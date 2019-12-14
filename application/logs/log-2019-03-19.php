@@ -1,0 +1,231 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+
+ERROR - 2019-03-19 12:27:11 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:27:11 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:27:20 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:27:20 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:27:24 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:27:24 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:27:27 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:27:27 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:27:29 --> Severity: Notice --> Undefined property: Batch_creation::$m /opt/lampp/htdocs/dbstock/application/controllers/Batch_creation.php 64
+ERROR - 2019-03-19 12:27:29 --> Severity: error --> Exception: Call to a member function updateindex() on null /opt/lampp/htdocs/dbstock/application/controllers/Batch_creation.php 64
+ERROR - 2019-03-19 12:28:43 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:28:43 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:29:28 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:29:28 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:29:41 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:29:41 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:29:48 --> Severity: Notice --> Undefined property: Settings::$m /opt/lampp/htdocs/dbstock/application/controllers/Settings.php 19
+ERROR - 2019-03-19 12:29:48 --> Severity: error --> Exception: Call to a member function updateindex() on null /opt/lampp/htdocs/dbstock/application/controllers/Settings.php 19
+ERROR - 2019-03-19 12:29:57 --> Severity: Notice --> Undefined property: Settings::$m /opt/lampp/htdocs/dbstock/application/controllers/Settings.php 19
+ERROR - 2019-03-19 12:29:57 --> Severity: error --> Exception: Call to a member function updateindex() on null /opt/lampp/htdocs/dbstock/application/controllers/Settings.php 19
+ERROR - 2019-03-19 12:29:59 --> Severity: Notice --> Undefined property: Settings::$m /opt/lampp/htdocs/dbstock/application/controllers/Settings.php 19
+ERROR - 2019-03-19 12:29:59 --> Severity: error --> Exception: Call to a member function updateindex() on null /opt/lampp/htdocs/dbstock/application/controllers/Settings.php 19
+ERROR - 2019-03-19 12:30:01 --> 404 Page Not Found: Assets/css
+ERROR - 2019-03-19 12:30:49 --> 404 Page Not Found: Assets/css
+ERROR - 2019-03-19 12:30:56 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:30:56 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:31:05 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:31:05 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:31:08 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:31:08 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:31:10 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:31:10 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:31:12 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:31:12 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:31:38 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:31:38 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:32:29 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:32:29 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:33:05 --> 404 Page Not Found: Assets/toastr
+ERROR - 2019-03-19 12:33:05 --> 404 Page Not Found: Assets/js
+ERROR - 2019-03-19 12:33:05 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:34:19 --> 404 Page Not Found: Assets/js
+ERROR - 2019-03-19 12:34:19 --> 404 Page Not Found: Assets/toastr
+ERROR - 2019-03-19 12:34:19 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:34:20 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:34:20 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:34:37 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:34:37 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:35:03 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:35:03 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:36:06 --> 404 Page Not Found: Assets/js
+ERROR - 2019-03-19 12:36:06 --> 404 Page Not Found: Assets/toastr
+ERROR - 2019-03-19 12:36:06 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:40:14 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:40:14 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:43:40 --> Query error: Column 'tobacco_amt' cannot be null - Invalid query: INSERT INTO `cont_adj` (`date`, `contractor`, `batch`, `tobacco`, `leaves`, `bl_yarn`, `wh_yarn`, `filter`, `tobacco_amt`, `leaves_amt`, `bl_yarn_amt`, `wh_yarn_amt`, `filter_amt`) VALUES ('2019-02-14', '2', '3', '25', '65', '30', '25', '16', NULL, NULL, NULL, NULL, NULL)
+ERROR - 2019-03-19 12:43:41 --> Query error: Column 'tobacco_amt' cannot be null - Invalid query: INSERT INTO `cont_adj` (`date`, `contractor`, `batch`, `tobacco`, `leaves`, `bl_yarn`, `wh_yarn`, `filter`, `tobacco_amt`, `leaves_amt`, `bl_yarn_amt`, `wh_yarn_amt`, `filter_amt`) VALUES ('2019-02-14', '2', '3', '25', '65', '30', '25', '16', NULL, NULL, NULL, NULL, NULL)
+ERROR - 2019-03-19 12:43:43 --> Query error: Column 'tobacco_amt' cannot be null - Invalid query: INSERT INTO `cont_adj` (`date`, `contractor`, `batch`, `tobacco`, `leaves`, `bl_yarn`, `wh_yarn`, `filter`, `tobacco_amt`, `leaves_amt`, `bl_yarn_amt`, `wh_yarn_amt`, `filter_amt`) VALUES ('2019-02-14', '2', '3', '25', '65', '30', '25', '16', NULL, NULL, NULL, NULL, NULL)
+ERROR - 2019-03-19 12:43:43 --> Query error: Column 'tobacco_amt' cannot be null - Invalid query: INSERT INTO `cont_adj` (`date`, `contractor`, `batch`, `tobacco`, `leaves`, `bl_yarn`, `wh_yarn`, `filter`, `tobacco_amt`, `leaves_amt`, `bl_yarn_amt`, `wh_yarn_amt`, `filter_amt`) VALUES ('2019-02-14', '2', '3', '25', '65', '30', '25', '16', NULL, NULL, NULL, NULL, NULL)
+ERROR - 2019-03-19 12:43:44 --> Query error: Column 'tobacco_amt' cannot be null - Invalid query: INSERT INTO `cont_adj` (`date`, `contractor`, `batch`, `tobacco`, `leaves`, `bl_yarn`, `wh_yarn`, `filter`, `tobacco_amt`, `leaves_amt`, `bl_yarn_amt`, `wh_yarn_amt`, `filter_amt`) VALUES ('2019-02-14', '2', '3', '25', '65', '30', '25', '16', NULL, NULL, NULL, NULL, NULL)
+ERROR - 2019-03-19 12:44:08 --> Query error: Column 'tobacco_amt' cannot be null - Invalid query: INSERT INTO `cont_adj` (`date`, `contractor`, `batch`, `tobacco`, `leaves`, `bl_yarn`, `wh_yarn`, `filter`, `tobacco_amt`, `leaves_amt`, `bl_yarn_amt`, `wh_yarn_amt`, `filter_amt`) VALUES ('2019-02-14', '2', '3', '25', '65', '30', '25', '16', NULL, NULL, NULL, NULL, NULL)
+ERROR - 2019-03-19 12:44:40 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:44:40 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:45:08 --> Query error: Column 'tobacco_amt' cannot be null - Invalid query: INSERT INTO `cont_adj` (`date`, `contractor`, `batch`, `tobacco`, `leaves`, `bl_yarn`, `wh_yarn`, `filter`, `tobacco_amt`, `leaves_amt`, `bl_yarn_amt`, `wh_yarn_amt`, `filter_amt`) VALUES ('2019-02-14', '2', '2', '250', '65', '16', '32', '8', NULL, NULL, NULL, NULL, NULL)
+ERROR - 2019-03-19 12:45:10 --> Query error: Column 'tobacco_amt' cannot be null - Invalid query: INSERT INTO `cont_adj` (`date`, `contractor`, `batch`, `tobacco`, `leaves`, `bl_yarn`, `wh_yarn`, `filter`, `tobacco_amt`, `leaves_amt`, `bl_yarn_amt`, `wh_yarn_amt`, `filter_amt`) VALUES ('2019-02-14', '2', '2', '250', '65', '16', '32', '8', NULL, NULL, NULL, NULL, NULL)
+ERROR - 2019-03-19 12:45:10 --> Query error: Column 'tobacco_amt' cannot be null - Invalid query: INSERT INTO `cont_adj` (`date`, `contractor`, `batch`, `tobacco`, `leaves`, `bl_yarn`, `wh_yarn`, `filter`, `tobacco_amt`, `leaves_amt`, `bl_yarn_amt`, `wh_yarn_amt`, `filter_amt`) VALUES ('2019-02-14', '2', '2', '250', '65', '16', '32', '8', NULL, NULL, NULL, NULL, NULL)
+ERROR - 2019-03-19 12:45:12 --> 404 Page Not Found: Assets/js
+ERROR - 2019-03-19 12:45:12 --> 404 Page Not Found: Assets/toastr
+ERROR - 2019-03-19 12:45:12 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:46:10 --> 404 Page Not Found: Assets/js
+ERROR - 2019-03-19 12:46:10 --> 404 Page Not Found: Assets/toastr
+ERROR - 2019-03-19 12:46:10 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:46:11 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:46:11 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:47:16 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:47:16 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:47:35 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:47:35 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:47:37 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:47:37 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:47:39 --> 404 Page Not Found: Assets/js
+ERROR - 2019-03-19 12:47:39 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:47:39 --> 404 Page Not Found: Assets/toastr
+ERROR - 2019-03-19 12:48:36 --> 404 Page Not Found: Assets/toastr
+ERROR - 2019-03-19 12:48:36 --> 404 Page Not Found: Assets/js
+ERROR - 2019-03-19 12:48:36 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:48:36 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:48:36 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:50:18 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:50:18 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:53:05 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 12:53:05 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:18:41 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:18:41 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:19:05 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:19:05 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:19:50 --> 404 Page Not Found: Assets/js
+ERROR - 2019-03-19 13:19:50 --> 404 Page Not Found: Assets/toastr
+ERROR - 2019-03-19 13:19:50 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:23:55 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:23:55 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:24:59 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:24:59 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:26:31 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:26:31 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:27:35 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:27:35 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:28:26 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:28:26 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:28:54 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:28:54 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:29:55 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:29:55 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:30:40 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:30:40 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:31:27 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:31:27 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:32:02 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:32:02 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:32:23 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:32:23 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:34:47 --> 404 Page Not Found: Assets/js
+ERROR - 2019-03-19 13:34:47 --> 404 Page Not Found: Assets/toastr
+ERROR - 2019-03-19 13:34:47 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:35:20 --> 404 Page Not Found: Assets/js
+ERROR - 2019-03-19 13:35:20 --> 404 Page Not Found: Assets/toastr
+ERROR - 2019-03-19 13:35:21 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:35:21 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:35:21 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:36:22 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:36:22 --> 404 Page Not Found: Assets/toastr
+ERROR - 2019-03-19 13:36:22 --> 404 Page Not Found: Assets/js
+ERROR - 2019-03-19 13:43:06 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:43:06 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:43:50 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:43:50 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:44:27 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:44:27 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:46:45 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:46:45 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:47:43 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:47:43 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:48:34 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:48:34 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:48:59 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:48:59 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:49:11 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:49:11 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:50:11 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:50:11 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:51:09 --> 404 Page Not Found: Assets/toastr
+ERROR - 2019-03-19 13:51:09 --> 404 Page Not Found: Assets/js
+ERROR - 2019-03-19 13:51:09 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:53:55 --> 404 Page Not Found: Assets/js
+ERROR - 2019-03-19 13:53:55 --> 404 Page Not Found: Assets/toastr
+ERROR - 2019-03-19 13:53:56 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:53:56 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:53:56 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:54:17 --> 404 Page Not Found: Assets/js
+ERROR - 2019-03-19 13:54:17 --> 404 Page Not Found: Assets/toastr
+ERROR - 2019-03-19 13:54:17 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:54:17 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:54:17 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:54:25 --> 404 Page Not Found: Assets/js
+ERROR - 2019-03-19 13:54:25 --> 404 Page Not Found: Assets/toastr
+ERROR - 2019-03-19 13:54:25 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:54:26 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:54:26 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:54:33 --> 404 Page Not Found: Assets/js
+ERROR - 2019-03-19 13:54:33 --> 404 Page Not Found: Assets/toastr
+ERROR - 2019-03-19 13:54:33 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:54:33 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:54:33 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:55:01 --> 404 Page Not Found: Assets/js
+ERROR - 2019-03-19 13:55:01 --> 404 Page Not Found: Assets/toastr
+ERROR - 2019-03-19 13:55:01 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:55:02 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:55:02 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:55:17 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:55:17 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:55:59 --> 404 Page Not Found: Assets/js
+ERROR - 2019-03-19 13:55:59 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:55:59 --> 404 Page Not Found: Assets/toastr
+ERROR - 2019-03-19 13:56:58 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:56:58 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:57:09 --> Query error: Column 'unit' cannot be null - Invalid query: INSERT INTO `tobaccomix_data` (`ref_id`, `batch`, `unit`, `alt_bag`) VALUES ('2', '1', NULL, '2')
+ERROR - 2019-03-19 13:57:09 --> Query error: Column 'unit' cannot be null - Invalid query: INSERT INTO `tobaccomix_data` (`ref_id`, `batch`, `unit`, `alt_bag`) VALUES ('2', '6', NULL, '4')
+ERROR - 2019-03-19 13:57:10 --> Query error: Column 'unit' cannot be null - Invalid query: INSERT INTO `tobaccomix_data` (`ref_id`, `batch`, `unit`, `alt_bag`) VALUES ('2', '7', NULL, '6')
+ERROR - 2019-03-19 13:57:12 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:57:12 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:57:39 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:57:39 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:58:04 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 13:58:04 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 14:01:05 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 14:01:05 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 14:01:45 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 14:01:45 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 14:01:55 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 14:01:55 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 14:02:17 --> 404 Page Not Found: Assets/js
+ERROR - 2019-03-19 14:02:17 --> 404 Page Not Found: Assets/toastr
+ERROR - 2019-03-19 14:02:17 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 14:02:38 --> 404 Page Not Found: Assets/js
+ERROR - 2019-03-19 14:02:38 --> 404 Page Not Found: Assets/toastr
+ERROR - 2019-03-19 14:02:38 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 14:02:39 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 14:02:39 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 14:02:51 --> 404 Page Not Found: Assets/js
+ERROR - 2019-03-19 14:02:51 --> 404 Page Not Found: Assets/toastr
+ERROR - 2019-03-19 14:02:51 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 14:02:51 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 14:02:51 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 14:03:17 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 14:03:17 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 14:03:19 --> 404 Page Not Found: Assets/js
+ERROR - 2019-03-19 14:03:19 --> 404 Page Not Found: Assets/toastr
+ERROR - 2019-03-19 14:03:19 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 14:04:55 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 14:04:55 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 14:05:48 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 14:05:48 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 14:06:59 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 14:06:59 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 14:07:49 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 14:07:49 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 14:07:58 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 14:07:58 --> 404 Page Not Found: Assets/datatable
+ERROR - 2019-03-19 14:08:01 --> 404 Page Not Found: Assets/css

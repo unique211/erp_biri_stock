@@ -1,0 +1,125 @@
+/*@font-face {
+   font-family: myFirstFont;
+   src: url("raleway/Raleway-Regular.ttf");
+}
+* {
+   font-family: myFirstFont;
+}*/
+.subaddbtn{
+	margin-top:-10px;	
+}
+.amountnumber{
+	text-align:right;	
+}
+.closehideshow{
+	margin-right:10px;
+}
+.optionbtnright{
+	margin-right:10px;
+}
+.optionbtnleft{
+	margin-left:10px;
+}
+.selectwidth{
+	width:100%;
+}
+.bgimg {
+  /* The image used */
+  background-image: url("img/tobacco-leaves_0.jpg");
+	height:auto;
+	width:100%;
+  /* Center and scale the image nicely */
+ background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+@media (max-width: 768px){
+	.bgimg{
+		height:1025px;
+	}
+}
+@media (max-width: 441px){
+	.bgimg{
+		height:850px;
+	}
+}
+
+@media (max-width: 360px){
+	.bgimg{
+		height:650px;
+	}
+}
+@media (max-width: 320px){
+	.bgimg{
+		height:580px;
+	}
+}
+
+@media (max-width: 360px){
+	.bgimg{
+		height:650px;
+	}
+}
+@media (min-height: 1366px){
+	.bgimg{
+		height:1370px;
+	}
+}
+
+@media (max-width: 360px){
+	.bgimg{
+		height:650px;
+	}
+}
+@media (height: 731px){
+	.bgimg{
+		height:750px;
+	}
+}
+
+@media (max-width: 360px){
+	.bgimg{
+		height:650px;
+	}
+}
+@media (height: 568px){
+	.bgimg{
+		height:568px;
+	}
+}
+@media (height: 667px){
+	.bgimg{
+		height:667px;
+	}
+}
+@media (height: 736px){
+	.bgimg{
+		height:735px;
+	}
+}
+@media (height: 823px){
+	.bgimg{
+		height:820px;
+	}
+}
+@media (height: 640px){
+	.bgimg{
+		height:640px;
+	}
+}
+@media (height: 731px){
+	.bgimg{
+		height:730px;
+	}
+}
+@media (height: 812px){
+	.bgimg{
+		height:812px;
+	}
+}
+@media (height: 1366px){
+	.bgimg{
+		height:1365px;
+	}
+}
