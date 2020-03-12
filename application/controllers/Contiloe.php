@@ -424,4 +424,26 @@ set_time_limit(0);
 			redirect(base_url('dbstock'));
 		}
 	}
+	public function centralexciseer(){
+		if(isset($this->session->userid)){
+			$title['title_name'] = " dbstock ";
+			$title['title_name1'] = "Central Excise ER-1";
+			$title['active_menu'] = "r";
+			$this->load->view('centralexciseer',$title);
+		}
+		else{
+			redirect(base_url('dbstock'));
+		}
+	}
+	public function contractorpayment(){
+		if(isset($this->session->userid)){
+			$title['title_name'] = " dbstock ";
+			$title['title_name1'] = "Contractor Payment List";
+			$title['active_menu'] = "r";
+			$this->load->view('contractorpaymentrep',$title);
+		}
+		else{
+			redirect(base_url('dbstock'));
+		}
+	}
 }
