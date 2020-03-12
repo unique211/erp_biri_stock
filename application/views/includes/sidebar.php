@@ -129,6 +129,8 @@
                                 <li><a href="<?php echo base_url(); ?>contiloe/item_wisereport"><span class="submenu-label"> RG-12A Report </span></a></li>
                                 <li><a href="<?php echo base_url(); ?>contiloe/bidi_sales_monthly"><span class="submenu-label"> Bidi Sales Monthly </span></a></li>
                                 <li><a href="<?php echo base_url(); ?>contiloe/itemwise_stock_monthly"><span class="submenu-label"> ItemWise Stock Monthly </span></a></li>
+                                <li><a href="<?php echo base_url(); ?>contiloe/centralexciseer"><span class="submenu-label"> Central Excise ER-1 </span></a></li>
+                                <li><a href="<?php echo base_url(); ?>contiloe/contractorpayment"><span class="submenu-label"> Contractor Payment List</span></a></li>
                             </ul>
                         </li>
 
