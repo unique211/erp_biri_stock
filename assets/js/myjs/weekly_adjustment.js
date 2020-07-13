@@ -117,7 +117,7 @@ $(document).ready(function() {
             success: function(data) {
                 // console.log('data'+data);
                 var data = eval(data);
-
+                var sr = 0;
 
                 var html = '';
                 html += '<table id="myTable" class="table table-striped">' +
@@ -140,9 +140,10 @@ $(document).ready(function() {
                     var fdateval = data[i].to_date;
                     var fdateslt = fdateval.split('-');
                     var to = fdateslt[2] + '/' + fdateslt[1] + '/' + fdateslt[0];
+                    sr = parseFloat(sr) + 1;
 
                     html += '<tr>' +
-                        '<td id="id_' + data[i].id + '">' + data[i].id + '</td>' +
+                        '<td id="id_' + data[i].id + '">' + sr + '</td>' +
                         '<td id="entry_' + data[i].id + '">' + entry + '</td>' +
                         '<td id="to_' + data[i].id + '">' + to + '</td>' +
                         '<td id="qty_' + data[i].id + '">' + data[i].qty + '</td>' +

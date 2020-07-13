@@ -143,15 +143,6 @@ $(document).ready(function() {
                         // twhy=parseFloat(twhy)+parseFloat(opwhy);
                         // tfilter=parseFloat(tfilter)+parseFloat(opfil);
 
-                        sumofasb = parseFloat(sumofasb) + parseFloat((nbiri).toFixed(3));
-                        sumofchkg = parseFloat(sumofchkg) + parseFloat(chbiripcs);
-                        sumofchpcs = parseFloat(sumofchpcs) + parseFloat(chbirikg);
-                        sumoflev = parseFloat(sumoflev) + parseFloat(oplev);
-                        sumoftob = parseFloat(sumoftob) + parseFloat(optob);
-                        sumofbly = parseFloat(sumofbly) + parseFloat(opbly);
-                        sumofwhy = parseFloat(sumofwhy) + parseFloat(opwhy);
-                        sumoffil = parseFloat(sumoffil) + parseFloat(opfil);
-
                         console.log("opening balance: " + tasb + " " + tchkg + " " + tchpcs + " " + ttobacco + " " + tleave + tbly + " " + twhy + " " + tfilter + " ");
                         table += '<tr >' +
                             '<td>' + fdate + '</td>' +
@@ -182,12 +173,10 @@ $(document).ready(function() {
                                 console.log(row);
                                 row1 = data.length;
                                 console.log(row1 - 3);
-
-                                if ((row1 - 3) == i) {
+                                if ((row1 - 4) == i) {
                                     flag = 1;
                                     console.log("flag is" + flag);
                                 }
-
                                 sumofasb = parseFloat(sumofasb) + parseFloat(data[i].asalbidi);
                                 sumofchkg = parseFloat(sumofchkg) + parseFloat(data[i].chatbidikgs);
                                 sumofchpcs = parseFloat(sumofchpcs) + parseFloat(data[i].chatbidipcs);
@@ -332,13 +321,10 @@ $(document).ready(function() {
                     '<td>' + twhy.toFixed(3) + '</td>' +
                     '<td>' + tfilter.toFixed(3) + '</td>' +
                     '</tr>';
-                var btc1 = '';
                 for (var i = 0; i < data.length; i++) {
-
                     if (data[i].batchnm != null) {
-
-                        if (btc1 == data[i].batchnm) {} else {
-                            btc1 = data[i].batchnm;
+                        if (btc == data[i].batchnm) {} else {
+                            btc = data[i].batchnm;
                             crleaves = data[i].consumption.clev;
 
 
@@ -397,7 +383,6 @@ $(document).ready(function() {
                     }
                 }
                 for (var i = 0; i < data.length; i++) {
-
                     if (data[i].batchnm != null) {
                         totallev = parseFloat(totallev) + parseFloat(data[i].closingBalance.closelev);
                         totaltob = parseFloat(totaltob) + parseFloat(data[i].closingBalance.closetob);
@@ -447,7 +432,6 @@ $(document).ready(function() {
                     //'<td>'+'</td>'+
                     '</tr>';
                 for (var i = 0; i < data.length; i++) {
-
                     if (data[i].batchname != null) {
                         //var gross=data[i].finalTotal.gtotal;
 
