@@ -123,6 +123,8 @@ $(document).ready(function() {
                 var totalfil = 0;
                 var totaltob = 0;
                 var totalwhy = 0;
+                var totalcc = 0;
+                var totallevc = 0;
                 for (var i = 0; i < data.length; i++) {
                     bname = data[i].batchname;
                     // console.log(oplev+" "+optob+" "+opbly+" "+opwhy+" "+opfil+" ");
@@ -154,7 +156,7 @@ $(document).ready(function() {
 
                         console.log("opening balance: " + tasb + " " + tchkg + " " + tchpcs + " " + ttobacco + " " + tleave + tbly + " " + twhy + " " + tfilter + " ");
                         table += '<tr >' +
-                            '<td>' + fdate + '</td>' +
+                            '<td>' + sdate + '</td>' +
                             '<td>' + data[i].batchname + '</td>' +
                             '<td>' + '</td>' +
                             '<td>' + nbiri.toFixed(2) + '</td>' +
@@ -197,10 +199,13 @@ $(document).ready(function() {
                                 sumofwhy = parseFloat(sumofwhy) + parseFloat(data[i].why);
                                 sumoffil = parseFloat(sumoffil) + parseFloat(data[i].fil);
 
-                                // var fdateslt = data[i].date.split('-');
-                                // var fdate = fdateslt[2] + '/' + fdateslt[1] + '/' + fdateslt[0];
+
+                                console.log(data[i].date);
+
+                                var fdateslt = data[i].date.split('-');
+                                var fdate = fdateslt[2] + '/' + fdateslt[1] + '/' + fdateslt[0];
                                 batches += '<tr>' +
-                                    '<td>' + data[i].date + '</td>' +
+                                    '<td>' + fdate + '</td>' +
                                     '<td>' + data[i].batch + '</td>' +
                                     '<td>' + data[i].wages + '</td>' +
                                     '<td>' + data[i].asalbidi + '</td>' +
@@ -341,7 +346,12 @@ $(document).ready(function() {
                             btc1 = data[i].batchnm;
                             crleaves = data[i].consumption.clev;
 
+                            crleaves = (parseInt(crleaves));
 
+
+                            totalcc = (parseFloat(ttobacco) - (parseFloat(data[i].consumption.ctob))).toFixed(3);
+
+                            totallevc = (parseFloat(tleave) - (parseFloat(crleaves))).toFixed(3);
 
                             batches += '<tr class="names">' +
                                 '<td style="text-align:left;" colspan="2">Less Consumption: </td>' +
@@ -362,7 +372,25 @@ $(document).ready(function() {
                     if (data[i].batchnm != null) {
                         ls = data[i].lesssortage.lslev;
                         tleaves = parseFloat(tleaves) + parseFloat(data[i].transfer.tlev);
-                        if (btc == data[i].batchnm) {} else {
+                        if (btc == data[i].batchnm) {
+
+                            totalcc = (parseFloat(totalcc) - parseFloat(data[i].lesssortage.lstob)).toFixed(3);
+                            totallevc = (parseFloat(totallevc) - parseFloat(data[i].lesssortage.lslev)).toFixed(3);
+
+                            btc = data[i].batchnm;
+                            batches += '<tr class="names">' +
+                                '<td style="text-align:left;" colspan="2">Less Sortage: </td>' +
+                                '<td style="text-align:center;" colspan="2">' + data[i].batchnm + '</td>' +
+                                '<td>' + '</td>' +
+                                '<td>' + '</td>' +
+                                '<td>' + data[i].lesssortage.lslev + '</td>' +
+                                '<td>' + data[i].lesssortage.lstob + '</td>' +
+                                '<td>' + data[i].lesssortage.lsbl + '</td>' +
+                                '<td>' + data[i].lesssortage.lswy + '</td>' +
+                                '<td>' + data[i].lesssortage.lsfil + '</td>' +
+                                '</tr>';
+
+                        } else {
                             btc = data[i].batchnm;
                             batches += '<tr class="names">' +
                                 '<td style="text-align:left;" colspan="2">Less Sortage: </td>' +
@@ -399,6 +427,7 @@ $(document).ready(function() {
                 for (var i = 0; i < data.length; i++) {
 
                     if (data[i].batchnm != null) {
+
                         totallev = parseFloat(totallev) + parseFloat(data[i].closingBalance.closelev);
                         totaltob = parseFloat(totaltob) + parseFloat(data[i].closingBalance.closetob);
                         totalbly = parseFloat(totalbly) + parseFloat(data[i].closingBalance.closebly);
@@ -427,8 +456,9 @@ $(document).ready(function() {
                     // '<td style="text-align:center;" colspan="2"></td>'+
                     '<td>' + '</td>' +
                     '<td>' + '</td>' +
-                    '<td>' + totallev.toFixed(3) + '</td>' +
-                    '<td>' + totaltob.toFixed(3) + '</td>' +
+                    '<td>' + totallevc + '</td>' +
+                    '<td>' + totalcc + '</td>' +
+
                     '<td>' + totalbly.toFixed(3) + '</td>' +
                     '<td>' + totalwhy.toFixed(3) + '</td>' +
                     '<td>' + totalfil.toFixed(3) + '</td>' +
@@ -494,4 +524,6 @@ $(document).ready(function() {
             }
         });
     });
+
+
 });

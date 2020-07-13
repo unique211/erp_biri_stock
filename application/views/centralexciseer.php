@@ -384,6 +384,10 @@ if (isset($title_name)) {
 
 		$("#tdate").val(date);
 		$("#fdate").val(date);
+
+		$('#fdate').datepicker().on('changeDate', function (ev) {
+    $('#fdate').Close();
+});
 		// $("#fdate").val();
 	</script>
 </body>

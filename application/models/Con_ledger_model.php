@@ -13,9 +13,7 @@ class Con_ledger_model extends CI_Model{
 		$id=$this->input->post('where');
 
 	
-		// $fdate='2020-05-01';
-		// $date='2020-05-31';
-		// $id=2;
+	
         $sqlQry='';$asalbidi=0;$chatbidipcs=0;$chatbidikgs=0;$asb=0;$asbidi=0; $sumoftob=0; $bid=0;$tobsum=0;$batchqry=0;
         $sql=0;$t=0;$l=0;$bl=0;$wy=0;$fi=0;$mulfil=0;$mulbl=0;$mullev=0;$multob=0;$mulwy=0; $batchnm='';$totalTobacco=0;
         $totalLeaves=0;$data=array();$batchname='';$leaves=0;$tobacco=0;$black_yarn=0;$white_yarn=0;$filter=0;$qry='';
@@ -25,12 +23,15 @@ class Con_ledger_model extends CI_Model{
         $bnm='';$wggroup='';$count=0;$bt='';$clleaves=0;$cltobacco=0;$clbly=0;$clwhy=0;$clfil=0;
         $sumofabs=0;$sumofchps=0;$sumofchkg=0;$sumoftob=0;$sumoflev=0;$sumofbly=0;$sumofwhy=0;$sumoffil=0;
 		$prev_date = date('Y-m-d', strtotime($fdate .' -1 day'));
-		
+		$sumdata=0;
         $fun=$this->getob($id,$prev_date);
 		//echo json_encode($fun);
+		$stabco=0;
 	
         $batchname=$fun['batchname'];
-        $tobacco=$fun['tobacco'];
+		$tobacco=$fun['tobacco'];
+		$stabco=$tobacco;
+		$stabco=number_format(round($stabco,3),3);
         $leaves=$fun['leaves'];
         $black_yarn=$fun['black_yarn'];
         $white_yarn=$fun['white_yarn'];
@@ -46,8 +47,10 @@ class Con_ledger_model extends CI_Model{
         $tsort=$GrossTotal['T_Short'];
         $advance=$GrossTotal['Advance'];
         $pf=$GrossTotal['Pf'];
-        $sumoftob=$sumoftob+$tobacco;
-        $sumoflev=$sumoflev+$leaves;
+		$sumoftob=$sumoftob+$tobacco;
+		
+		$sumoflev=$sumoflev+$leaves;
+		
         $sumofbly=$sumofbly+$black_yarn;
         $sumofwhy=$sumofwhy+$white_yarn;
         $sumoffil=$sumoffil+$filter;
@@ -148,7 +151,8 @@ class Con_ledger_model extends CI_Model{
                     $sumofwhy=$sumofwhy+$wh_yarn;
                     $sumoffil=$sumoffil+$fil;  
                     if($btr != $batch){
-                        $sumoftob=$sumoftob+$tob;   
+						$sumoftob=$sumoftob+$tob;   
+						
                         $btr=$batch;
                         $btarray=array('batch'=>$btr,
                             'sumofasb'=>$sumofabs,
@@ -162,7 +166,9 @@ class Con_ledger_model extends CI_Model{
                         );
                         array_push($btc,$btr);
                     }
-                    
+					$sumdata=$sumdata+$asalbidi+$chatbidipcs;
+					$stabco=$stabco+$tob;
+					$stabco=number_format(round($stabco,3),3);
                     $data[]=array(
                         'date'=>$dateof,
                         'batch'=>$batch,
@@ -183,7 +189,8 @@ class Con_ledger_model extends CI_Model{
                 }
                 else{
                     if($btr != $batch){
-                        $sumoftob=$sumoftob+$tob;
+						$sumoftob=$sumoftob+$tob;
+					
                         $sumoflev=$sumoflev+$lev;
                         $sumofbly=$sumofbly+$bl_yarn;
                         $sumofwhy=$sumofwhy+$wh_yarn;
@@ -197,7 +204,11 @@ class Con_ledger_model extends CI_Model{
                             'sumoffil'=>$sumoffil
                         );
                         array_push($btc,$btr);
-                    }
+					}
+					$sumdata=$sumdata+$asalbidi+$chatbidipcs;
+					$stabco=$stabco+$tob;
+					$stabco=number_format(round($stabco,3),3);
+
                     $data[]=array(
                         'date'=>$dateof,
                         'batch'=>$batch,
@@ -216,7 +227,8 @@ class Con_ledger_model extends CI_Model{
                         
                     );
                 }
-            }//array_push($btc,$btarray);
+			}//array_push($btc,$btarray);
+			
             $count=count($btc);
             //echo $count;
             $this->db->select('*');
@@ -240,7 +252,8 @@ class Con_ledger_model extends CI_Model{
                 $this->db->where('batch2',$bid);
                 $tobsum=$this->db->get()->row()->tob;//result();
                  //echo $this->db->last_query()."<br>";
-                // echo json_encode($tobsum);
+				// echo json_encode($tobsum);
+				
                 if($tobsum != ''){
                     //echo $this->db->last_query();
                     $this->db->select_sum('qty');
@@ -254,20 +267,25 @@ class Con_ledger_model extends CI_Model{
                     else{
                         $sql=0;
                     }
-                    //echo $tobsum."<br>";
+				
+					
                     $sumoftob=$sumoftob+$tobsum;
                 }
                 else{
                     $sql=0;
                     //echo $tobsum."<br>";
-                }
-                $multob=$tobsum*$t;
-                $mullev=$tobsum*$l;
-                $mulbl=$tobsum*$bl;
-                $mulwy=$tobsum*$wy;
-                $mulfil=$tobsum*$fi;
+				}
+			
+			
+                $multob=$sumdata*$t;
+                $mullev=$sumdata*$l;
+                $mulbl=$sumdata*$bl;
+                $mulwy=$sumdata*$wy;
+				$mulfil=$sumdata*$fi;
+				$ctabaco=0;
+				$clev=0;
 
-                $this->db->select('sum(tobacco_amt) as tobacco_amt,sum(leaves_amt) as leaves_amt,sum(bl_yarn_amt) as bl_yarn_amt,sum(wh_yarn_amt) as wh_yarn_amt,sum(filter_amt) as filter_amt');
+                $this->db->select('sum(tobacco_amt) as tobacco_amt,sum(tobacco) as ctobacco,sum(leaves) as cleaves,sum(leaves_amt) as leaves_amt,sum(bl_yarn_amt) as bl_yarn_amt,sum(wh_yarn_amt) as wh_yarn_amt,sum(filter_amt) as filter_amt');
                 $this->db->from('cont_adj');
                 $this->db->where('date >=',$fdate);
                 $this->db->where('date <=',$date);
@@ -277,11 +295,13 @@ class Con_ledger_model extends CI_Model{
                 //echo $this->db->last_query();
                 if($qry != null){
                     foreach($qry as $row){
-                        $tobacco_amt=$row->tobacco_amt;
+                       $tobacco_amt=$row->tobacco_amt;
                         $leaves_amt=$row->leaves_amt;
                         $bl_yarn_amt=$row->bl_yarn_amt;
                         $wh_yarn_amt=$row->wh_yarn_amt;
                         $filter_amt=$row->filter_amt;
+                        $ctabaco=$row->ctobacco;
+                        $clev=$row->cleaves;
                     }
                 }
                 else{
@@ -289,7 +309,9 @@ class Con_ledger_model extends CI_Model{
                     $leaves_amt=0;
                     $bl_yarn_amt=0;
                     $wh_yarn_amt=0;
-                    $filter_amt=0;
+					$filter_amt=0;
+					$ctabaco=0;
+				$clev=0;
                 }
                 $this->db->select('sum(b_qty) as b_qty,sum(t_qty) as t_qty');
                 $this->db->from('raw_item');
@@ -328,12 +350,13 @@ class Con_ledger_model extends CI_Model{
                 if($bt == $batchnm){
                    // 0;//0;//
                    $sumoflev=0;$mullev=0;$leaves_amt=0;$totalLeaves=0;$sumoftob=0;
-                    //echo $sumoflev." &".$multob." ".$tobacco_amt." ".$totalTobacco;
+                    
                     $clleaves=$sumoflev-$mullev-$leaves_amt-$totalLeaves;
                     $cltobacco=$sumoftob-$multob-$tobacco_amt-$totalTobacco;
                     $clbly=0;
                     $clwhy=0;
-                    $clfil=0;
+					$clfil=0;
+				
                     $data[]=array(
                         'batchnm'=>$batchnm,
                         'batch'=>null,
@@ -346,8 +369,8 @@ class Con_ledger_model extends CI_Model{
                             'cfil'=>number_format(round($mulfil,3),3),
                         ),
                         'lesssortage'=>array(
-                            'lstob'=>number_format(round($tobacco_amt,3),3),
-                            'lslev'=>number_format(round($leaves_amt,3),3),
+                            'lstob'=>number_format(round($ctabaco,3),3),
+                            'lslev'=>number_format(round($clev,3),3),
                             'lsbl'=>number_format(round($bl_yarn_amt,3),3),
                             'lswy'=>number_format(round($wh_yarn_amt,3),3),
                             'lsfil'=>number_format(round($filter_amt,3),3),
@@ -369,27 +392,34 @@ class Con_ledger_model extends CI_Model{
                 else{
                     
                     for( $i = 0; $i<$count; $i++ ) {
+						
                         $bt=$btc[$i];
-                        $clleaves=$sumoflev-$mullev-$leaves_amt-$totalLeaves;
-                        $cltobacco=$sumoftob-$multob-$tobacco_amt-$totalTobacco;
+                       // $clleaves=$sumoflev-$mullev-$leaves_amt-$totalLeaves;
+						//$cltobacco=$sumoftob-$multob-$tobacco_amt-$totalTobacco;
+						$clleaves=$sumoflev-$mullev-$clev;
+						$cltobacco=$stabco-$multob-$ctabaco;
                         $clbly=$sumofbly-$mulbl-$bl_yarn_amt;
                         $clwhy=$sumofwhy-$mulwy-$wh_yarn_amt;
-                        $clfil=$sumoffil-$mulfil-$filter_amt;
+						$clfil=$sumoffil-$mulfil-$filter_amt;
+
+						
+						
+					
                         if($bt == $batchnm){
                             $data[]=array(
                                 'batchnm'=>$batchnm,
                                 'batch'=>null,
                                 'batchname'=>null,
                                 'consumption'=>array(
-                                    'clev'=>number_format(round($mullev,3),3),
+                                    'clev'=>round($mullev,3),
                                     'ctob'=>number_format(round($multob,3),3),
                                     'cbl'=>number_format(round($mulbl,3),3),
                                     'cwy'=>number_format(round($mulwy,3),3),
                                     'cfil'=>number_format(round($mulfil,3),3),
                                 ),
                                 'lesssortage'=>array(
-                                    'lstob'=>number_format(round($tobacco_amt,3),3),
-                                    'lslev'=>number_format(round($leaves_amt,3),3),
+									'lstob'=>number_format(round($ctabaco,3),3),
+									'lslev'=>number_format(round($clev,3),3),
                                     'lsbl'=>number_format(round($bl_yarn_amt,3),3),
                                     'lswy'=>number_format(round($wh_yarn_amt,3),3),
                                     'lsfil'=>number_format(round($filter_amt,3),3),

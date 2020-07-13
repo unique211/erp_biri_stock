@@ -157,7 +157,9 @@ $(".datepicker-input").click(function() {
             var date = new Date();
             date = date.toString('dd/MM/yyyy');
             $("#date").val(date);
-            $("#fdate").val(date);
+			$("#fdate").val(date);
+			
+			
         </script>
     </body>
 </html>
