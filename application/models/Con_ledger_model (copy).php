@@ -13,9 +13,9 @@ class Con_ledger_model extends CI_Model{
 		$id=$this->input->post('where');
 
 	
-		// $fdate='2020-05-01';
-		// $date='2020-05-31';
-		// $id=2;
+		$fdate='2020-07-01';
+		$date='2020-07-31';
+		$id=2;
         $sqlQry='';$asalbidi=0;$chatbidipcs=0;$chatbidikgs=0;$asb=0;$asbidi=0; $sumoftob=0; $bid=0;$tobsum=0;$batchqry=0;
         $sql=0;$t=0;$l=0;$bl=0;$wy=0;$fi=0;$mulfil=0;$mulbl=0;$mullev=0;$multob=0;$mulwy=0; $batchnm='';$totalTobacco=0;
         $totalLeaves=0;$data=array();$batchname='';$leaves=0;$tobacco=0;$black_yarn=0;$white_yarn=0;$filter=0;$qry='';
@@ -27,8 +27,7 @@ class Con_ledger_model extends CI_Model{
 		$prev_date = date('Y-m-d', strtotime($fdate .' -1 day'));
 		
         $fun=$this->getob($id,$prev_date);
-		//echo json_encode($fun);
-	
+        //echo json_encode($fun);
         $batchname=$fun['batchname'];
         $tobacco=$fun['tobacco'];
         $leaves=$fun['leaves'];
@@ -98,24 +97,15 @@ class Con_ledger_model extends CI_Model{
                 } 
                 $sortArray[$key][] = $value; 
             } 
-		} 
-		$quantity=0;
+        } 
         $orderby = "sum"; //change this to whatever key you want from the array 
         array_multisort($sortArray[$orderby],SORT_DESC,$people); 
         $ary=$people[0]['bname'];
         $this->db->select('qty');
         $this->db->from('weekly_adjustment');
         $this->db->where('entry_date >=',$fdate);
-		$this->db->where('to_date >=',$date);
-		$getqty=$this->db->get();
-		if($getqty->num_rows() > 0){
-			foreach($getqty->result_array() as $qtydata){
-				$quantity=$qtydata['qty'];
-			}
-		}else{
-			$quantity=0;
-		}
-       // $quantity=$this->db->get()->row()->qty;
+        $this->db->where('to_date >=',$date);
+        $quantity=$this->db->get()->row()->qty;
         $qty=0-$quantity;
         $this->db->select('cont_issue_receive.*,batch_master.batch,wages_fixation.name as wgnm');
         $this->db->from('cont_issue_receive');

@@ -134,13 +134,26 @@ if(isset($title_name)){
             $('#date').datepicker({
                 'todayHighlight':true,
                 format: 'yyyy-mm-dd',
-                autoclose: true,
+				autoclose: true,
+				
             });
             $('#fdate').datepicker({
                 'todayHighlight':true,
                 format: 'yyyy-mm-dd',
-                autoclose: true,
-            });
+				autoclose: true,
+			
+			});
+			$(".datepicker-input").each(function() {
+    $(this).datepicker();
+});
+
+$(".datepicker-input").click(function() {
+    $(".datepicker-days .day").click(function() {
+        $('.datepicker').hide();
+    });
+});
+			
+			
             var date = new Date();
             date = date.toString('dd/MM/yyyy');
             $("#date").val(date);

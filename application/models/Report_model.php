@@ -3,7 +3,8 @@ class Report_model extends CI_Model{
     function showData($table){
         $table="con-party_master";
         $nm="contractor";
-        $date="2019-04-01";//$this->input->post('date');
+		//$date="2019-04-01";
+		$date=$this->input->post('date');
         $this->db->select('id,party,name');
         $this->db->from($table);
         $this->db->order_by('name','ASC');
