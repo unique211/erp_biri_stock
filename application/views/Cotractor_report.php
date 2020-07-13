@@ -16,7 +16,9 @@ if(isset($title_name)){
         <meta name="author" content="">
     <?php include "includes/headerlink.php"; ?>    
     <style>
-    .names { font-weight: bold; }
+    .names { font-weight: bold;
+		text-align:right;
+	 }
     </style>
     </head>
     <body class="overflow-hidden"  >
@@ -75,13 +77,13 @@ if(isset($title_name)){
                                                 <tr>
                                                     <th width="10%">SL No</th>
                                                     <th width="20%">Contractor Name</th>
-                                                    <th width="10%">Time</th>
-                                                    <th width="10%">Batch</th>
-                                                    <th width="10%">Tobacco</th> 
-                                                    <th width="10%">Leaves</th>
-                                                    <th width="10%">Black Yarn</th>
-                                                    <th width="10%">White Yarn</th>
-                                                    <th width="10%">Filter</th>
+                                                    <th width="10%" style="text-align:right;">Time</th>
+                                                    <th width="10%" >Batch</th>
+                                                    <th width="10%" style="text-align:right;"> Tobacco</th> 
+                                                    <th width="10%" style="text-align:right;">Leaves</th>
+                                                    <th width="10%" style="text-align:right;">Black Yarn</th>
+                                                    <th width="10%" style="text-align:right;">White Yarn</th>
+                                                    <th width="10%" style="text-align:right;">Filter</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="tbody"></tbody>
@@ -113,6 +115,10 @@ if(isset($title_name)){
             var date = new Date();
             date = date.toString('dd/MM/yyyy');
             $("#date").val(date);
+			$('#date').on('change', function () {
+		
+				$(this).datepicker('hide');
+});
         </script>
     </body>
 </html>
