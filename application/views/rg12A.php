@@ -90,7 +90,7 @@ if(isset($title_name)){
                                                     <label></label>
                                                     <div class="form">
                                                     <input type="button" id="btnExport" class="btn btn-primary pull-right" value="Export" />
-                                                   <!-- <input type="button" id="btnExportpdf" class="btn btn-primary pull-right" value="ExportPdf" />-->
+                                                   <input type="button" id="btnExportpdf" class="btn btn-primary pull-right" value="ExportPdf" />
                                                     </div>
                                                 </div>
                                             </div>
