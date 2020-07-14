@@ -16,8 +16,25 @@ if(isset($title_name)){
         <meta name="author" content="">
     <?php include "includes/headerlink.php"; ?>    
     <style>
-    .names { font-weight: bold; }
-    </style>
+    .names { font-weight: bold; },
+	
+	</style>
+	<style>
+ th, td {
+  border: 2px solid black;
+  border-collapse: collapse;
+  border-width: 2px; 
+}
+th, td {
+  padding: 5px;
+  
+}
+.table1 {
+  border: 2px solid black;
+  border-collapse: collapse;
+  border-width: 2px; 
+}
+</style>
     </head>
     <body class="overflow-hidden"  >
         <!-- Overlay Div -->
@@ -77,7 +94,8 @@ if(isset($title_name)){
                                                     <label></label>
                                                     <div class="form">
                                                     <input type="button" id="btnExport" class="btn btn-primary pull-right" value="Export" />
-                                                    </div>
+												    <input type="button" id="btnExportpdf" class="btn btn-primary pull-right" value="ExportPdf" />
+												</div>
                                                 </div>
                                             </div>
                                         </div><br>
@@ -85,7 +103,7 @@ if(isset($title_name)){
                                         <div class="table-responsive" id="show_master" style="overflow-x: auto;">
 											
                                            
-                                    <table id="file_info" class="table table-striped dataTable" cellspacing="0" style="width:100%;">
+                                    <table id="file_info" class="  " cellspacing="0"  style="width:100%;">
                                             <thead id="thead">
                                                 <tr>
                                                     <th width="5%" rowspan="2">SL No</th>
@@ -145,17 +163,22 @@ if(isset($title_name)){
         <?php include "includes/footerlink.php"; ?>   
         <script type="text/javascript">var baseurl = "<?php print base_url(); ?>";</script>
         <script src="<?php echo base_url(); ?>assets/js/jquery.table2excel.js" type="text/javascript"></script>
-        <script src="<?php echo base_url(); ?>assets/js/myjs/datewisereport.js"></script>
+		<script src="<?php echo base_url(); ?>assets/js/myjs/datewisereport.js"></script>
+		 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script> 
         <script>
             $('#date').datepicker({
                 'todayHighlight':true,
                 format: 'yyyy-mm-dd',
-                autoclose: true,
-            });
+				autoclose: true,
+				minView: 2  });
             $('#fdate').datepicker({
                 'todayHighlight':true,
                 format: 'yyyy-mm-dd',
-                autoclose: true,
+				autoclose: true,
+				minView: 2
+            
+        
             });
             var date = new Date();
             date = date.toString('dd/MM/yyyy');
