@@ -135,13 +135,16 @@ if(isset($title_name)){
                 'todayHighlight':true,
                 format: 'yyyy-mm-dd',
 				autoclose: true,
+				autoHide: true
+
 				
             });
             $('#fdate').datepicker({
                 'todayHighlight':true,
                 format: 'yyyy-mm-dd',
 				autoclose: true,
-			
+			    autoHide: true
+
 			});
 			$(".datepicker-input").each(function() {
     $(this).datepicker();

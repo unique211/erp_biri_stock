@@ -13,7 +13,9 @@ class Consumtion_Report_model extends CI_Model
         $fil = 0;
         $query = '';
         $fdate = $this->input->post('fdate');
-        $tdate = $this->input->post('tdate');
+		$tdate = $this->input->post('tdate');
+		$fdate='2020-04-01';
+		$tdate='2020-06-30';
         $qry = '';
         $data = array();
         $this->db->select('*');
