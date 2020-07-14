@@ -6,8 +6,7 @@ class Date_Report_model extends CI_Model{
         $fdate=$this->input->post('fdate');
 		$date=$this->input->post('date');
 		
-		// $fdate='2020-07-13';
-		// $date='2020-07-13';
+		
         $this->db->select('id,party,name');
         $this->db->from($table);
         $this->db->order_by('name','ASC');
@@ -205,7 +204,7 @@ class Date_Report_model extends CI_Model{
                 if($t != '' && $l != '' )
                 {//echo "IF ";
                     $cat=$cat+$t;
-                    $cal=$$cal+$l;
+                    $cal=$cal+$l;
                 }
                 else{
                    // echo "else ";
