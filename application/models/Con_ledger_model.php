@@ -12,7 +12,9 @@ class Con_ledger_model extends CI_Model{
         $fdate=$this->input->post('fdate');
 		$id=$this->input->post('where');
 
-	
+		// $date='2020-06-31';
+        // $fdate='2020-06-01';
+		// $id=19;		
 	
         $sqlQry='';$asalbidi=0;$chatbidipcs=0;$chatbidikgs=0;$asb=0;$asbidi=0; $sumoftob=0; $bid=0;$tobsum=0;$batchqry=0;
         $sql=0;$t=0;$l=0;$bl=0;$wy=0;$fi=0;$mulfil=0;$mulbl=0;$mullev=0;$multob=0;$mulwy=0; $batchnm='';$totalTobacco=0;

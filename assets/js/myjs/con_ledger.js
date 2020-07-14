@@ -158,15 +158,15 @@ $(document).ready(function() {
                         table += '<tr >' +
                             '<td>' + sdate + '</td>' +
                             '<td>' + data[i].batchname + '</td>' +
-                            '<td>' + '</td>' +
-                            '<td>' + nbiri.toFixed(2) + '</td>' +
-                            '<td>' + chbiripcs.toFixed(3) + '</td>' +
-                            '<td>' + chbirikg.toFixed(3) + '</td>' +
-                            '<td>' + data[i].leaves + '</td>' +
-                            '<td>' + data[i].tobacco + '</td>' +
-                            '<td>' + data[i].black_yarn + '</td>' +
-                            '<td>' + data[i].white_yarn + '</td>' +
-                            '<td>' + data[i].filter + '</td>' +
+                            '<td>Openig ' + '</td>' +
+                            '<td style="text-align:right;">' + nbiri.toFixed(2) + '</td>' +
+                            '<td style="text-align:right;">' + chbiripcs.toFixed(3) + '</td>' +
+                            '<td style="text-align:right;">' + chbirikg.toFixed(3) + '</td>' +
+                            '<td style="text-align:right;">' + data[i].leaves + '</td>' +
+                            '<td style="text-align:right;">' + data[i].tobacco + '</td>' +
+                            '<td style="text-align:right;">' + data[i].black_yarn + '</td>' +
+                            '<td style="text-align:right;">' + data[i].white_yarn + '</td>' +
+                            '<td style="text-align:right;">' + data[i].filter + '</td>' +
                             '</tr><tr id="row_' + i + '" class="names"></tr>';
                     }
 
@@ -208,14 +208,14 @@ $(document).ready(function() {
                                     '<td>' + fdate + '</td>' +
                                     '<td>' + data[i].batch + '</td>' +
                                     '<td>' + data[i].wages + '</td>' +
-                                    '<td>' + data[i].asalbidi + '</td>' +
-                                    '<td>' + data[i].chatbidipcs + '</td>' +
-                                    '<td>' + data[i].chatbidikgs + '</td>' +
-                                    '<td>' + data[i].lev + '</td>' +
-                                    '<td>' + data[i].tob + '</td>' +
-                                    '<td>' + data[i].bly + '</td>' +
-                                    '<td>' + data[i].why + '</td>' +
-                                    '<td>' + data[i].fil + '</td>' +
+                                    '<td style="text-align:right;">' + data[i].asalbidi + '</td>' +
+                                    '<td style="text-align:right;">' + data[i].chatbidipcs + '</td>' +
+                                    '<td style="text-align:right;">' + data[i].chatbidikgs + '</td>' +
+                                    '<td style="text-align:right;">' + data[i].lev + '</td>' +
+                                    '<td style="text-align:right;">' + data[i].tob + '</td>' +
+                                    '<td style="text-align:right;">' + data[i].bly + '</td>' +
+                                    '<td style="text-align:right;">' + data[i].why + '</td>' +
+                                    '<td  style="text-align:right;">' + data[i].fil + '</td>' +
                                     '</tr>';
                                 btc = data[i].batch;
                             } else {
@@ -224,7 +224,7 @@ $(document).ready(function() {
                                         '<td>' + data[i].date + '</td>' +
                                         '<td>' + btc + '</td>' +
                                         '<td>' + '</td>' +
-                                        '<td>' + data[i].qty + '</td>' +
+                                        '<td style="text-align:right;">' + data[i].qty + '</td>' +
                                         '<td></td>' +
                                         '<td></td>' +
                                         '<td></td>' +
@@ -245,14 +245,14 @@ $(document).ready(function() {
                                 sumofwhy = parseFloat(sumofwhy) + parseFloat(opwhy);
                                 sumoffil = parseFloat(sumoffil) + parseFloat(opfil);
                                 batches += '<tr id="batchtotal" class="names"><td style="text-align:center;" colspan="3">Sub Total---></td>' +
-                                    '<td>' + sumofasb.toFixed(3) + '</td>' +
-                                    '<td>' + sumofchpcs.toFixed(3) + '</td>' +
-                                    '<td>' + sumofchkg.toFixed(3) + '</td>' +
-                                    '<td>' + sumoflev.toFixed(3) + '</td>' +
-                                    '<td>' + sumoftob.toFixed(3) + '</td>' +
-                                    '<td>' + sumofbly.toFixed(3) + '</td>' +
-                                    '<td>' + sumofwhy.toFixed(3) + '</td>' +
-                                    '<td>' + sumoffil.toFixed(3) + '</td></tr>';
+                                    '<td style="text-align:right;">' + sumofasb.toFixed(3) + '</td>' +
+                                    '<td style="text-align:right;">' + sumofchpcs.toFixed(3) + '</td>' +
+                                    '<td style="text-align:right;">' + sumofchkg.toFixed(3) + '</td>' +
+                                    '<td style="text-align:right;">' + sumoflev.toFixed(3) + '</td>' +
+                                    '<td style="text-align:right;">' + sumoftob.toFixed(3) + '</td>' +
+                                    '<td style="text-align:right;">' + sumofbly.toFixed(3) + '</td>' +
+                                    '<td style="text-align:right;">' + sumofwhy.toFixed(3) + '</td>' +
+                                    '<td style="text-align:right;">' + sumoffil.toFixed(3) + '</td></tr>';
                                 tasb = parseFloat(tasb) + parseFloat(sumofasb); //
                                 tchpcs = parseFloat(tchpcs) + parseFloat(sumofchpcs); //
                                 tchkg = parseFloat(tchkg) + parseFloat(sumofchkg); //
@@ -284,14 +284,14 @@ $(document).ready(function() {
                                     '<td>' + data[i].date + '</td>' +
                                     '<td>' + data[i].batch + '</td>' +
                                     '<td>' + data[i].wages + '</td>' +
-                                    '<td>' + data[i].asalbidi + '</td>' +
-                                    '<td>' + data[i].chatbidipcs + '</td>' +
-                                    '<td>' + data[i].chatbidikgs + '</td>' +
-                                    '<td>' + data[i].lev + '</td>' +
-                                    '<td>' + data[i].tob + '</td>' +
-                                    '<td>' + data[i].bly + '</td>' +
-                                    '<td>' + data[i].why + '</td>' +
-                                    '<td>' + data[i].fil + '</td>' +
+                                    '<td style="text-align:right;">' + data[i].asalbidi + '</td>' +
+                                    '<td style="text-align:right;">' + data[i].chatbidipcs + '</td>' +
+                                    '<td style="text-align:right;">' + data[i].chatbidikgs + '</td>' +
+                                    '<td style="text-align:right;">' + data[i].lev + '</td>' +
+                                    '<td style="text-align:right;">' + data[i].tob + '</td>' +
+                                    '<td style="text-align:right;">' + data[i].bly + '</td>' +
+                                    '<td style="text-align:right;">' + data[i].why + '</td>' +
+                                    '<td style="text-align:right;">' + data[i].fil + '</td>' +
                                     '</tr>';
                             }
 
@@ -309,14 +309,14 @@ $(document).ready(function() {
                             //console.log("Flag 0 : "+tasb+" "+tchkg+" "+tchpcs+" "+ttobacco+" "+tleave+tbly+" "+twhy+" "+tfilter+" ");
                             console.log("Flag 1 : " + tasb + " " + tchkg + " " + tchpcs + " " + ttobacco + " " + tleave + tbly + " " + twhy + " " + tfilter + " ");
                             batches += '<tr id="batchtotal" class="names"><td style="text-align:center;" colspan="3">Sub Total---></td>' +
-                                '<td>' + sumofasb.toFixed(3) + '</td>' +
-                                '<td>' + sumofchpcs.toFixed(3) + '</td>' +
-                                '<td>' + sumofchkg.toFixed(3) + '</td>' +
-                                '<td>' + sumoflev.toFixed(3) + '</td>' +
-                                '<td>' + sumoftob.toFixed(3) + '</td>' +
-                                '<td>' + sumofbly.toFixed(3) + '</td>' +
-                                '<td>' + sumofwhy.toFixed(3) + '</td>' +
-                                '<td>' + sumoffil.toFixed(3) + '</td></tr>';
+                                '<td style="text-align:right;">' + sumofasb.toFixed(3) + '</td>' +
+                                '<td style="text-align:right;">' + sumofchpcs.toFixed(3) + '</td>' +
+                                '<td style="text-align:right;">' + sumofchkg.toFixed(3) + '</td>' +
+                                '<td style="text-align:right;">' + sumoflev.toFixed(3) + '</td>' +
+                                '<td style="text-align:right;">' + sumoftob.toFixed(3) + '</td>' +
+                                '<td style="text-align:right;">' + sumofbly.toFixed(3) + '</td>' +
+                                '<td style="text-align:right;">' + sumofwhy.toFixed(3) + '</td>' +
+                                '<td style="text-align:right;">' + sumoffil.toFixed(3) + '</td></tr>';
                             console.log("Equal");
                         } else {
                             //oleave=sumoflev-oplev;
@@ -328,14 +328,14 @@ $(document).ready(function() {
 
                 batches += '<tr class="names">' +
                     '<td style="text-align:left;" colspan="3">Total -- > </td>' +
-                    '<td>' + tasb.toFixed(3) + '</td>' +
-                    '<td>' + tchpcs.toFixed(3) + '</td>' +
-                    '<td>' + tchkg.toFixed(3) + '</td>' +
-                    '<td>' + tleave.toFixed(3) + '</td>' +
-                    '<td>' + ttobacco.toFixed(3) + '</td>' +
-                    '<td>' + tbly.toFixed(3) + '</td>' +
-                    '<td>' + twhy.toFixed(3) + '</td>' +
-                    '<td>' + tfilter.toFixed(3) + '</td>' +
+                    '<td style="text-align:right;">' + tasb.toFixed(3) + '</td>' +
+                    '<td style="text-align:right;">' + tchpcs.toFixed(3) + '</td>' +
+                    '<td style="text-align:right;">' + tchkg.toFixed(3) + '</td>' +
+                    '<td style="text-align:right;">' + tleave.toFixed(3) + '</td>' +
+                    '<td style="text-align:right;">' + ttobacco.toFixed(3) + '</td>' +
+                    '<td style="text-align:right;">' + tbly.toFixed(3) + '</td>' +
+                    '<td style="text-align:right;">' + twhy.toFixed(3) + '</td>' +
+                    '<td style="text-align:right;">' + tfilter.toFixed(3) + '</td>' +
                     '</tr>';
                 var btc1 = '';
                 for (var i = 0; i < data.length; i++) {
@@ -346,7 +346,7 @@ $(document).ready(function() {
                             btc1 = data[i].batchnm;
                             crleaves = data[i].consumption.clev;
 
-                            crleaves = (parseInt(crleaves));
+                            crleaves = (parseFloat(crleaves));
 
 
                             totalcc = (parseFloat(ttobacco) - (parseFloat(data[i].consumption.ctob))).toFixed(3);
@@ -358,11 +358,11 @@ $(document).ready(function() {
                                 '<td style="text-align:center;" colspan="2">' + data[i].batchnm + '</td>' +
                                 '<td>' + '</td>' +
                                 '<td>' + '</td>' +
-                                '<td>' + data[i].consumption.clev + '</td>' +
-                                '<td>' + data[i].consumption.ctob + '</td>' +
-                                '<td>' + data[i].consumption.cbl + '</td>' +
-                                '<td>' + data[i].consumption.cwy + '</td>' +
-                                '<td>' + data[i].consumption.cfil + '</td>' +
+                                '<td style="text-align:right;">' + data[i].consumption.clev + '</td>' +
+                                '<td style="text-align:right;">' + data[i].consumption.ctob + '</td>' +
+                                '<td style="text-align:right;">' + data[i].consumption.cbl + '</td>' +
+                                '<td style="text-align:right;">' + data[i].consumption.cwy + '</td>' +
+                                '<td style="text-align:right;">' + data[i].consumption.cfil + '</td>' +
                                 '</tr>';
                         }
 
@@ -383,11 +383,11 @@ $(document).ready(function() {
                                 '<td style="text-align:center;" colspan="2">' + data[i].batchnm + '</td>' +
                                 '<td>' + '</td>' +
                                 '<td>' + '</td>' +
-                                '<td>' + data[i].lesssortage.lslev + '</td>' +
-                                '<td>' + data[i].lesssortage.lstob + '</td>' +
-                                '<td>' + data[i].lesssortage.lsbl + '</td>' +
-                                '<td>' + data[i].lesssortage.lswy + '</td>' +
-                                '<td>' + data[i].lesssortage.lsfil + '</td>' +
+                                '<td style="text-align:right;">' + data[i].lesssortage.lslev + '</td>' +
+                                '<td style="text-align:right;">' + data[i].lesssortage.lstob + '</td>' +
+                                '<td style="text-align:right;">' + data[i].lesssortage.lsbl + '</td>' +
+                                '<td style="text-align:right;">' + data[i].lesssortage.lswy + '</td>' +
+                                '<td style="text-align:right;">' + data[i].lesssortage.lsfil + '</td>' +
                                 '</tr>';
 
                         } else {
@@ -397,11 +397,11 @@ $(document).ready(function() {
                                 '<td style="text-align:center;" colspan="2">' + data[i].batchnm + '</td>' +
                                 '<td>' + '</td>' +
                                 '<td>' + '</td>' +
-                                '<td>' + data[i].lesssortage.lslev + '</td>' +
-                                '<td>' + data[i].lesssortage.lstob + '</td>' +
-                                '<td>' + data[i].lesssortage.lsbl + '</td>' +
-                                '<td>' + data[i].lesssortage.lswy + '</td>' +
-                                '<td>' + data[i].lesssortage.lsfil + '</td>' +
+                                '<td style="text-align:right;">' + data[i].lesssortage.lslev + '</td>' +
+                                '<td style="text-align:right;">' + data[i].lesssortage.lstob + '</td>' +
+                                '<td style="text-align:right;">' + data[i].lesssortage.lsbl + '</td>' +
+                                '<td style="text-align:right;">' + data[i].lesssortage.lswy + '</td>' +
+                                '<td style="text-align:right;">' + data[i].lesssortage.lsfil + '</td>' +
                                 '</tr>';
                         }
                     }
@@ -415,8 +415,8 @@ $(document).ready(function() {
                                 '<td style="text-align:center;" colspan="2">' + data[i].batchnm + '</td>' +
                                 '<td>' + '</td>' +
                                 '<td>' + '</td>' +
-                                '<td>' + data[i].transfer.tlev + '</td>' +
-                                '<td>' + data[i].transfer.ttob + '</td>' +
+                                '<td style="text-align:right;">' + data[i].transfer.tlev + '</td>' +
+                                '<td style="text-align:right;">' + data[i].transfer.ttob + '</td>' +
                                 '<td>' + '</td>' +
                                 '<td>' + '</td>' +
                                 '<td>' + '</td>' +
@@ -439,11 +439,11 @@ $(document).ready(function() {
                                 '<td style="text-align:center;" colspan="4">Clossing Of:' + data[i].batchnm + ' </td>' +
                                 '<td>' + '</td>' +
                                 '<td>' + '</td>' +
-                                '<td>' + data[i].closingBalance.closelev + '</td>' +
-                                '<td>' + data[i].closingBalance.closetob + '</td>' +
-                                '<td>' + data[i].closingBalance.closebly + '</td>' +
-                                '<td>' + data[i].closingBalance.closewhy + '</td>' +
-                                '<td>' + data[i].closingBalance.closefil + '</td>' +
+                                '<td style="text-align:right;">' + data[i].closingBalance.closelev + '</td>' +
+                                '<td style="text-align:right;">' + data[i].closingBalance.closetob + '</td>' +
+                                '<td style="text-align:right;">' + data[i].closingBalance.closebly + '</td>' +
+                                '<td style="text-align:right;">' + data[i].closingBalance.closewhy + '</td>' +
+                                '<td style="text-align:right;">' + data[i].closingBalance.closefil + '</td>' +
                                 '</tr>';
                         }
                     }
@@ -456,12 +456,12 @@ $(document).ready(function() {
                     // '<td style="text-align:center;" colspan="2"></td>'+
                     '<td>' + '</td>' +
                     '<td>' + '</td>' +
-                    '<td>' + totallevc + '</td>' +
-                    '<td>' + totalcc + '</td>' +
+                    '<td style="text-align:right;">' + totallevc + '</td>' +
+                    '<td style="text-align:right;">' + totalcc + '</td>' +
 
-                    '<td>' + totalbly.toFixed(3) + '</td>' +
-                    '<td>' + totalwhy.toFixed(3) + '</td>' +
-                    '<td>' + totalfil.toFixed(3) + '</td>' +
+                    '<td style="text-align:right;">' + totalbly.toFixed(3) + '</td>' +
+                    '<td style="text-align:right;">' + totalwhy.toFixed(3) + '</td>' +
+                    '<td style="text-align:right;">' + totalfil.toFixed(3) + '</td>' +
                     '</tr>';
                 batches += '<tr class="names">' +
                     '<td style="text-align:center;" colspan="2">Gross Total  </td>' +
@@ -492,28 +492,28 @@ $(document).ready(function() {
                         advance = parseFloat(advance) + parseFloat(data[i].finalTotal.advance.replace(/,/g, ""));
                         pf = parseFloat(pf) + parseFloat(data[i].finalTotal.pf.replace(/,/g, ""));
                         batches += '<tr class="names">' +
-                            '<td style="text-align:center;" colspan="2">' + data[i].finalTotal.gtotal + '</td>' +
-                            '<td>' + data[i].finalTotal.tLev + '</td>' +
-                            '<td>' + data[i].finalTotal.tTob + '</td>' +
-                            '<td>' + data[i].finalTotal.blsutta + '</td>' +
-                            '<td>' + data[i].finalTotal.whsutta + '</td>' +
-                            '<td>' + data[i].finalTotal.bags + '</td>' +
-                            '<td>' + data[i].finalTotal.dice + '</td>' +
-                            '<td>' + data[i].finalTotal.tsort + '</td>' +
-                            '<td>' + data[i].finalTotal.advance + '</td>' +
-                            '<td>' + data[i].finalTotal.pf + '</td>' +
+                            '<td style="text-align:center;" colspan="2">' + Math.round(parseFloat(data[i].finalTotal.gtotal.replace(/,/g, ""))).toFixed(2) + '</td>' +
+                            '<td style="text-align:right;">' + data[i].finalTotal.tLev + '</td>' +
+                            '<td style="text-align:right;">' + data[i].finalTotal.tTob + '</td>' +
+                            '<td style="text-align:right;">' + data[i].finalTotal.blsutta + '</td>' +
+                            '<td style="text-align:right;">' + data[i].finalTotal.whsutta + '</td>' +
+                            '<td style="text-align:right;">' + data[i].finalTotal.bags + '</td>' +
+                            '<td style="text-align:right;">' + data[i].finalTotal.dice + '</td>' +
+                            '<td style="text-align:right;">' + data[i].finalTotal.tsort + '</td>' +
+                            '<td style="text-align:right;">' + data[i].finalTotal.advance + '</td>' +
+                            '<td style="text-align:right;">' + data[i].finalTotal.pf + '</td>' +
                             '</tr>';
                     }
                 }
                 sumoftotal = parseFloat(lev) + parseFloat(tob) + parseFloat(blsutta) + parseFloat(whsutta) + parseFloat(bag) + parseFloat(dice) + parseFloat(tsort) + parseFloat(advance) + parseFloat(pf);
                 finalTot = grosstotal - sumoftotal;
                 batches += '<tr class="names">' +
-                    '<td style="text-align:center;" class="divide" colspan="2">' + sumoftotal.toFixed(3) + '</td>' +
+                    '<td style="text-align:center;" class="divide" colspan="2">' + sumoftotal.toFixed(2) + '</td>' +
                     '<td colspan="9"> <======  Less </td>' +
 
                     '</tr>';
                 batches += '<tr class="names">' +
-                    '<td style="text-align:center;" colspan="2">' + finalTot.toFixed(3) + '</td>' +
+                    '<td style="text-align:center;" colspan="2">' + Math.round(finalTot).toFixed(2) + '</td>' +
                     '<td colspan="9"> <======  Net </td>' +
 
                     '</tr>';
