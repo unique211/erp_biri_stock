@@ -525,5 +525,25 @@ $(document).ready(function() {
         });
     });
 
+    $(document).on('click', "#btnExportpdf", function(e) {
+        e.preventDefault();
+        Export1();
+    });
+
+    function Export1() {
+        html2canvas($('#file_info')[0], {
+            onrendered: function(canvas) {
+                var data = canvas.toDataURL();
+                var docDefinition = {
+                    content: [{
+                        image: data,
+                        width: 500
+                    }]
+                };
+                pdfMake.createPdf(docDefinition).download("Contractorledger.pdf");
+            }
+        })
+    }
+
 
 });

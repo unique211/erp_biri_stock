@@ -783,7 +783,8 @@ class Con_ledger_model extends CI_Model{
                     $sum=$sumofasbWg+$sumofbounas;
                     $sumofhand=$sumofhand+$mulhand;
                     $sumofadition=$sumofadition+$muladdition;
-                    $GrossTotal=round($selectsum,3)+round($sumofasbWg,2)+round($sumofbounas,2)+round($sumofhand,2)+round($sumofadition,2);
+                   // $GrossTotal=round($selectsum,3)+round($sumofasbWg,2)+round($sumofbounas,2)+round($sumofhand,2)+round($sumofadition,2);
+                    $GrossTotal=round($sumofasbWg,2)+round($sumofbounas,2)+round($sumofhand,2)+round($sumofadition,2);
                 }
                 $this->db->select('tobacco_amt,leaves_amt,bl_yarn_amt,wh_yarn_amt,filter_amt');
                 $this->db->from('cont_adj');

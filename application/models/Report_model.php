@@ -151,7 +151,10 @@ class Report_model extends CI_Model{
                         $this->db->select('count(cont_name) cont_name');
                         $this->db->from('cont_issue_receive');
                         $this->db->where('cont_name',$id);
-                        $this->db->where('date <=',$date);
+						$this->db->where('date <=',$date);
+						$this->db->where("asal_bidi >",0);
+						$this->db->where("chant_bidi_pcs >",0);
+
                         $con=$this->db->get()->row()->cont_name;
                     }
                     else{

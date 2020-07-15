@@ -121,7 +121,7 @@
                             <ul class="submenu">
                                 <li><a href="<?php echo base_url(); ?>contiloe/Contractor_report"><span class="submenu-label">Contractor Trial Report </span></a></li>
                                 <li><a href="<?php echo base_url(); ?>contiloe/DatewiseReport"><span class="submenu-label">Date Wise Report </span></a></li>
-                                <li><a href="<?php echo base_url(); ?>contiloe/contractor_sheet"><span class="submenu-label">Contractor Sheet </span></a></li>
+                                <li><a href="<?php echo base_url(); ?>contiloe/contractor_sheet"><span class="submenu-label">Wages Report </span></a></li>
                                 <li><a href="<?php echo base_url(); ?>contiloe/contractor_ledger"><span class="submenu-label">Contractor Ledger </span></a></li>
                                 <li><a href="<?php echo base_url(); ?>contiloe/issue"><span class="submenu-label"> Issue Report </span></a></li>
                                 <li><a href="<?php echo base_url(); ?>contiloe/recieved"><span class="submenu-label"> Received Report </span></a></li>

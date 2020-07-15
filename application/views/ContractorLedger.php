@@ -84,7 +84,9 @@ if(isset($title_name)){
                                                     <label></label>
                                                     <div class="form">
                                                     <input type="button" id="btnExport" class="btn btn-primary pull-right" value="Export" />
-                                                    </div>
+													<input type="button" id="btnExportpdf" class="btn btn-primary pull-right" value="ExportPdf" />
+
+												</div>
                                                 </div>
                                             </div>
                                         </div><br>
@@ -98,14 +100,14 @@ if(isset($title_name)){
                                                     <th>Date</th>
                                                     <th>Batch</th>
                                                     <th></th>
-                                                    <th>Net Biri</th>
-                                                    <th>Home Ch.</th>
-                                                    <th>Fact.Ch.</th>
-                                                    <th>Leaves</th>
-                                                    <th>Tobacco</th>
-                                                    <th>Black Yarn</th>
-                                                    <th>White Yarn</th>
-                                                    <th>Filter</th>
+                                                    <th style="text-align:right;" >Net Biri</th>
+                                                    <th style="text-align:right;" >Home Ch.</th>
+                                                    <th style="text-align:right;" >Fact.Ch.</th>
+                                                    <th style="text-align:right;" >Leaves</th>
+                                                    <th style="text-align:right;" >Tobacco</th>
+                                                    <th style="text-align:right;" >Black Yarn</th>
+                                                    <th style="text-align:right;" >White Yarn</th>
+                                                    <th style="text-align:right;" >Filter</th>
                                                 </tr>
                                             </thead>
                                             <tbody id="tbody"></tbody>
@@ -129,7 +131,9 @@ if(isset($title_name)){
         <script type="text/javascript">var baseurl = "<?php print base_url(); ?>";</script>
         <script src="<?php echo base_url(); ?>assets/js/jquery.table2excel.js" type="text/javascript"></script>
         <script src="<?php echo base_url(); ?>assets/js/myjs/dynamic.js"></script>
-        <script src="<?php echo base_url(); ?>assets/js/myjs/con_ledger.js"></script>
+		<script src="<?php echo base_url(); ?>assets/js/myjs/con_ledger.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script> 
         <script>
             $('#date').datepicker({
                 'todayHighlight':true,

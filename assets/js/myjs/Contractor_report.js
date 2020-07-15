@@ -56,10 +56,14 @@ $(document).ready(function() {
                         if (nm != data[i].bname) {
                             nm = data[i].bname;
                             if (val != 0) { //
-                                html += '<tr class="trs">' +
-                                    '<td></td><td></td><td></td><td></td><td class="names">' + Tsum.toFixed(3) + '</td><td class="names">' + Lsum.toFixed(3) + '</td><td class="names">' + bsum.toFixed(3) + '</td><td class="names">' + wsum.toFixed(3) + '</td><td class="names">' + fsum.toFixed(3) + '</td></tr><tr></tr>';
-                                index += 1;
-                                val = val + 1;
+                                if (Tsum == 0 && Lsum == 0 && bsum == 0 && wsum == 0 && fsum == 0) {
+
+                                } else {
+                                    html += '<tr class="trs">' +
+                                        '<td></td><td></td><td></td><td></td><td class="names">' + Tsum.toFixed(3) + '</td><td class="names">' + Lsum.toFixed(3) + '</td><td class="names">' + bsum.toFixed(3) + '</td><td class="names">' + wsum.toFixed(3) + '</td><td class="names">' + fsum.toFixed(3) + '</td></tr><tr></tr>';
+                                    index += 1;
+                                    val = val + 1;
+                                }
                             } else {
                                 html += '<tr></tr>';
                                 val++;
@@ -79,17 +83,22 @@ $(document).ready(function() {
                             wsum = parseFloat(wsum) + parseFloat(white_yarn);
                             filter = data[i].name.filter.replace(/,/g, "");
                             fsum = parseFloat(fsum) + parseFloat(filter);
-                            html += '<tr>' +
-                                '<td>' + index + '</td>' +
-                                '<td>' + data[i].bname + '</td>' +
-                                '<td style="text-align:right;">' + data[i].count + '</td>' +
-                                '<td >' + data[i].name.batchName + '</td>' +
-                                '<td style="text-align:right;">' + data[i].name.tobacco + '</td>' +
-                                '<td style="text-align:right;">' + data[i].name.leaves + '</td>' +
-                                '<td style="text-align:right;">' + data[i].name.black_yarn + '</td>' +
-                                '<td style="text-align:right;">' + data[i].name.white_yarn + '</td>' +
-                                '<td style="text-align:right;">' + data[i].name.filter + '</td>' +
-                                '</tr>';
+
+                            if (data[i].name.tobacco == 0 && data[i].name.leaves == 0 && data[i].name.black_yarn == 0 && data[i].name.white_yarn == 0 && data[i].name.filter == 0) {
+
+                            } else {
+                                html += '<tr>' +
+                                    '<td>' + index + '</td>' +
+                                    '<td>' + data[i].bname + '</td>' +
+                                    '<td style="text-align:right;">' + data[i].count + '</td>' +
+                                    '<td >' + data[i].name.batchName + '</td>' +
+                                    '<td style="text-align:right;">' + data[i].name.tobacco + '</td>' +
+                                    '<td style="text-align:right;">' + data[i].name.leaves + '</td>' +
+                                    '<td style="text-align:right;">' + data[i].name.black_yarn + '</td>' +
+                                    '<td style="text-align:right;">' + data[i].name.white_yarn + '</td>' +
+                                    '<td style="text-align:right;">' + data[i].name.filter + '</td>' +
+                                    '</tr>';
+                            }
 
                         } else {
                             tobacco = data[i].name.tobacco.replace(/,/g, "");
@@ -102,27 +111,36 @@ $(document).ready(function() {
                             wsum = parseFloat(wsum) + parseFloat(white_yarn);
                             filter = data[i].name.filter.replace(/,/g, "");
                             fsum = parseFloat(fsum) + parseFloat(filter);
-                            html += '<tr>' +
-                                '<td>' + '</td>' +
-                                '<td>' + '</td>' +
-                                '<td>' + '</td>' +
-                                '<td>' + '</td>' +
-                                '<td>' + '</td>' +
-                                // '<td>' + data[i].name.batchName + '</td>' +
-                                '<td style="text-align:right;">' + data[i].name.tobacco + '</td>' +
-                                '<td style="text-align:right;">' + data[i].name.leaves + '</td>' +
-                                '<td style="text-align:right;">' + data[i].name.black_yarn + '</td>' +
-                                '<td style="text-align:right;">' + data[i].name.white_yarn + '</td>' +
-                                '<td style="text-align:right;">' + data[i].name.filter + '</td>' +
-                                '</tr>';
+
+                            if (data[i].name.tobacco == 0 && data[i].name.leaves == 0 && data[i].name.black_yarn == 0 && data[i].name.white_yarn == 0 && data[i].name.filter == 0) {
+
+                            } else {
+                                html += '<tr>' +
+                                    '<td>' + '</td>' +
+                                    '<td>' + '</td>' +
+                                    '<td>' + '</td>' +
+                                    '<td>' + '</td>' +
+                                    '<td></td>' +
+                                    // '<td>' + data[i].name.batchName + '</td>' +
+                                    '<td style="text-align:right;">' + data[i].name.tobacco + '</td>' +
+                                    '<td style="text-align:right;">' + data[i].name.leaves + '</td>' +
+                                    '<td style="text-align:right;">' + data[i].name.black_yarn + '</td>' +
+                                    '<td style="text-align:right;">' + data[i].name.white_yarn + '</td>' +
+                                    '<td style="text-align:right;">' + data[i].name.filter + '</td>' +
+                                    '</tr>';
+                            }
                         }
                     } else {}
                     if (flag == 1) {
                         console.log(flag + " is the flag ??");
-                        html += '<tr class="trs">' +
-                            '<td></td><td></td><td></td><td></td><td style="text-align:right;" class="names">' + Tsum.toFixed(3) + '</td><td class="names">' + Lsum.toFixed(3) + '</td><td class="names">' + bsum.toFixed(3) + '</td><td class="names">' + wsum.toFixed(3) + '</td><td class="names">' + fsum.toFixed(3) + '</td></tr><tr></tr>';
-                        index += 1;
-                        val = val + 1;
+                        if (Tsum == 0 && Lsum == 0 && bsum == 0 && wsum == 0 && fsum == 0) {
+
+                        } else {
+                            html += '<tr class="trs">' +
+                                '<td></td><td></td><td></td><td></td><td style="text-align:right;" class="names">' + Tsum.toFixed(3) + '</td><td class="names">' + Lsum.toFixed(3) + '</td><td class="names">' + bsum.toFixed(3) + '</td><td class="names">' + wsum.toFixed(3) + '</td><td class="names">' + fsum.toFixed(3) + '</td></tr><tr></tr>';
+                            index += 1;
+                            val = val + 1;
+                        }
                     }
                 }
                 $('#tbody').html(html);

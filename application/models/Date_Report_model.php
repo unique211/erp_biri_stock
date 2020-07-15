@@ -5,7 +5,8 @@ class Date_Report_model extends CI_Model{
         //'2019-04-05';//'2019-04-09';//
         $fdate=$this->input->post('fdate');
 		$date=$this->input->post('date');
-		
+		// $fdate='2020-07-13';
+		// $date='2020-07-13';
 		
         $this->db->select('id,party,name');
         $this->db->from($table);
@@ -29,7 +30,21 @@ class Date_Report_model extends CI_Model{
             $bqry=$this->db->get()->result();
             foreach($bqry as $row)
             {
-                $batchid=$row->id;
+				$batchid=$row->id;
+				
+				$this->db->select('sum(tobacco) as stob,sum(leaves) as slev');
+                $this->db->from('cont_adj');
+                $this->db->where('contractor',$id);
+                $this->db->where('batch',$batchid);
+                $this->db->where('date >= ',$fdate);
+                $this->db->where('date <= ',$date);
+				$select1=$this->db->get()->result();
+				
+                foreach($select1 as $row1){
+					$stob=$row1->stob;
+					$slev=$row1->slev;
+				}
+
                 $this->db->select('sum(asal_bidi) as asal_bidi,sum(chant_bidi_pcs) as chant_bidi_pcs');
                 $this->db->from('cont_issue_receive');
                 $this->db->where('cont_name',$id);
