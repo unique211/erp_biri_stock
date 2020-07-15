@@ -206,5 +206,9 @@ $(document).ready(function() {
             }
         })
     }
+    // $('.date').datepicker().on('changeDate', function() {
+    //     $(this).blur();
+    // });
+
 
 });

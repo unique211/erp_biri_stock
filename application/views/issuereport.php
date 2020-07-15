@@ -152,10 +152,8 @@ if (isset($title_name)) {
             'todayHighlight': true,
             format: 'yyyy-mm-dd',
             autoclose: true,
-		});
-		$('#date').on('changeDate', function(ev){
-    $(this).datepicker('hide');
-});
+		});;
+	
      
     </script>
 </body>
