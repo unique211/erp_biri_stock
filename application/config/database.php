@@ -77,6 +77,7 @@ $db['default'] = array(
 	'dsn'	=> '',
 
 
+
 	 'hostname' => 'us-cdbr-iron-east-05.cleardb.net',
 	 'username' => 'bf087033adc7b4',
 	 'password' => '4829dfb9',
@@ -85,6 +86,7 @@ $db['default'] = array(
 	//'username' => 'root',
 	//'password' => '',
 	//'database' => 'heroku_f1a3373b0439afe',
+
 
 
 	'dbdriver' => 'mysqli',
