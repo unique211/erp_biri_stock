@@ -4,9 +4,12 @@ class Con_sheet_model extends CI_Model{
         $query='';$id='';$contractorname=''; $data=array();$result='';
         $nm="contractor";
         //'withoutdeduction';//'2019-04-01';//'2019-04-05';//
-        $fdate=$this->input->post('fdate');'withdeduction';//
+        $fdate=$this->input->post('fdate');//'withdeduction';
         $date=$this->input->post('date');
-        $where=$this->input->post('where');
+		$where=$this->input->post('where');
+		// $fdate='2020-06-01';
+		// $date='2020-06-31';
+		//$where='withoutdeduction';
         if($where == 'withoutdeduction'){
             $this->db->select('id,party,name');
             $this->db->from($table);
@@ -69,7 +72,7 @@ class Con_sheet_model extends CI_Model{
                     $sum=$sumofasbWg+$sumofbounas;
                     $sumofhand=$sumofhand+$mulhand;
                     $sumofadition=$sumofadition+$muladdition;
-                    $GrossTotal=round($selectsum,3)+round($sumofasbWg,2)+round($sumofbounas,2)+round($sumofhand,2)+round($sumofadition,2);
+                    $GrossTotal=round($sumofasbWg,2)+round($sumofbounas,2)+round($sumofhand,2)+round($sumofadition,2);
                 }
                 if($selectsum != ''){
                     $data[]=array(
@@ -155,7 +158,7 @@ class Con_sheet_model extends CI_Model{
                         $sum=$sumofasbWg+$sumofbounas;
                         $sumofhand=$sumofhand+$mulhand;
                         $sumofadition=$sumofadition+$muladdition;
-                        $GrossTotal=round($selectsum,3)+round($sumofasbWg,2)+round($sumofbounas,2)+round($sumofhand,2)+round($sumofadition,2);
+                        $GrossTotal=round($sumofasbWg,2)+round($sumofbounas,2)+round($sumofhand,2)+round($sumofadition,2);
                     }
                     $this->db->select('tobacco_amt,leaves_amt,bl_yarn_amt,wh_yarn_amt,filter_amt');
                         $this->db->from('cont_adj');
@@ -165,7 +168,7 @@ class Con_sheet_model extends CI_Model{
                         $this->db->where('date <=',$date);
                         $conadjust=$this->db->get()->result();
                         if($conadjust != null){
-                            echo json_encode($conadjust);
+                          //  echo json_encode($conadjust);
                             foreach($conadjust as $row){
                                 $tobAmt=$row->tobacco_amt;
                                 $levAmt=$row->leaves_amt;
@@ -294,7 +297,8 @@ class Con_sheet_model extends CI_Model{
                 }
                
             }
-            return $data;
+			return $data;
+
         }
     }
 }

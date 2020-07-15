@@ -53,7 +53,7 @@ $(document).ready(function() {
                 var totalcTob = 0;
 
                 for (var i = 1; i < data.length; i++) {
-                    sr = sr + 1;
+
 
                     totalaslbiri = (parseFloat(totalaslbiri) + parseFloat(data[i].asalbiri)).toFixed(3);
                     totalchatbiri = (parseFloat(totalchatbiri) + parseFloat(data[i].chatbiri)).toFixed(3);
@@ -70,32 +70,38 @@ $(document).ready(function() {
                     totalsmLev = (parseFloat(totalsmLev) + parseFloat(data[i].smLev)).toFixed(3);
                     totalclosingtobacco = (parseFloat(totalclosingtobacco) + parseFloat(data[i].closingtobacco)).toFixed(3);
                     totalclosingleaves = (parseFloat(totalclosingleaves) + parseFloat(data[i].closingleaves)).toFixed(3);
-                    html += '<tr>' +
-                        '<td>' + sr + '</td>' +
-                        '<td>' + data[i].contractorname + '</td>' +
-                        //  '<td>'+sr+'</td>'+
-                        '<td style="text-align:right">' + data[i].asalbiri + '</td>' +
-                        '<td  style="text-align:right">' + data[i].chatbiri + '</td>' +
-                        '<td  style="text-align:right">' + data[i].totalBiri + '</td>' +
-                        '<td  style="text-align:right">' + data[i].obtob + '</td>' +
-                        '<td  style="text-align:right">' + data[i].oblev + '</td>' +
-                        //'<td>'+data[i].obbags+'</td>'+
-                        '<td  style="text-align:right">' + data[i].itob + '</td>' +
-                        '<td  style="text-align:right">' + data[i].ileave + '</td>' +
-                        //'<td>'+data[i].ibag+'</td>'+
-                        '<td  style="text-align:right">' + data[i].TotalTobbaco + '</td>' +
-                        '<td  style="text-align:right">' + data[i].TotalLeaves + '</td>' +
-                        // '<td>'+data[i].TotalBag+'</td>'+
-                        '<td  style="text-align:right">' + data[i].cTob + '</td>' +
-                        '<td  style="text-align:right">' + data[i].cLev + '</td>' +
-                        //'<td>'+data[i].cBag+'</td>'+
-                        '<td  style="text-align:right">' + data[i].smTob + '</td>' +
-                        '<td  style="text-align:right">' + data[i].smLev + '</td>' +
-                        // '<td>'+data[i].smBag+'</td>'+
-                        '<td  style="text-align:right">' + data[i].closingtobacco + '</td>' +
-                        '<td  style="text-align:right">' + data[i].closingleaves + '</td>' +
-                        '<td></td>' +
-                        '</tr>';
+
+                    if (data[i].asalbiri == 0 && data[i].chatbiri == 0 && data[i].totalBiri == 0 && data[i].obtob == 0 && data[i].oblev == 0 && data[i].itob == 0 && data[i].ileave == 0 && data[i].TotalTobbaco == 0 && data[i].TotalLeaves && data[i].cTob == 0 && data[i].cLev == 0 && data[i].smLev == 0 && data[i].closingtobacco == 0 && data[i].closingleaves == 0) {
+
+                    } else {
+                        sr = sr + 1;
+                        html += '<tr>' +
+                            '<td>' + sr + '</td>' +
+                            '<td>' + data[i].contractorname + '</td>' +
+                            //  '<td>'+sr+'</td>'+
+                            '<td style="text-align:right">' + data[i].asalbiri + '</td>' +
+                            '<td  style="text-align:right">' + data[i].chatbiri + '</td>' +
+                            '<td  style="text-align:right">' + data[i].totalBiri + '</td>' +
+                            '<td  style="text-align:right">' + data[i].obtob + '</td>' +
+                            '<td  style="text-align:right">' + data[i].oblev + '</td>' +
+                            //'<td>'+data[i].obbags+'</td>'+
+                            '<td  style="text-align:right">' + data[i].itob + '</td>' +
+                            '<td  style="text-align:right">' + data[i].ileave + '</td>' +
+                            //'<td>'+data[i].ibag+'</td>'+
+                            '<td  style="text-align:right">' + data[i].TotalTobbaco + '</td>' +
+                            '<td  style="text-align:right">' + data[i].TotalLeaves + '</td>' +
+                            // '<td>'+data[i].TotalBag+'</td>'+
+                            '<td  style="text-align:right">' + data[i].cTob + '</td>' +
+                            '<td  style="text-align:right">' + data[i].cLev + '</td>' +
+                            //'<td>'+data[i].cBag+'</td>'+
+                            '<td  style="text-align:right">' + data[i].smTob + '</td>' +
+                            '<td  style="text-align:right">' + data[i].smLev + '</td>' +
+                            // '<td>'+data[i].smBag+'</td>'+
+                            '<td  style="text-align:right">' + data[i].closingtobacco + '</td>' +
+                            '<td  style="text-align:right">' + data[i].closingleaves + '</td>' +
+                            '<td></td>' +
+                            '</tr>';
+                    }
                 }
                 html += '<tr>' +
                     '<td></td>' +

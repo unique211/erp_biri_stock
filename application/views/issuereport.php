@@ -84,7 +84,9 @@ if (isset($title_name)) {
                                                 <label></label>
                                                 <div class="form">
                                                     <input type="button" id="btnExport" class="btn btn-primary pull-right" value="Export" />
-                                                </div>
+													<input type="button" id="btnExportpdf" class="btn btn-primary pull-right" value="ExportPdf" />
+
+												</div>
                                             </div>
                                         </div>
                                     </div><br>
@@ -98,15 +100,15 @@ if (isset($title_name)) {
                                                         <!-- <th width="5%">SL No</th> -->
                                                         <th width="15%">Contractor Name</th>
                                                         <th width="10%">Batch</th>
-                                                        <th width="10%">Tobacco</th>
-                                                        <th width="5%"> Tobacco Bag </th>
-                                                        <th width="10%">Leaves</th>
-                                                        <th width="10%">Leaves Bag</th>
-                                                        <th width="10%">Black Yarn</th>
-                                                        <th width="10%">White Yarn</th>
-                                                        <th width="10%">Filter</th>
-                                                        <th width="5%">Dics</th>
-                                                        <th width="5%">Other</th>
+                                                        <th style="text-align:right;" width="10%">Tobacco</th>
+                                                        <th style="text-align:right;" width="5%"> Tobacco Bag </th>
+                                                        <th style="text-align:right;" width="10%">Leaves</th>
+                                                        <th  style="text-align:right;"  width="10%">Leaves Bag</th>
+                                                        <th style="text-align:right;"  width="10%">Black Yarn</th>
+                                                        <th style="text-align:right;" width="10%">White Yarn</th>
+                                                        <th style="text-align:right;"  width="10%">Filter</th>
+                                                        <th style="text-align:right;"  width="5%">Dics</th>
+                                                        <th style="text-align:right;"  width="5%">Other</th>
                                                     </tr>
 
                                                 </thead>
@@ -133,8 +135,14 @@ if (isset($title_name)) {
         var baseurl = "<?php print base_url(); ?>";
     </script>
     <script src="<?php echo base_url(); ?>assets/js/jquery.table2excel.js" type="text/javascript"></script>
-    <script src="<?php echo base_url(); ?>assets/js/myjs/issueReport.js"></script>
+	<script src="<?php echo base_url(); ?>assets/js/myjs/issueReport.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script> 
     <script>
+		   var date = new Date();
+        date = date.toString('dd/MM/yyyy');
+        $("#date").val(date);
+        $("#fdate").val(date);
         $('#date').datepicker({
             'todayHighlight': true,
             format: 'yyyy-mm-dd',
@@ -144,11 +152,11 @@ if (isset($title_name)) {
             'todayHighlight': true,
             format: 'yyyy-mm-dd',
             autoclose: true,
-        });
-        var date = new Date();
-        date = date.toString('dd/MM/yyyy');
-        $("#date").val(date);
-        $("#fdate").val(date);
+		});
+		$('#date').on('changeDate', function(ev){
+    $(this).datepicker('hide');
+});
+     
     </script>
 </body>
 

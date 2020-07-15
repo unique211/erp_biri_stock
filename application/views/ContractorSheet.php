@@ -42,7 +42,7 @@ if(isset($title_name)){
                                 <div class="panel-body ">
                                     <div class="row " id="documents">
                                         <div class="col-sm-12">
-                                        <div class="col-sm-3">
+                                        <div class="col-sm-2">
                                                 <div class="form-group">
                                                     <label>From Date</label>
                                                     <div class="input-group date " data-provide="datepicker">
@@ -53,7 +53,7 @@ if(isset($title_name)){
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-2">
                                                 <div class="form-group">
                                                     <label>To Date</label>
                                                     <div class="input-group date " data-provide="datepicker">
@@ -88,14 +88,18 @@ if(isset($title_name)){
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-1">
+                                            <div class="col-sm-3">
                                                 <div class="form-group">
                                                     <label></label>
                                                     <div class="form">
-                                                    <input type="button" id="btnExport" class="btn btn-primary pull-right" value="Export" />
-                                                    </div>
+													<input type="button" id="btnExport" class="btn btn-primary pull-right" value="Export" />
+													<input type="button" id="btnExportpdf" class="btn btn-primary pull-right" value="ExportPdf" />
+
+												</div>
                                                 </div>
-                                            </div>
+											</div>
+											
+
                                         </div><br>
                                         <!-- <div class="col-lg-4" >
 									        <br>
@@ -140,7 +144,9 @@ if(isset($title_name)){
         <?php include "includes/footerlink.php"; ?>   
         <script type="text/javascript">var baseurl = "<?php print base_url(); ?>";</script>
         <script src="<?php echo base_url(); ?>assets/js/jquery.table2excel.js" type="text/javascript"></script>
-        <script src="<?php echo base_url(); ?>assets/js/myjs/con_sheet.js"></script>
+		<script src="<?php echo base_url(); ?>assets/js/myjs/con_sheet.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script> 
         <script>
             $('#date').datepicker({
                 'todayHighlight':true,

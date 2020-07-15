@@ -339,7 +339,7 @@ set_time_limit(0);
 	public function contractor_sheet(){
 		if(isset($this->session->userid)){
 			$title['title_name'] = " dbstock ";
-			$title['title_name1'] = " Contractor Sheet ";
+			$title['title_name1'] = "Wages Report ";
 			$title['active_menu'] = "r";
 			$this->load->view('ContractorSheet',$title);
 		}
