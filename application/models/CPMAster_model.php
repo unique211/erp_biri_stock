@@ -67,7 +67,7 @@ class CPMAster_model extends CI_Model{
             $this->db->select('*');    
             $this->db->from('con-party_master');
             $this->db->order_by("name");
-           // $this->db->where('status','1');
+            $this->db->where('status','1');
             $query = $this->db->get();
             return $query->result();
         }
