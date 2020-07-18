@@ -42,7 +42,8 @@ class FinishPS extends CI_Controller
                     'basic' =>$this->input->post('basic_per'),
                     'total' =>$this->input->post('total'),
                     'truck_no'=>$this->input->post('truck'),
-                    'freight'=>$this->input->post('freight')
+                    'freight'=>$this->input->post('freight'),
+                    'gst_invoice_no'=>$this->input->post('gstinvoice')
             );
             }else{
                 $data = array(
@@ -58,7 +59,9 @@ class FinishPS extends CI_Controller
                         'basic' =>$this->input->post('basic_per'),
                         'total' =>$this->input->post('total'),
                         'truck_no'=>$this->input->post('truck'),
-                        'freight'=>$this->input->post('freight')
+						'freight'=>$this->input->post('freight'),
+						'gst_invoice_no'=>$this->input->post('gstinvoice')
+
                 );
             } 
         }else if($table_name=="purchase_data"){

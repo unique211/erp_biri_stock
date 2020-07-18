@@ -1,5 +1,6 @@
 $(document).ready(function() {
     getMasterSelect("packingbatch", "#batch");
+
     function getMasterSelect(table_name, selecter) {
 
         $.ajax({
@@ -176,7 +177,7 @@ $(document).ready(function() {
                 }
             },
             error: function() {
-               // alert("Error..");
+                // alert("Error..");
             }
         });
     });
@@ -210,6 +211,7 @@ $(document).ready(function() {
         $("#nccd_amt").val(0);
         $('#tax_amt').val(0);
         $("#total").val(0);
+        $('#gstinvoice').val('');
 
 
     }
@@ -314,6 +316,7 @@ $(document).ready(function() {
         var total = $('#tax_amt').val();
         var truck = $('#truckno').val();
         var freight = $('#freight').val();
+        var gstinvoice = $('#gstinvoice').val();
         var id = $('#save_update').val();
 
 
@@ -321,107 +324,108 @@ $(document).ready(function() {
         var voucher_date = fdateslt[2] + '-' + fdateslt[1] + '-' + fdateslt[0];
         var fdateslt = bill_date1.split('/');
         var bill_date = fdateslt[2] + '-' + fdateslt[1] + '-' + fdateslt[0];
-      
+
         var r1 = $('table#file_info').find('tbody').find('tr');
         var r = r1.length;
-            if(r>0){
-        $.ajax({
-            type: "POST",
-            url: baseurl + "FinishPS/adddata",
+        if (r > 0) {
+            $.ajax({
+                type: "POST",
+                url: baseurl + "FinishPS/adddata",
 
-            data: {
-                id: id,
-                purchase_id: purchase_id,
-                sales_id: sales_id,
-                voucher_date: voucher_date,
-                billno: billno,
-                type: type,
-                bill_date: bill_date,
-                party_id: party_id,
-                sgst: sgst,
-                cgst: cgst,
-                igst: igst,
-                nccd: nccd,
-                total: total,
-                truck: truck,
-                freight: freight,
-                basic_per:basic_per,
-                table_name: table_name
-            },
-            dataType: "JSON",
-            async: false,
-            success: function(data) {
-                var sale_id = 0;
+                data: {
+                    id: id,
+                    purchase_id: purchase_id,
+                    sales_id: sales_id,
+                    voucher_date: voucher_date,
+                    billno: billno,
+                    type: type,
+                    bill_date: bill_date,
+                    party_id: party_id,
+                    sgst: sgst,
+                    cgst: cgst,
+                    igst: igst,
+                    nccd: nccd,
+                    total: total,
+                    truck: truck,
+                    freight: freight,
+                    basic_per: basic_per,
+                    gstinvoice: gstinvoice,
+                    table_name: table_name
+                },
+                dataType: "JSON",
+                async: false,
+                success: function(data) {
+                    var sale_id = 0;
 
-                if (id == "") {
-                    sale_id = data;
-                } else {
-                    sale_id = id;
+                    if (id == "") {
+                        sale_id = data;
+                    } else {
+                        sale_id = id;
+                    }
+
+                    var r1 = $('table#file_info').find('tbody').find('tr');
+                    var r = r1.length;
+
+                    table_name = "sale_data";
+
+
+                    for (var i = 0; i < r; i++) {
+
+                        batch_id = $(r1[i]).find('td:eq(1)').html();
+                        stock = $(r1[i]).find('td:eq(2)').html();
+                        pack = $(r1[i]).find('td:eq(3)').html();
+                        qty = $(r1[i]).find('td:eq(4)').html();
+                        rate = $(r1[i]).find('td:eq(5)').html();
+
+                        $.ajax({
+                            type: "POST",
+                            url: baseurl + "FinishPS/adddata1",
+
+                            data: {
+                                id: id,
+                                sale_id: sale_id,
+                                batch_id: batch_id,
+                                stock: stock,
+                                qty: qty,
+                                pack: pack,
+                                rate: rate,
+                                table_name: table_name
+                            },
+                            dataType: "JSON",
+                            async: false,
+                            success: function(result) {
+
+                            }
+
+                        });
+                    }
                 }
 
-                var r1 = $('table#file_info').find('tbody').find('tr');
-                var r = r1.length;
-
-                table_name = "sale_data";
+            });
 
 
-                for (var i = 0; i < r; i++) {
 
-                    batch_id = $(r1[i]).find('td:eq(1)').html();
-                    stock = $(r1[i]).find('td:eq(2)').html();
-                    pack = $(r1[i]).find('td:eq(3)').html();
-                    qty = $(r1[i]).find('td:eq(4)').html();
-                    rate = $(r1[i]).find('td:eq(5)').html();
 
-                    $.ajax({
-                        type: "POST",
-                        url: baseurl + "FinishPS/adddata1",
 
-                        data: {
-                            id: id,
-                            sale_id: sale_id,
-                            batch_id: batch_id,
-                            stock: stock,
-                            qty: qty,
-                            pack: pack,
-                            rate: rate,
-                            table_name: table_name
-                        },
-                        dataType: "JSON",
-                        async: false,
-                        success: function(result) {
-
-                        }
-
-                    });
-                }
+            if (id != "") {
+                successTost("Data Update Successfully");
+            } else {
+                successTost("Data Save Successfully");
             }
+            // $('#master_form')[0].reset();
+            formclear();
+            getsaleid();
+            defaultdate();
+            $('#row').val("0");
+            $('#file_info tbody').html('');
 
-        });
+            $('.tablehideshow').show();
 
-
-
-
-
-        if (id != "") {
-            successTost("Data Update Successfully");
+            datashow();
+            $('.closehideshow').trigger('click');
         } else {
-            successTost("Data Save Successfully");
+            swal("Selcet One Batch For Sale!!");
         }
-        // $('#master_form')[0].reset();
-        formclear();
-        getsaleid();
-        defaultdate();
-        $('#row').val("0");
-        $('#file_info tbody').html('');
-
-        $('.tablehideshow').show();
-
-        datashow();
-        $('.closehideshow').trigger('click');
-    }else{
-        swal("Selcet One Batch For Sale!!");
-    }
 
 
 
@@ -448,18 +452,19 @@ $(document).ready(function() {
     function getQty(ncd) {
         var taxable = 0;
         var qty = 0;
-       
+
         var r1 = $('table#file_info').find('tbody').find('tr');
-        console.log("r1"+r1.length);
+        console.log("r1" + r1.length);
         for (var i = 0; i < r1.length; i++) {
             qty = $(r1[i]).find('td:eq(4)').html();
             taxable = parseFloat(taxable) + parseFloat(qty);
         }
-        console.log("taxable"+taxable);
+        console.log("taxable" + taxable);
         var tot = parseFloat(taxable) * parseFloat(ncd);
-      //  console.log("ncd"+ncd+"tot"+tot);
+        //  console.log("ncd"+ncd+"tot"+tot);
         $('#nccd_amt').val(tot.toFixed(2));
     }
+
     function getBasic(basic) {
         var taxable = 0;
         var qty = 0;
@@ -468,11 +473,11 @@ $(document).ready(function() {
             qty = $(r1[i]).find('td:eq(4)').html();
             taxable = parseFloat(taxable) + parseFloat(qty);
         }
-        
+
         var tot = parseFloat(taxable) * parseFloat(basic);
-       
+
         $('#basic_amt').val(tot.toFixed(2));
-       
+
     }
     $("#igst_per").blur(function() {
         count_total();
@@ -552,14 +557,15 @@ $(document).ready(function() {
 
                 var data = eval(data);
                 console.log('data' + data);
-
+                var sr = 0;
                 var html = '';
                 html += '<table id="myTable" class="table table-striped">' +
                     '<thead>' +
                     '<tr>' +
 
                     '<th><font style="font-weight:bold">Sale Date</font></th>' +
-                    '<th style="display:none;">type</th>' +
+                    '<th ><font style="font-weight:bold">Invoce No</font></th>' +
+                    '<th ><font style="font-weight:bold">No Of Box</font></th>' +
                     '<th style="display:none;">bill id</th>' +
                     '<th style="display:none;">bill date</th>' +
                     '<th style="display:none;">Party id</th>' +
@@ -567,12 +573,16 @@ $(document).ready(function() {
                     '<th><font style="font-weight:bold">Taxable Amount</font></th>' +
                     '<th><font style="font-weight:bold">SGST(%)</font></th>' +
                     '<th><font style="font-weight:bold">CGST(%)</font></th>' +
+                    '<th  style="display:none;"><font style="font-weight:bold">IGST(%)</font></th>' +
                     '<th><font style="font-weight:bold">IGST(%)</font></th>' +
                     '<th><font style="font-weight:bold">Total Amount</font></th>' +
+                    '<th style="display:none;"><font style="font-weight:bold">Basic </font></th>' +
                     '<th><font style="font-weight:bold">Basic </font></th>' +
+                    '<th  style="display:none;"><font style="font-weight:bold">NCCD</font></th>' +
                     '<th><font style="font-weight:bold">NCCD</font></th>' +
-                    '<th style="display:none;">truck</th>' +
-                    '<th style="display:none;">freight</th>' +
+                    '<th ><font style="font-weight:bold">Truck No.</font></th>' +
+                    '<th ><font style="font-weight:bold">Freight</font></th>' +
+                    '<th style="display:none;"><font style="font-weight:bold">Freight</font></th>' +
                     '<th class="not-export-column"><font style="font-weight:bold">Operations</font></th>' +
 
                     '</tr>' +
@@ -591,30 +601,38 @@ $(document).ready(function() {
 
                     var grand_total = parseFloat(tot) + parseFloat(igst_amt) + parseFloat(sgst_amt) + parseFloat(cgst_amt);
                     var grand_tot = Math.round(grand_total);
+                    var basic_amt = (parseFloat(data[i].qtysum) * parseFloat(data[i].basic)).toFixed(2);
+                    var nccd_amt = (parseFloat(data[i].qtysum) * parseFloat(data[i].nccd)).toFixed(2);
+
                     var fdateval = data[i].voucher_date;
                     var fdateslt = fdateval.split('-');
                     var voucher_date = fdateslt[2] + '/' + fdateslt[1] + '/' + fdateslt[0];
                     var fdateval = data[i].bill_date;
                     var fdateslt = fdateval.split('-');
                     var bill_date = fdateslt[2] + '/' + fdateslt[1] + '/' + fdateslt[0];
-
+                    sr = parseFloat(sr) + 1;
                     html += '<tr>' +
 
                         '<td id="voucher_date_' + data[i].id + '">' + voucher_date + '</td>' +
-                        '<td style="display:none;"id="billno_' + data[i].id + '">' + data[i].bill_no + '</td>' +
+                        '<td id="billno_' + data[i].id + '">' + data[i].sale_id + '</td>' +
+                        '<td id="packsum_' + data[i].id + '">' + data[i].packsum + '</td>' +
                         '<td style="display:none;"id="bill_date_' + data[i].id + '">' + bill_date + '</td>' +
                         '<td style="display:none;"id="party_id_' + data[i].id + '">' + data[i].party_id + '</td>' +
                         '<td style="display:none;"id="sale_id_' + data[i].id + '">' + data[i].sale_id + '</td>' +
                         '<td id="party_name_' + data[i].id + '">' + data[i].party_name + '</td>' +
-                        '<td id="party_name_' + data[i].id + '">' + data[i].total + '</td>' +
+                        '<td id="total_' + data[i].id + '">' + data[i].total + '</td>' +
                         '<td id="sgst_' + data[i].id + '">' + data[i].sgst + '</td>' +
                         '<td id="cgst_' + data[i].id + '">' + data[i].cgst + '</td>' +
-                        '<td id="igst_' + data[i].id + '">' + data[i].igst + '</td>' +
-                        '<td id="total_' + data[i].id + '">' + grand_tot + '</td>' +
-                        '<td id="basicper_' + data[i].id + '">' + data[i].basic + '</td>' +
-                        '<td id="nccd1_' + data[i].id + '">' + data[i].nccd + '</td>' +
-                      '<td style="display:none;" id="truck_' + data[i].id + '">' + data[i].truck_no + '</td>' +
-                        '<td style="display:none;" id="freight_' + data[i].id + '">' + data[i].freight + '</td>' +
+                        '<td  style="display:none;" id="igst_' + data[i].id + '">' + data[i].igst + '</td>' +
+                        '<td  id="igstamt_' + data[i].id + '">' + igst_amt + '</td>' +
+                        '<td id="gtotal_' + data[i].id + '">' + grand_tot + '</td>' +
+                        '<td style="display:none;" id="basicper_' + data[i].id + '">' + data[i].basic + '</td>' +
+                        '<td id="basicamt_' + data[i].id + '">' + basic_amt + '</td>' +
+                        '<td  style="display:none;" id="nccd1_' + data[i].id + '">' + data[i].nccd + '</td>' +
+                        '<td id="nccdamt_' + data[i].id + '">' + nccd_amt + '</td>' +
+                        '<td  id="truck_' + data[i].id + '">' + data[i].truck_no + '</td>' +
+                        '<td  id="freight_' + data[i].id + '">' + data[i].freight + '</td>' +
+                        '<td  style="display:none;"  id="gst_invoice_no_' + data[i].id + '">' + data[i].gst_invoice_no + '</td>' +
                         '<td class="not-export-column" ><button name="edit" value="edit" class="edit_data btn btn-xs btn-success" id=' + data[i].id + '><i class="fa fa-edit"></i></button>&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' + data[i].id + '><i class="fa fa-trash"></i></button></td>' +
                         '</tr>';
 
@@ -627,17 +645,17 @@ $(document).ready(function() {
                     buttons: [{
                             extend: 'pdfHtml5',
                             title: 'DB Stock-Raw Item Purchase & Sales',
-                            //orientation: 'landscape',
-                            pageSize: 'A4',
+                            orientation: 'landscape',
+                            pageSize: 'LEGAL',
                             exportOptions: {
-                                columns: [0, 1, 6, 7, 8, 9, 10]
+                                columns: [0, 1, 2, 7, 8, 9, 11, 12, 14, 16, 17, 18]
                             },
                         },
                         {
                             title: 'DB Stock-Raw Item Purchase & Sales',
                             extend: 'excelHtml5',
                             exportOptions: {
-                                columns: [0, 1, 6, 7, 8, 9, 10]
+                                columns: [0, 1, 2, 7, 8, 9, 11, 12, 14, 16, 17, 18]
                             }
                         }
                     ]
@@ -738,10 +756,12 @@ $(document).ready(function() {
         var total = $('#total_' + id).html();
         var truck = $('#truck_' + id).html();
         var freight = $('#freight_' + id).html();
-        var basicper=$('#basicper_'+id).html();
+        var basicper = $('#basicper_' + id).html();
+        var gst_invoice_no = $('#gst_invoice_no_' + id).html();
 
         $('#date').val(voucher_date1);
         $('#invoice').val(sale_id);
+        $('#gstinvoice').val(gst_invoice_no);
         $('#saleto').val(party_id).trigger('change');;
         $('#sgst_per').val(sgst);
         $('#cgst_per').val(cgst);
@@ -807,6 +827,6 @@ $(document).ready(function() {
             }
 
         });
-      
+
     });
 });

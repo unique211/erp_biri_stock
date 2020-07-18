@@ -28,12 +28,77 @@ class FinishPS_model extends CI_Model{
      { 
          if($table == "purchase_master")
          {
-           $this->db->select('purchase_master.*,con-party_master.name as party_name');    
+          //  $this->db->select('purchase_master.*,con-party_master.name as party_name');    
+          //  $this->db->from('purchase_master');
+          //  $this->db->join('con-party_master', 'con-party_master.id = purchase_master.party_id');
+          //  $this->db->where($where);
+          //  $query = $this->db->get();
+		//  return $query->result();
+		
+		$result=array();
+           $this->db->select('purchase_master.*,con-party_master.name as party_name,purchase_master.id as id');    
            $this->db->from('purchase_master');
            $this->db->join('con-party_master', 'con-party_master.id = purchase_master.party_id');
-           $this->db->where($where);
-           $query = $this->db->get();
-           return $query->result();
+		 //$this->db->where('type','Finish Product');
+		  $this->db->where($where);
+
+		 $query = $this->db->get();
+		 foreach($query->result_array() as $value){
+
+			$id=$value['id'];
+			$sale_id=$value['sale_id'];
+			$voucher_date=$value['voucher_date'];
+			$type=$value['type'];
+			$bill_no=$value['bill_no'];
+			$bill_date=$value['bill_date'];
+			$party_id=$value['party_id'];
+			$sgst=$value['sgst'];
+			$cgst=$value['cgst'];
+			$igst=$value['igst'];
+			$nccd=$value['nccd'];
+			$total=$value['total'];
+			$truck_no=$value['truck_no'];
+			$freight=$value['freight'];
+			$basic=$value['basic'];
+			$party_name=$value['party_name'];
+			$gst_invoice_no=$value['gst_invoice_no'];
+			$packsum=0;
+			$qtysum=0;
+
+			$this->db->select('SUM(pack) AS AMOUNT,sum(qty) as sumqty');
+			$this->db->where('sale_id',$id);
+			$query1 = $this->db->get('sale_data');
+			foreach($query1->result_array() as $value1){
+				$packsum=$value1['AMOUNT'];
+				$qtysum=$value1['sumqty'];
+			}
+			$result[]=array(
+				'id'=>$id,
+				'sale_id'=>$sale_id,
+				'voucher_date'=>$voucher_date,
+				'type'=>$type,
+				'bill_no'=>$bill_no,
+				'bill_date'=>$bill_date,
+				'party_id'=>$party_id,
+				'sgst'=>$sgst,
+				'cgst'=>$cgst,
+				'igst'=>$igst,
+				'nccd'=>$nccd,
+				'total'=>$total,
+				'truck_no'=>$truck_no,
+				'freight'=>$freight,
+				'basic'=>$basic,
+				'party_name'=>$party_name,
+				'packsum'=>$packsum,
+				'qtysum'=>$qtysum,
+				'gst_invoice_no'=>$gst_invoice_no
+			);
+
+			
+
+
+		 }
+		 return $result;
           
          }
  
@@ -42,14 +107,72 @@ class FinishPS_model extends CI_Model{
      { 
          if($table == "purchase_master")
          {
-           $this->db->select('purchase_master.*,con-party_master.name as party_name');    
+		    $result=array();
+           $this->db->select('purchase_master.*,con-party_master.name as party_name,purchase_master.id as id');    
            $this->db->from('purchase_master');
            $this->db->join('con-party_master', 'con-party_master.id = purchase_master.party_id');
            $this->db->where('type','Finish Product');
-           $query = $this->db->get();
+		 $query = $this->db->get();
+		 foreach($query->result_array() as $value){
+
+			$id=$value['id'];
+			$sale_id=$value['sale_id'];
+			$voucher_date=$value['voucher_date'];
+			$type=$value['type'];
+			$bill_no=$value['bill_no'];
+			$bill_date=$value['bill_date'];
+			$party_id=$value['party_id'];
+			$sgst=$value['sgst'];
+			$cgst=$value['cgst'];
+			$igst=$value['igst'];
+			$nccd=$value['nccd'];
+			$total=$value['total'];
+			$truck_no=$value['truck_no'];
+			$freight=$value['freight'];
+			$basic=$value['basic'];
+			$party_name=$value['party_name'];
+			$gst_invoice_no=$value['gst_invoice_no'];
+
+			$packsum=0;
+			$qtysum=0;
+
+			$this->db->select('SUM(pack) AS AMOUNT,sum(qty) as sumqty');
+			$this->db->where('sale_id',$id);
+			$query1 = $this->db->get('sale_data');
+			foreach($query1->result_array() as $value1){
+				$packsum=$value1['AMOUNT'];
+				$qtysum=$value1['sumqty'];
+			}
+			$result[]=array(
+				'id'=>$id,
+				'sale_id'=>$sale_id,
+				'voucher_date'=>$voucher_date,
+				'type'=>$type,
+				'bill_no'=>$bill_no,
+				'bill_date'=>$bill_date,
+				'party_id'=>$party_id,
+				'sgst'=>$sgst,
+				'cgst'=>$cgst,
+				'igst'=>$igst,
+				'nccd'=>$nccd,
+				'total'=>$total,
+				'truck_no'=>$truck_no,
+				'freight'=>$freight,
+				'basic'=>$basic,
+				'party_name'=>$party_name,
+				'packsum'=>$packsum,
+				'qtysum'=>$qtysum,
+				'gst_invoice_no'=>$gst_invoice_no,
+			);
+
+			
+
+
+		 }
+		 return $result;
            //$a=$this->db->last_query();
           // echo $a;
-           return $query->result();
+         //  return $query->result();
           
          }
  
