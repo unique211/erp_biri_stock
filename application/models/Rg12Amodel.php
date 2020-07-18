@@ -111,7 +111,7 @@ foreach($datedata as $date){
   $pack=0;
         $this->db->select('sum(qty) as loosepcs');    
         $this->db->from('item_master');
-        $this->db->where_in('id','11,12,13,14');
+        $this->db->where_in('id','3,4');
        $query = $this->db->get();
        $itemsum=$query->result_array();
        $loosepcs=$itemsum[0]['loosepcs'];
@@ -244,8 +244,8 @@ foreach($datedata as $date){
   if($query9->num_rows() >0){
     foreach($query9->result_array() as $salesinfo){
 
-      $salesqty=$salesinfo['saleqtysum'];
-      $pack=$salesinfo['packsum'];
+      $salesqty=$salesqty+$salesinfo['saleqtysum'];
+      $pack=$pack+$salesinfo['packsum'];
      
     }
   }
