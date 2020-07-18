@@ -53,7 +53,7 @@ if(isset($title_name)){
                                                 <label>Sale Date</label>
                                             </div>
                                         </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-2">
                                             <div class="form-group">
                                                 <div class="input-group date doj" data-provide="datepicker">
                                                     <input type="text" class="form-control input-sm placeholdesize datepicker" form="master_form"  id="date" name="date"autocomplete="off" placeholder="To Date"    >
@@ -69,9 +69,19 @@ if(isset($title_name)){
                                                 <label>Invoice Number</label>
                                             </div>
                                         </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-2">
                                             <div class="form-group">
                                             <input type="text" class="form-control input-sm placeholdesize" form="master_form" id="invoice" name="invoice"  placeholder="Invoice Number"disabled >
+                                            </div>
+										</div>
+										<div class="col-sm-2">
+                                            <div class="form-group">
+                                                <label>Gst Invoice Number</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <div class="form-group">
+                                            <input type="text" class="form-control input-sm placeholdesize" form="master_form" id="gstinvoice" name="gstinvoice"  placeholder="Gst Invoice Number" >
                                             </div>
                                         </div>
                                         </div>
