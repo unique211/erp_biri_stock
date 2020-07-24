@@ -68,7 +68,7 @@ if (isset($title_name)) {
 										</div>
 										<div class="col-sm-3">
 											<div class="form-group">
-												<select id="monthnm" name="monthnm" class="form-control">
+												<select id="monthnm" name="monthnm" class="form-control monthdata">
 													<option selected disabled>Select</option>
 													<option value="1">January</option>
 													<option value="2">Febuary</option>
@@ -87,7 +87,7 @@ if (isset($title_name)) {
 										</div>
 										<div class="col-sm-3">
 											<div class="form-group">
-												<select id="yearnm" name="yearnm" class="form-control">
+												<select id="yearnm" name="yearnm" class="form-control monthdata">
 													<option selected disabled>Select</option>
 													<option value="2020">2020</option>
 
@@ -151,12 +151,13 @@ if (isset($title_name)) {
 												</thead>
 												<tbody id="tbody">
 													<tr>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
+													<td id="hsncode" ></td>
+														<td style="text-align:right;" id="openingbal"></td>
+														<td style="text-align:right;" id="manufacturing"></td>
+														
+														<td style="text-align:right;" id="clearence"></td>
+														<td  style="text-align:right;" id="closeingbal"></td>
+														<td style="text-align:right;" id="valueofgood"></td>
 
 													</tr>
 													<tr>
@@ -210,28 +211,28 @@ if (isset($title_name)) {
 													<tbody id="paymenttbody">
 														<tr>
 															<td>Basic</td>
-															<td></td>
-															<td></td>
+															<td style="text-align:right;" id="basicamt1"></td>
+															<td style="text-align:right;" id="basicamt"></td>
 
 
 														</tr>
 														
 														<tr>
 															<td>NCCD</td>
-															<td></td>
-															<td></td>
+															<td style="text-align:right;" id="nccdamt1"></td>
+															<td style="text-align:right;" id="nccdamt"></td>
 														</tr>
 														<tr>
 															<td>Cess</td>
-															<td></td>
-															<td></td>
+															<td style="text-align:right;" id="chessamt1"></td>
+															<td style="text-align:right;" id="chessamt"></td>
 														</tr>
 													</tbody>
 													<tfoot id="tfootid">
 													<tr>
 															<td>Total</td>
-															<td></td>
-															<td></td>
+															<td  style="text-align:right;"  id="totalamt"></td>
+															<td  style="text-align:right;"  id="totalamt1"></td>
 														</tr>
 													</tfoot>
 												</table>
@@ -304,9 +305,9 @@ if (isset($title_name)) {
 												</table>
 
 										</div>
-										<div class="col-sm-12">
+										<div class="col-sm-12" id="show_master">
 										
-										<div style="margin-top:0px;border-bottom:1px solid;width:100%;">
+										<!-- <div style="margin-top:0px;border-bottom:1px solid;width:100%;">
 												<label class=""><b>Invoice Issue</b></label>
 											</div>
 											<br>
@@ -344,7 +345,7 @@ if (isset($title_name)) {
                                                         </div>
                                                     </div>
 											</div>
-										</div>
+										</div> -->
 
 									</div><br>
 
@@ -368,7 +369,7 @@ if (isset($title_name)) {
 		var baseurl = "<?php print base_url(); ?>";
 	</script>
 	<script src="<?php echo base_url(); ?>assets/js/jquery.table2excel.js" type="text/javascript"></script>
-	<script src="<?php echo base_url(); ?>assets/js/myjs/itemwisestockmonthly.js"></script>
+	<script src="<?php echo base_url(); ?>assets/js/myjs/centrealwiseex.js"></script>
 	<script>
 		$('#date #fdate').datepicker({
 			'todayHighlight': true,

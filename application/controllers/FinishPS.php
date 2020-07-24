@@ -129,7 +129,7 @@ class FinishPS extends CI_Controller
     
        } else {
         $where= array(
-            'voucher_date' =>$this->input->post('date'),
+           
             'type' =>$this->input->post('type')
          );
          $data1=$this->FinishPS_model->showalldata($table_name,$where);

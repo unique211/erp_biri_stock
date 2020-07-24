@@ -34,6 +34,9 @@ class FinishPS_model extends CI_Model{
           //  $this->db->where($where);
           //  $query = $this->db->get();
 		//  return $query->result();
+
+		$sdate =$this->input->post('date');
+		$edate =$this->input->post('edate');
 		
 		$result=array();
            $this->db->select('purchase_master.*,con-party_master.name as party_name,purchase_master.id as id');    
@@ -41,6 +44,14 @@ class FinishPS_model extends CI_Model{
            $this->db->join('con-party_master', 'con-party_master.id = purchase_master.party_id');
 		 //$this->db->where('type','Finish Product');
 		  $this->db->where($where);
+		  if(($sdate != "")&& ($edate !="")){
+			$this->db->where('purchase_master.voucher_date >=',$sdate);
+			$this->db->where('purchase_master.voucher_date <=',$edate);
+		  }else if(($sdate != "")&& ($edate =="")){
+			$this->db->where('purchase_master.voucher_date',$edate);
+ 
+		  }
+		 
 
 		 $query = $this->db->get();
 		 foreach($query->result_array() as $value){
