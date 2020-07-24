@@ -270,13 +270,28 @@ if(isset($title_name)){
                      
                 <div class="col-sm-2">
                                             <div class="form-group">
-                                                <label>Sale Date</label>
+                                                <label>Sale From Date</label>
                                             </div>
                                         </div>
-                                        <div class="col-sm-4">
+                                        <div class="col-sm-3">
                                             <div class="form-group">
                                                 <div class="input-group date doj" data-provide="datepicker">
                                                     <input type="text" class="form-control input-sm placeholdesize datepicker" form="master_form"  id="date2" name="date2"autocomplete="off" placeholder="Sale Date"    >
+                                                    <div class="input-group-addon">
+                                                        <span class="fa fa-calender"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+										</div>
+										<div class="col-sm-2">
+                                            <div class="form-group">
+                                                <label>Sale To Date</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            <div class="form-group">
+                                                <div class="input-group date doj" data-provide="datepicker">
+                                                    <input type="text" class="form-control input-sm placeholdesize datepicker" form="master_form"  id="date3" name="date3"autocomplete="off" placeholder="Sale Date"    >
                                                     <div class="input-group-addon">
                                                         <span class="fa fa-calender"></span>
                                                     </div>

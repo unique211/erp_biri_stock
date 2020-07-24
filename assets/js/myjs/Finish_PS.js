@@ -522,6 +522,9 @@ $(document).ready(function() {
     $(document).on("change", "#date2", function() {
         datashow();
     });
+    $(document).on("change", "#date3", function() {
+        datashow();
+    });
 
     /* function getQty(){
          var r1 = $('table#file_info').find('tbody').find('tr');
@@ -534,12 +537,17 @@ $(document).ready(function() {
     //----------------show data in the tabale code start-----------------------
     function datashow() {
         var date2 = $('#date2').val();
+        var date3 = $('#date3').val();
         type = "Finish Product";
         table_name = "purchase_master";
         var date = "";
+        var edate = "";
         if (date2 != '') {
             var fdateslt = date2.split('/');
             date = fdateslt[2] + '-' + fdateslt[1] + '-' + fdateslt[0];
+
+            var fdateslt = date3.split('/');
+            edate = fdateslt[2] + '-' + fdateslt[1] + '-' + fdateslt[0];
         }
 
         // alert(date);
@@ -550,6 +558,7 @@ $(document).ready(function() {
                 table_name: table_name,
                 date: date,
                 type: type,
+                edate: edate,
             },
             dataType: "JSON",
             async: false,
@@ -559,6 +568,13 @@ $(document).ready(function() {
                 console.log('data' + data);
                 var sr = 0;
                 var html = '';
+                var packsum = 0;
+                var taamountsum = 0;
+                var igstsum = 0;
+                var totalamtsum = 0;
+                var basicsum = 0;
+                var nccdsum = 0;
+                var feightsum = 0;
                 html += '<table id="myTable" class="table table-striped">' +
                     '<thead>' +
                     '<tr>' +
@@ -611,6 +627,18 @@ $(document).ready(function() {
                     var fdateslt = fdateval.split('-');
                     var bill_date = fdateslt[2] + '/' + fdateslt[1] + '/' + fdateslt[0];
                     sr = parseFloat(sr) + 1;
+
+                    taamountsum = parseFloat(taamountsum) + parseFloat(tot);
+                    nccdsum = parseFloat(nccdsum) + parseFloat(nccd_amt);
+                    basicsum = parseFloat(basicsum) + parseFloat(basic_amt);
+                    packsum = parseFloat(packsum) + parseFloat(data[i].packsum);
+                    igstsum = parseFloat(igstsum) + parseFloat(igst_amt);
+                    totalamtsum = parseFloat(grand_tot) + parseFloat(totalamtsum);
+                    feightsum = parseFloat(feightsum) + parseFloat(data[i].freight);
+
+
+
+
                     html += '<tr>' +
 
                         '<td id="voucher_date_' + data[i].id + '">' + voucher_date + '</td>' +
@@ -637,7 +665,38 @@ $(document).ready(function() {
                         '</tr>';
 
                 }
-                html += '</tbody></table>';
+                html += '</tbody>';
+                html += '<tfoot>' +
+                    '<tr>' +
+
+                    '<td >Total</td>' +
+                    '<td >	</td>' +
+                    '<td >' + packsum + '</td>' +
+                    '<td style="display:none;"></td>' +
+                    '<td style="display:none;"></td>' +
+                    '<td style="display:none;"></td>' +
+                    '<td ></td>' +
+                    '<td >' + taamountsum.toFixed(2) + '</td>' +
+                    '<td >' + 0 + '</td>' +
+                    '<td >' + 0 + '</td>' +
+                    '<td  style="display:none;" >' + 0 + '</td>' +
+                    '<td >' + igstsum + '</td>' +
+                    '<td >' + totalamtsum + '</td>' +
+                    '<td style="display:none;" >' + 0 + '</td>' +
+                    '<td >' + basicsum.toFixed(2) + '</td>' +
+                    '<td  style="display:none;" >' + 0 + '</td>' +
+                    '<td>' + nccdsum.toFixed(2) + '</td>' +
+                    '<td ></td>' +
+                    '<td  >' + feightsum.toFixed(2) + '</td>' +
+                    '<td  style="display:none;" ></td>' +
+                    '<td class="not-export-column" >-</td>' +
+                    '</tr>' +
+
+                    '</tfoot></table>';
+
+
+
+
 
                 $('#show_master').html(html);
                 $('#myTable').DataTable({

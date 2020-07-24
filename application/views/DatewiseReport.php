@@ -21,18 +21,20 @@ if(isset($title_name)){
 	</style>
 	<style>
  th, td {
-  border: 2px solid black;
+  border: 2px solid gray;
   border-collapse: collapse;
   border-width: 2px; 
+  color: black;
 }
 th, td {
   padding: 5px;
-  
+  color: black;
 }
 .table1 {
-  border: 2px solid black;
+  border: 2px solid gray;
   border-collapse: collapse;
   border-width: 2px; 
+  color: black;
 }
 </style>
     </head>
