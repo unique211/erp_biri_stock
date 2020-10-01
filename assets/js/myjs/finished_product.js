@@ -47,7 +47,7 @@ $(document).ready(function() {
     $(document).on("change", "#date3", function() {
         datashow();
     });
-    $('#filter').on('click',function(){
+    $('#filter').on('click', function() {
         datashow();
     });
     $(".closehideshow").click(function() {
@@ -135,7 +135,7 @@ $(document).ready(function() {
                     '<td>Total</td>' +
                     '<td ><span id="tot_cart"style="width:30%; text-align:right;"></span></td>' +
                     '<td id="total_bidi" align="right">' +
-                      '</td>' +
+                    '</td>' +
                     '</tr>';
                 $('#product_body').append(body);
                 $('#product_footer').append(foot);
@@ -186,7 +186,7 @@ $(document).ready(function() {
             }
 
             tot_bidi = parseInt(cartons2) * parseInt(bidi);
-           // alert(tot_bidi.toFixed(3));
+            // alert(tot_bidi.toFixed(3));
         });
 
         $('#total_' + id).html(tot_bidi.toFixed(3));
@@ -196,7 +196,7 @@ $(document).ready(function() {
     $(document).on("submit", "#master_form", function(e) {
         e.preventDefault();
         table_name = "finished_product";
-     
+
         var date1 = $('#date').val();
         var label_id;
         var cartons;
@@ -219,6 +219,7 @@ $(document).ready(function() {
             async: false,
             success: function(data) {
                 ref_id = data;
+                $('#btnprint').val(ref_id);
             }
         });
 
@@ -269,7 +270,7 @@ $(document).ready(function() {
         $('.tablehideshow').show();
         $(".btnhideshow").show();
         defaultdate();
-       
+
         //latestdata();
         //formdata();
         $('.closehideshow').trigger('click');
@@ -292,14 +293,15 @@ $(document).ready(function() {
         var date = fdateslt[2] + '-' + fdateslt[1] + '-' + fdateslt[0];
         var fdateslt = date3.split('/');
         var date1 = fdateslt[2] + '-' + fdateslt[1] + '-' + fdateslt[0];
-        var where = date; var where1 = date1;
+        var where = date;
+        var where1 = date1;
         $.ajax({
             type: "POST",
             url: baseurl + "Finished_product/showdata",
             data: {
                 table_name: table_name,
                 where: where,
-                where1:where1
+                where1: where1
             },
             dataType: "JSON",
             async: false,
@@ -322,14 +324,15 @@ $(document).ready(function() {
                     '</tr>' +
                     '</thead>' +
                     '<tbody>';
-                    var sum_cartons=0;var sum_total_bidi=0;
+                var sum_cartons = 0;
+                var sum_total_bidi = 0;
                 for (var i = 0; i < data.length; i++) {
                     var bidi = data[i].bidi;
                     var cbidi = data[i].cbidi;
                     var tot = parseFloat(bidi) + parseFloat(cbidi);
                     // alert(tot);
-                    sum_cartons=parseFloat(sum_cartons)+parseFloat(data[i].cartons);
-                    sum_total_bidi=parseFloat(sum_total_bidi)+parseFloat(data[i].total_bidi);
+                    sum_cartons = parseFloat(sum_cartons) + parseFloat(data[i].cartons);
+                    sum_total_bidi = parseFloat(sum_total_bidi) + parseFloat(data[i].total_bidi);
                     var fdateval = data[i].date;
                     var fdateslt = fdateval.split('-');
                     var date = fdateslt[2] + '/' + fdateslt[1] + '/' + fdateslt[0];
@@ -343,17 +346,17 @@ $(document).ready(function() {
                         '</tr>';
 
                 }
-                html += '</tbody>'+
-                '<tfoot>'+
-                '<tr>'+
-                '<td class="boldness">Total</td>'+
-                '<td class="boldness"></td>'+
-                '<td class="boldness">'+sum_cartons+'</td>'+
-                '<td class="boldness">'+sum_total_bidi.toFixed(3)+'</td>'+
-                '<td class="boldness"></td>'+
-                '</tr>'+
-                '</tfoot>'+
-                '</table>';
+                html += '</tbody>' +
+                    '<tfoot>' +
+                    '<tr>' +
+                    '<td class="boldness">Total</td>' +
+                    '<td class="boldness"></td>' +
+                    '<td class="boldness">' + sum_cartons + '</td>' +
+                    '<td class="boldness">' + sum_total_bidi.toFixed(3) + '</td>' +
+                    '<td class="boldness"></td>' +
+                    '</tr>' +
+                    '</tfoot>' +
+                    '</table>';
 
                 $('#show_master').html(html);
                 $('#myTable').DataTable({
@@ -444,6 +447,7 @@ $(document).ready(function() {
 
         $('#btnsave').text('Update');
         var id = $(this).attr('id');
+
 
         var date = $('#date_' + id).html();
 

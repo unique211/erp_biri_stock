@@ -5,9 +5,20 @@ class Con_ledger_model extends CI_Model{
         $this->db->from($table);
         $result=$this->db->get()->result();
         return $result;
-    }
+	}
+	function data_insert($data){
+		
+		
+				$result = $this->db->insert('payment_store',$data);
+				return $result;
+		
+			}
+	
+
     function showData($table){
-       
+	   
+		
+		
         $date=$this->input->post('date');
         $fdate=$this->input->post('fdate');
 		$id=$this->input->post('where');
@@ -853,8 +864,8 @@ class Con_ledger_model extends CI_Model{
                 }
                 $this->db->select_sum('amount');
                 //$this->db->group_by('name');
-                $this->db->from('information');
-                $this->db->where('name',$id);
+                $this->db->from('vouchar');
+                $this->db->where('to',$id);
                 $amount=$this->db->get()->row()->amount;
                 //echo $this->db->last_query();
                 //echo $sumTsort." <BR>";

@@ -90,5 +90,6 @@ class Finished_product extends CI_Controller
        $data1=$this->Finished_product_model->filtertoday($table_name);
        echo json_encode($data1);
     
-       }
+	   }
+	  
 }

@@ -6,6 +6,7 @@ class FinishPS extends CI_Controller
      function __construct(){
 		parent:: __construct();
 		$this->load->model('FinishPS_model');
+		ob_start();
 				
      }
      public function get_master(){
@@ -209,5 +210,96 @@ class FinishPS extends CI_Controller
  
          echo json_encode($data1);	
 
-    }
+	}
+	public function printfinish(){
+		$id=$this->input->post('btnprint');
+
+		
+		$this->load->library('myfpdf');
+		$data['companydata']=$this->FinishPS_model->companydata();
+		$data['masterdata']=$this->FinishPS_model->getmasterdata($id);
+		$data['productdata']=$this->FinishPS_model->fetch_data($id,"sale_data");
+		
+		// echo json_encode($data);	
+
+		
+		 $this->load->view('invoice_print',$data);
+	   }
+	   public function printbill(){
+	
+		$this->load->library('myfpdf');
+		
+		$fromdate=$this->input->post('fdate');
+		$fromdate1=$this->input->post('fdate');
+		$todate=$this->input->post('date');
+		$ctype=$this->input->post('ctype');
+		
+
+		if($ctype=="Wages"){
+		$todate1=$this->input->post('date');
+		$fromdate = str_replace('/', '-', $fromdate);
+		$fromdate= date('Y-m-d', strtotime($fromdate));
+	
+		$todate = str_replace('/', '-', $todate);
+		$todate= date('Y-m-d', strtotime($todate));
+		// $fromdate = '2020-04-01';
+		// $todate = '2020-09-01';
+
+		$m= date("m", strtotime($todate));
+		$m11= date("F", strtotime($todate));
+
+		$monarray=array('04','05','06','07','08','09','10','11','12','01','02','03');
+		$mnm=1;
+		foreach($monarray as $month){
+			if($month==$m){
+				break;
+			}else{
+				$mnm=$mnm+1;
+			}
+		}
+		$data['billno']=$mnm;
+		$data['month']=$m11;
+		$data['todate1']=$todate1;
+		
+		$data['companydata']=$this->FinishPS_model->companydata();
+		$data['getconitem']=$this->FinishPS_model->getconitem($ctype);
+		$data['masterdata']=$this->FinishPS_model->getcontractortdata($fromdate,$todate);
+				//echo json_encode($data);	
+		$this->load->view('contract_bill_print',$data);
+		}else{
+			$todate1=$this->input->post('date');
+		$fromdate = str_replace('/', '-', $fromdate);
+		$fromdate= date('Y-m-d', strtotime($fromdate));
+	
+		$todate = str_replace('/', '-', $todate);
+		$todate= date('Y-m-d', strtotime($todate));
+		// $fromdate = '2020-04-01';
+		// $todate = '2020-09-01';
+
+		$m= date("m", strtotime($todate));
+		$m11= date("F", strtotime($todate));
+
+		$monarray=array('04','05','06','07','08','09','10','11','12','01','02','03');
+		$mnm=1;
+		foreach($monarray as $month){
+			if($month==$m){
+				break;
+			}else{
+				$mnm=$mnm+1;
+			}
+		}
+		$data['billno']=$mnm;
+		$data['month']=$m11;
+		$data['todate1']=$todate1;
+		$data['fromdate1']=$fromdate1;
+		
+		$data['companydata']=$this->FinishPS_model->companydata();
+		$data['getconitem']=$this->FinishPS_model->getconitem($ctype);
+		$data['masterdata']=$this->FinishPS_model->getcontractortdata($fromdate,$todate);
+				//echo json_encode($data);	
+		$this->load->view('contract_bill_print1',$data);
+		}
+
+	   }
 }
+?>

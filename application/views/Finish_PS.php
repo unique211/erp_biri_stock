@@ -259,11 +259,15 @@ if(isset($title_name)){
 
 						<div class="col-lg-12" >
 											<input type="hidden" id="save_update" value="" >
-												&nbsp;	&nbsp;	<!--<button type="button" class="btn btn-sm btn-danger pull-left delete_data" >Delete</button>-->
-												&nbsp;	&nbsp;	<button type="submit" id="btnsave" form="master_form" class="btn btn-sm btn-success btn-sm pull-right">Save</button>
+												&nbsp;	&nbsp;	
+
+												&nbsp;	&nbsp;	<button type="submit" id="btnsave" form="master_form" class="btn btn-sm btn-success btn-sm pull-right" style="margin-right:1%;">Save</button>
 												&nbsp;	&nbsp;	<button type="button" class="btn btn-sm btn-info pull-right closehideshow" >Close</button>
 						</div>
-
+						<input type="hidden" form="pdfgenerate" id="btnprint" name="btnprint">
+						<form id="pdfgenerate" name="pdfgenerate"  method="POST" action="<?php echo base_url('FinishPS/printfinish');?>" target="_blank">
+		
+		</form>  
 									<br/>
 				</div>
 				

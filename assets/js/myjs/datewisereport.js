@@ -12,11 +12,25 @@ $(document).ready(function() {
     });
 
 
+    $.ajax({
+        type: 'POST',
+        url: baseurl + "company/get_master",
+        async: false,
+        dataType: 'json',
+        success: function(data) {
+            $('#companynm').html(data[0].company_name);
+        }
+    });
+
 
     $('#search').click(function() {
         var table_name = 'con-party_master';
         var sdate = $('#fdate').val();
         var date = $('#date').val();
+
+        $('#dfromdate').html(sdate)
+        $('#dtodate').html(date)
+
         var fdateslt = sdate.split('/');
         var fdate = fdateslt[2] + '-' + fdateslt[1] + '-' + fdateslt[0];
         var fdateslt = date.split('/');

@@ -465,23 +465,26 @@ $(document).ready(function() {
                     '</tr>';
                 batches += '<tr class="names">' +
                     '<td style="text-align:center;" colspan="2">Gross Total  </td>' +
-                    '<td>Leaves</td>' +
-                    '<td>Tobacco</td>' +
-                    '<td>Bl-Sutta</td>' +
-                    '<td>Wh-Sutta</td>' +
-                    '<td>Bags</td>' +
-                    '<td>Dice</td>' +
-                    '<td>T-Short</td>' +
-                    '<td>Advance</td>' +
-                    '<td> P.F.</td>' +
+                    '<td style="text-align:center;">Leaves</td>' +
+                    '<td style="text-align:center;">Tobacco</td>' +
+                    '<td style="text-align:center;">Bl-Sutta</td>' +
+                    '<td style="text-align:center;">Wh-Sutta</td>' +
+                    '<td style="text-align:center;">Bags</td>' +
+                    '<td style="text-align:center;">Dice</td>' +
+                    '<td style="text-align:center;">T-Short</td>' +
+                    '<td style="text-align:center;">Advance</td>' +
+                    '<td style="text-align:center;"> P.F.</td>' +
                     //'<td>'+'</td>'+
                     '</tr>';
                 for (var i = 0; i < data.length; i++) {
 
                     if (data[i].batchname != null) {
+                        console.log("asdffsdfsd" + data[i].batchname);
                         //var gross=data[i].finalTotal.gtotal;
 
                         grosstotal = parseFloat(grosstotal) + parseFloat(data[i].finalTotal.gtotal.replace(/,/g, ""));
+
+
                         lev = parseFloat(lev) + parseFloat(data[i].finalTotal.tLev.replace(/,/g, ""));
                         tob = parseFloat(tob) + parseFloat(data[i].finalTotal.tTob.replace(/,/g, ""));
                         blsutta = parseFloat(blsutta) + parseFloat(data[i].finalTotal.blsutta.replace(/,/g, ""));

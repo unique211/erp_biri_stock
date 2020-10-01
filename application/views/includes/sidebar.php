@@ -51,6 +51,7 @@
                                 <li><a href="<?php echo base_url(); ?>contiloe/ratemaster"><span class="submenu-label">Rate Master </span></a></li>
                                 <li><a href="<?php echo base_url(); ?>contiloe/packingbatch_lable"><span class="submenu-label">Packing Batch/Lable </span></a></li>
                                 <li><a href="<?php echo base_url(); ?>contiloe/checker_master"><span class="submenu-label">Checker Master</span></a></li>
+                                <li><a href="<?php echo base_url(); ?>contiloe/contractorbillmaster"><span class="submenu-label">Contractor Bill Master</span></a></li>
 
 
                             </ul>
@@ -129,7 +130,8 @@
                                 <li><a href="<?php echo base_url(); ?>contiloe/item_wisereport"><span class="submenu-label"> RG-12A Report </span></a></li>
                                 <li><a href="<?php echo base_url(); ?>contiloe/bidi_sales_monthly"><span class="submenu-label"> Bidi Sales Monthly </span></a></li>
                                 <li><a href="<?php echo base_url(); ?>contiloe/itemwise_stock_monthly"><span class="submenu-label"> ItemWise Stock Monthly </span></a></li>
-                                <li><a href="<?php echo base_url(); ?>contiloe/centralexciseer"><span class="submenu-label"> Central Excise ER-1 </span></a></li>
+								<li><a href="<?php echo base_url(); ?>contiloe/centralexciseer"><span class="submenu-label"> Central Excise ER-1 </span></a></li>
+								<li><a href="<?php echo base_url(); ?>contiloe/controctorbill"><span class="submenu-label"> Contractor Bill</span></a></li>
                                 <li><a href="<?php echo base_url(); ?>contiloe/contractorpayment"><span class="submenu-label"> Contractor Payment List</span></a></li>
                             </ul>
                         </li>

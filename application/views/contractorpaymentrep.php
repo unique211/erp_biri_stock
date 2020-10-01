@@ -58,7 +58,7 @@ if (isset($title_name)) {
 							</div>
 							<div class="panel-body ">
 								<div class="row " id="documents">
-									
+									<form id="contractorpayment" name="contractorpayment"></form>
 									<div class="col-sm-2">
 											<div class="form-group">
 												<label>From</label>
@@ -69,7 +69,7 @@ if (isset($title_name)) {
 										<div class="col-sm-3">
 											<div class="form-group">
 											<div class="input-group date " data-provide="datepicker">
-                                                        <input type="text" class="form-control input-sm placeholdesize datepicker doj"  id="fdate" name="fdate">
+                                                        <input type="text" form="contractorpayment" class="form-control input-sm placeholdesize datepicker doj"  id="fdate" name="fdate" required>
                                                         <div class="input-group-addon">
                                                             <span class="fa fa-calender"></span>
                                                         </div>
@@ -80,7 +80,7 @@ if (isset($title_name)) {
 										<div class="form-group">
                                                 
                                                 <div class="input-group">
-                                                    <input type="submit" class="btn btn-info" id="search" name="search">
+                                                    <input type="submit" form="contractorpayment" class="btn btn-info" id="search" name="search">
                                                 </div>
                                             </div>
 										</div>
@@ -138,121 +138,11 @@ if (isset($title_name)) {
 
 												</thead>
 												<tbody id="tbody">
-													<tr>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td>0.00</td>
-														<td>0.00</td>
-														
-
-													</tr>
-													<tr>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td>0.00</td>
-														<td>0.00</td>
-
-													</tr>
-													<tr>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td>0.00</td>
-														<td>0.00</td>
-
-													</tr>
-													<tr>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td>0.00</td>
-														<td>0.00</td>
-
-													</tr>
-													<tr>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td>0.00</td>
-														<td>0.00</td>
-
-													</tr>
-													<tr>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td>0.00</td>
-														<td>0.00</td>
-
-													</tr>
-													<tr>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td>0.00</td>
-														<td>0.00</td>
-
-													</tr>
-													<tr>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td>0.00</td>
-														<td>0.00</td>
-
-													</tr>
-													<tr>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td>0.00</td>
-														<td>0.00</td>
-
-													</tr>
-													<tr>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td>0.00</td>
-														<td>0.00</td>
-
-													</tr>
-													<tr>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td>0.00</td>
-														<td>0.00</td>
-
-													</tr>
+												
 
 												</tbody>
 												<tfoot id="tfootid">
-												<tr class="names">
+												<!-- <tr class="names">
 														<td class="texes"></td>
 														<td class="texes"></td>
 														<td class="texes"></td>
@@ -261,7 +151,7 @@ if (isset($title_name)) {
 														<td class="texes">0.00</td>
 														<td class="texes">0.00</td>
 
-													</tr>
+													</tr> -->
 												</tfoot>
 											</table>
 										</div>
@@ -285,7 +175,7 @@ if (isset($title_name)) {
 		var baseurl = "<?php print base_url(); ?>";
 	</script>
 	<script src="<?php echo base_url(); ?>assets/js/jquery.table2excel.js" type="text/javascript"></script>
-	<script src="<?php echo base_url(); ?>assets/js/myjs/itemwisestockmonthly.js"></script>
+	<script src="<?php echo base_url(); ?>assets/js/myjs/contractorpayment.js"></script>
 	<script>
 		$('#date #fdate').datepicker({
 			'todayHighlight': true,

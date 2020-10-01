@@ -359,6 +359,7 @@ $(document).ready(function() {
 
                     if (id == "") {
                         sale_id = data;
+                        $('#btnprint').val(sale_id);
                     } else {
                         sale_id = id;
                     }
@@ -611,6 +612,8 @@ $(document).ready(function() {
                     var cgst = Math.round(data[i].cgst);
                     var igst = Math.round(data[i].igst);
 
+
+
                     var sgst_amt = parseFloat(tot) * parseFloat(sgst) / 100;
                     var cgst_amt = parseFloat(tot) * parseFloat(cgst) / 100;
                     var igst_amt = parseFloat(tot) * parseFloat(igst) / 100;
@@ -661,7 +664,7 @@ $(document).ready(function() {
                         '<td  id="truck_' + data[i].id + '">' + data[i].truck_no + '</td>' +
                         '<td  id="freight_' + data[i].id + '">' + data[i].freight + '</td>' +
                         '<td  style="display:none;"  id="gst_invoice_no_' + data[i].id + '">' + data[i].gst_invoice_no + '</td>' +
-                        '<td class="not-export-column" ><button name="edit" value="edit" class="edit_data btn btn-xs btn-success" id=' + data[i].id + '><i class="fa fa-edit"></i></button>&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' + data[i].id + '><i class="fa fa-trash"></i></button></td>' +
+                        '<td class="not-export-column" ><button name="edit" value="edit" class="edit_data btn btn-xs btn-success" id=' + data[i].id + '><i class="fa fa-edit"></i></button>&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' + data[i].id + '><i class="fa fa-trash"></i></button>&nbsp;<button name="delete" value="Delete" class="print_pdf btn btn-xs btn-danger" id=' + data[i].id + '><i class="fa fa-print"></i></button></td>' +
                         '</tr>';
 
                 }
@@ -799,9 +802,11 @@ $(document).ready(function() {
         $('.tablehideshow').show();
         $(".btnhideshow").hide();
 
+
         $('#btnsave').text('Update');
         //   $('#file_info_tbody').html('');
         var id = $(this).attr('id');
+        $('#btnprint').val(id);
         var voucher_date1 = $('#voucher_date_' + id).html();
 
         var billno = $('#billno_' + id).html();
@@ -886,6 +891,13 @@ $(document).ready(function() {
             }
 
         });
+
+    });
+
+    $(document).on('click', '.print_pdf', function() {
+        var id1 = $(this).attr('id');
+        $('#btnprint').val(id1);
+        $("#pdfgenerate").trigger('submit');
 
     });
 });
