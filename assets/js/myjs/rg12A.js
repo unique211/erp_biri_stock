@@ -45,6 +45,7 @@ $(document).ready(function() {
             success: function(data) {
 
                 $('#tbody').html('');
+                $('#tfoot').html('');
                 var html = "";
                 var cdate = "";
                 if (data.length > 0) {

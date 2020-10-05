@@ -40,6 +40,9 @@ $(document).ready(function() {
             async: false,
             success: function(data) {
                 var html = "";
+
+                var table = $('#dataTable').DataTable();
+                table.destroy();
                 $('#tbody').html('');
                 var sr = 0;
                 for (var i = 0; i < data.length; i++) {
@@ -72,6 +75,10 @@ $(document).ready(function() {
 
                     sumoftotal = parseFloat(lev) + parseFloat(tob) + parseFloat(blsutta) + parseFloat(whsutta) + parseFloat(bag) + parseFloat(dice) + parseFloat(tsort) + parseFloat(advance) + parseFloat(pf);
                     finalTot = grosstotal - sumoftotal;
+
+                    var amountth = (finalTot - (finalTot % 1000));
+
+                    //var amountth = amountth + "000";
                     //finalth = (parseFloat(finalTot) / parseFloat(1000)).toFixed(3);
 
                     html += '<tr class="names">' +
@@ -83,11 +90,33 @@ $(document).ready(function() {
                         '<td style="text-align:left;"><select class="checkpayment" id="pay_' + data[i].id + '"><option value="select">Select</option><option value="yes">Yes</option><option value="no">No</option></select></td>' +
                         '<td style="text-align:right;">' + Math.round(finalTot).toFixed(2) + '</td>' +
 
-                        '<td style="text-align:right;">' + Math.floor(finalTot) + '</td>' +
+                        '<td style="text-align:right;">' + Math.round(amountth) + '</td>' +
 
                         '</tr>';
                 }
                 $('#tbody').html(html);
+                $('#dataTable').DataTable({
+                    "pageLength": 200,
+                    dom: 'Bfrtip',
+                    buttons: [{
+                            extend: 'pdfHtml5',
+                            pageSize: 'A4',
+                            // orientation: 'landscape',
+                            title: 'Contractor Payment List',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 6]
+                            },
+                        },
+                        {
+                            extend: 'excelHtml5',
+                            title: 'Contractor Payment List',
+                            exportOptions: {
+                                columns: [0, 1, 2, 3, 6]
+                            },
+                        }
+                    ]
+                });
+
 
             }
         });
@@ -121,8 +150,17 @@ $(document).ready(function() {
         }
     });
 
-
-
+    $("#btnExport").click(function() {
+        $("#dataTable").table2excel({
+            exclude: ".noExl",
+            name: "Contractor Trial Report",
+            filename: "Contractor Trial Report",
+            fileext: ".xls",
+            exclude_img: true,
+            exclude_links: true,
+            exclude_inputs: true
+        });
+    });
 
 
 });

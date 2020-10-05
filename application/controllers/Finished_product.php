@@ -6,7 +6,7 @@ class Finished_product extends CI_Controller
      function __construct(){
 		parent:: __construct();
 		$this->load->model('Finished_product_model');
-				
+		ob_start();	
      }
 
      public function adddata()
@@ -90,6 +90,28 @@ class Finished_product extends CI_Controller
        $data1=$this->Finished_product_model->filtertoday($table_name);
        echo json_encode($data1);
     
+	   }
+
+	   public function downlpaddb(){
+		$this->load->dbutil();
+
+		$prefs = array(     
+			'format'      => 'zip',             
+			'filename'    => 'my_db_backup.sql'
+			);
+		
+		
+		$backup =& $this->dbutil->backup($prefs); 
+		
+		$db_name = 'backup-on-'. date("Y-m-d-H-i-s") .'.zip';
+		$save = 'pathtobkfolder/'.$db_name;
+		
+		$this->load->helper('file');
+		write_file($save, $backup); 
+		
+		
+		$this->load->helper('download');
+		force_download($db_name, $backup);
 	   }
 	  
 }

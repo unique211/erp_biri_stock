@@ -908,7 +908,9 @@ class Contractorpayment_model extends CI_Model{
                 $this->db->select_sum('amount');
                 //$this->db->group_by('name');
                 $this->db->from('vouchar');
-                $this->db->where('to',$id);
+				$this->db->where('to',$id);
+				$this->db->where('date >=',$fdate);
+				$this->db->where('date <=',$date);
                 $amount=$this->db->get()->row()->amount;
                 //echo $this->db->last_query();
                 //echo $sumTsort." <BR>";

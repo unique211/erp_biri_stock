@@ -1,5 +1,5 @@
 <?php
-class Con_ledger_model extends CI_Model{
+class Partyledger_model extends CI_Model{
     function getdata($table){
         $this->db->select('psdate,pedate');
         $this->db->from($table);
@@ -954,5 +954,591 @@ class Con_ledger_model extends CI_Model{
 		   }
 		   return $date1;
 	}
+
+	public function showData1($table){
+		$result=array();
+		$tdate=$this->input->post('date');
+        $fdate=$this->input->post('fdate');
+		$id=$this->input->post('where');
+        $startdate="";
+        // $fdate="2020-05-17";
+        // $tdate="2020-05-31";;
+		// $id='44';
+		
+		function getDatesFromRange($start, $end, $format = 'Y-m-d') {
+			$array = array();
+			$interval = new DateInterval('P1D');
+		
+			$realEnd = new DateTime($end);
+			$realEnd->add($interval);
+		
+			$period = new DatePeriod(new DateTime($start), $interval, $realEnd);
+		
+			foreach($period as $date) { 
+				$array[] = $date->format($format); 
+			}
+		
+			return $array;
+		}
+
+
+		$credit=0;
+		$debit=0;
+		$balance=0;
+
+		$this->db->select('*');
+		$this->db->from('financial_period');
+		$this->db->order_by("id", "desc");
+		$this->db->limit(1);  
+		$result11=$this->db->get()->result();
+		foreach($result11 as $row1){
+			$startdate=$row1->fsdate;
+		}
+
+		if($startdate==$fdate){
+
+		
+
+		$this->db->select('*');    
+           $this->db->from('con-party_master');
+		   $this->db->where('id',$id);
+		  	$query = $this->db->get()->result();
+		   foreach($query as $row){
+			$amount=$row->amount;
+			if($amount>=0){
+				$credit=$amount;
+			}else{
+				$debit=$amount;
+			}
+			$description='Opening Balance';
+			
+			$balance=$debit-$credit;
+			$result[]=array(
+				'date'=>$startdate,
+				'credit'=>$credit,
+				'debit'=>$debit,
+				'balance'=>$balance,
+				'description'=>$description,
+			);
+			
+		   }
+			
+
+		   $datedata=getDatesFromRange($fdate,$tdate);
+
+		   foreach($datedata as $date){
+
+			$this->db->select('*');    
+			$this->db->from('purchase_master');
+			$this->db->where('type','Finish Product');
+			$this->db->where('sale_id !=','0');
+			$this->db->where('party_id',$id);
+			$this->db->where('voucher_date', $date);
+		   $query33 = $this->db->get();
+			 if($query33->num_rows()>0){
+		   $purchase=$query33->result_array();
+		
+		   foreach($purchase as $purchase_data){
+				$total=$purchase_data['total'];
+				$igst=$purchase_data['igst'];
+				$cgst=$purchase_data['cgst'];
+				$sgst=$purchase_data['sgst'];
+				$igstamt=0;
+				$cgstamt=0;
+				$sgstamt=0;
+				$credit=0;
+				$debit=0;
+
+				if($igst >0){
+					$gstamt=(($total)* ($igst))/100;
+				}
+				if($cgst >0){
+					$cgstamt=(($total)* ($cgst))/100;
+				}
+				if($sgst >0){
+					$sgstamt=(($total)* ($sgst))/100;
+				}
+
+				$debit=$gstamt+$cgstamt+$sgstamt+$total;
+				$balance=($balance+$debit)-($credit);
+				$result[]=array(
+					'date'=>$date,
+					'credit'=>$credit,
+					'debit'=>$debit,
+					'balance'=>$balance,
+					'description'=>'BIRI SALES',
+				);
+
+		   }
+        }
+        
+        $this->db->select('*');    
+        $this->db->from('vouchar');
+       
+        $this->db->where('from',$id);
+        $this->db->where('date', $date);
+       $query44 = $this->db->get();
+         if($query44->num_rows()>0){
+       $voucherdata=$query44->result_array();
+    
+       foreach($voucherdata as $voucherinfo){
+        $amount=$voucherinfo['amount'];
+        $type=$voucherinfo['type'];
+        $remark=$voucherinfo['remark'];
+		$credit=0;
+		$debit=0;
+        if($type=="Received"){
+            $credit=$amount;
+        }else if($type=="Payment"){
+            $debit=$amount;
+
+        }
+
+       
+		$balance=($balance+$debit)-($credit);
+        $result[]=array(
+            'date'=>$date,
+            'credit'=>$credit,
+            'debit'=>$debit,
+            'balance'=>$balance,
+            'description'=>$remark,
+        );
+
+
+       }
+    }
+
+        
+
+		   $this->db->select('id');    
+		   $this->db->from('purchase_master');
+		   $this->db->where('type','Purchase');
+		   $this->db->where('purchase_id !=','0');
+		   $this->db->where('party_id',$id);
+		   $this->db->where('voucher_date', $date);
+		  $query3 = $this->db->get();
+		  if($query3->num_rows()>0){
+			$purchased=$query3->result_array();
+
+			foreach($purchased as $purchasebidi){
+				$total=$purchasebidi['total'];
+				$igst=$purchasebidi['igst'];
+				$cgst=$purchasebidi['cgst'];
+				$sgst=$purchasebidi['sgst'];
+				$igstamt=0;
+				$cgstamt=0;
+				$sgstamt=0;
+				$credit=0;
+				$debit=0;
+				if($igst >0){
+					$gstamt=(($total)* ($igst))/100;
+				}
+				if($cgst >0){
+					$cgstamt=(($total)* ($cgst))/100;
+				}
+				if($sgst >0){
+					$sgstamt=(($total)* ($sgst))/100;
+				}
+
+				$credit=$gstamt+$cgstamt+$sgstamt+$total;
+				$balance=($balance+$debit)-($credit);
+				$result[]=array(
+					'date'=>$date,
+					'credit'=>$credit,
+					'debit'=>$debit,
+					'balance'=>$balance,
+					'description'=>'Raw Item Purchase',
+				);
+			}
+		}
+
+			$this->db->select('id');    
+			$this->db->from('purchase_master');
+			$this->db->where('type','Sales');
+			$this->db->where('purchase_id !=','0');
+			$this->db->where('party_id',$id);
+			$this->db->where('voucher_date', $date);
+		   $query3 = $this->db->get();
+		   if($query3->num_rows()>0){
+			 $purchased=$query3->result_array();
+ 
+			 foreach($purchased as $purchasebidi){
+				 $total=$purchasebidi['total'];
+				 $igst=$purchasebidi['igst'];
+				 $cgst=$purchasebidi['cgst'];
+				 $sgst=$purchasebidi['sgst'];
+				 $igstamt=0;
+				 $cgstamt=0;
+				 $sgstamt=0;
+				$credit=0;
+				$debit=0;
+				 if($igst >0){
+					 $gstamt=(($total)* ($igst))/100;
+				 }
+				 if($cgst >0){
+					 $cgstamt=(($total)* ($cgst))/100;
+				 }
+				 if($sgst >0){
+					 $sgstamt=(($total)* ($sgst))/100;
+				 }
+ 
+				 $debit=$gstamt+$cgstamt+$sgstamt+$total;
+				 $balance=($balance+$debit)-($credit);
+				 $result[]=array(
+					 'date'=>$date,
+					 'credit'=>$credit,
+					 'debit'=>$debit,
+					 'balance'=>$balance,
+					 'description'=>'Raw Item Sales',
+				 );
+			 }
+			}
+			//remiani voucher
+
+	}
+}else{
+	$credit=0;
+	$debit=0;
+	$balance=0;
+	$this->db->select('*');    
+	$this->db->from('purchase_master');
+	$this->db->where('type','Finish Product');
+	$this->db->where('sale_id !=','0');
+	$this->db->where('party_id',$id);
+	$this->db->where('voucher_date <=', $fdate);
+   $query33 = $this->db->get();
+	 if($query33->num_rows()>0){
+   $purchase=$query33->result_array();
+
+   foreach($purchase as $purchase_data){
+		$total=$purchase_data['total'];
+		$igst=$purchase_data['igst'];
+		$cgst=$purchase_data['cgst'];
+		$sgst=$purchase_data['sgst'];
+		$igstamt=0;
+		$cgstamt=0;
+		$sgstamt=0;
+		
+
+		if($igst >0){
+			$gstamt=(($total)* ($igst))/100;
+		}
+		if($cgst >0){
+			$cgstamt=(($total)* ($cgst))/100;
+		}
+		if($sgst >0){
+			$sgstamt=(($total)* ($sgst))/100;
+		}
+
+		$debit=$debit+$gstamt+$cgstamt+$sgstamt+$total;
+		
+	
+   }
+}
+
+$this->db->select('*');    
+$this->db->from('vouchar');
+
+$this->db->where('from',$id);
+$this->db->where('date <=', $fdate);
+$query44 = $this->db->get();
+ if($query44->num_rows()>0){
+$voucherdata=$query44->result_array();
+
+foreach($voucherdata as $voucherinfo){
+$amount=$voucherinfo['amount'];
+$type=$voucherinfo['type'];
+$remark=$voucherinfo['remark'];
+
+if($type=="Received"){
+	$credit=$credit+$amount;
+}else if($type=="Payment"){
+	$debit= $debit+$amount;
+
+}
+}
+}
+
+
+
+   $this->db->select('id');    
+   $this->db->from('purchase_master');
+   $this->db->where('type','Purchase');
+   $this->db->where('purchase_id !=','0');
+   $this->db->where('party_id',$id);
+   $this->db->where('voucher_date <=', $fdate);
+  $query3 = $this->db->get();
+  if($query3->num_rows()>0){
+	$purchased=$query3->result_array();
+
+	foreach($purchased as $purchasebidi){
+		$total=$purchasebidi['total'];
+		$igst=$purchasebidi['igst'];
+		$cgst=$purchasebidi['cgst'];
+		$sgst=$purchasebidi['sgst'];
+		$igstamt=0;
+		$cgstamt=0;
+		$sgstamt=0;
+	
+		if($igst >0){
+			$gstamt=(($total)* ($igst))/100;
+		}
+		if($cgst >0){
+			$cgstamt=(($total)* ($cgst))/100;
+		}
+		if($sgst >0){
+			$sgstamt=(($total)* ($sgst))/100;
+		}
+
+		$credit=$credit+$gstamt+$cgstamt+$sgstamt+$total;
+	
+	}
+}
+
+	$this->db->select('id');    
+	$this->db->from('purchase_master');
+	$this->db->where('type','Sales');
+	$this->db->where('purchase_id !=','0');
+	$this->db->where('party_id',$id);
+	$this->db->where('voucher_date <=', $fdate);
+   $query3 = $this->db->get();
+   if($query3->num_rows()>0){
+	 $purchased=$query3->result_array();
+
+	 foreach($purchased as $purchasebidi){
+		 $total=$purchasebidi['total'];
+		 $igst=$purchasebidi['igst'];
+		 $cgst=$purchasebidi['cgst'];
+		 $sgst=$purchasebidi['sgst'];
+		 $igstamt=0;
+		 $cgstamt=0;
+		 $sgstamt=0;
+	
+		 if($igst >0){
+			 $gstamt=(($total)* ($igst))/100;
+		 }
+		 if($cgst >0){
+			 $cgstamt=(($total)* ($cgst))/100;
+		 }
+		 if($sgst >0){
+			 $sgstamt=(($total)* ($sgst))/100;
+		 }
+
+		 $debit=$debit+ $gstamt+$cgstamt+$sgstamt+$total;
+		
+		 
+	 }
+	}
+
+	$this->db->select('*');    
+           $this->db->from('con-party_master');
+		   $this->db->where('id',$id);
+		  	$query = $this->db->get()->result();
+		   foreach($query as $row){
+			$amount=$row->amount;
+			if($amount>=0){
+				$credit=$credit+$amount;
+			}else{
+				$debit=$debit-$amount;
+			}
+			$description='Opening Balance';
+			
+			$balance=$debit-$credit;
+			$result[]=array(
+				'date'=>$fdate,
+				'credit'=>$credit,
+				'debit'=>$debit,
+				'balance'=>$balance,
+				'description'=>$description,
+			);
+			
+		   }
+
+		   $datedata=getDatesFromRange($fdate,$tdate);
+
+		   foreach($datedata as $date){
+
+			$this->db->select('*');    
+			$this->db->from('purchase_master');
+			$this->db->where('type','Finish Product');
+			$this->db->where('sale_id !=','0');
+			$this->db->where('party_id',$id);
+			$this->db->where('voucher_date', $date);
+		   $query33 = $this->db->get();
+			 if($query33->num_rows()>0){
+		   $purchase=$query33->result_array();
+		
+		   foreach($purchase as $purchase_data){
+				$total=$purchase_data['total'];
+				$igst=$purchase_data['igst'];
+				$cgst=$purchase_data['cgst'];
+				$sgst=$purchase_data['sgst'];
+				$igstamt=0;
+				$cgstamt=0;
+				$sgstamt=0;
+				$credit=0;
+				$debit=0;
+
+				if($igst >0){
+					$gstamt=(($total)* ($igst))/100;
+				}
+				if($cgst >0){
+					$cgstamt=(($total)* ($cgst))/100;
+				}
+				if($sgst >0){
+					$sgstamt=(($total)* ($sgst))/100;
+				}
+
+				$debit=$gstamt+$cgstamt+$sgstamt+$total;
+				$balance=($balance+$debit)-($credit);
+				$result[]=array(
+					'date'=>$date,
+					'credit'=>$credit,
+					'debit'=>$debit,
+					'balance'=>$balance,
+					'description'=>'BIRI SALES',
+				);
+
+		   }
+        }
+        
+        $this->db->select('*');    
+        $this->db->from('vouchar');
+       
+        $this->db->where('from',$id);
+        $this->db->where('date', $date);
+       $query44 = $this->db->get();
+         if($query44->num_rows()>0){
+       $voucherdata=$query44->result_array();
+    
+       foreach($voucherdata as $voucherinfo){
+        $amount=$voucherinfo['amount'];
+        $type=$voucherinfo['type'];
+        $remark=$voucherinfo['remark'];
+		$credit=0;
+		$debit=0;
+        if($type=="Received"){
+            $credit=$amount;
+        }else if($type=="Payment"){
+            $debit=$amount;
+
+        }
+
+       
+		$balance=($balance+$debit)-($credit);
+        $result[]=array(
+            'date'=>$date,
+            'credit'=>$credit,
+            'debit'=>$debit,
+            'balance'=>$balance,
+            'description'=>$remark,
+        );
+
+
+       }
+    }
+
+        
+
+		   $this->db->select('id');    
+		   $this->db->from('purchase_master');
+		   $this->db->where('type','Purchase');
+		   $this->db->where('purchase_id !=','0');
+		   $this->db->where('party_id',$id);
+		   $this->db->where('voucher_date', $date);
+		  $query3 = $this->db->get();
+		  if($query3->num_rows()>0){
+			$purchased=$query3->result_array();
+
+			foreach($purchased as $purchasebidi){
+				$total=$purchasebidi['total'];
+				$igst=$purchasebidi['igst'];
+				$cgst=$purchasebidi['cgst'];
+				$sgst=$purchasebidi['sgst'];
+				$igstamt=0;
+				$cgstamt=0;
+				$sgstamt=0;
+				$credit=0;
+				$debit=0;
+				if($igst >0){
+					$gstamt=(($total)* ($igst))/100;
+				}
+				if($cgst >0){
+					$cgstamt=(($total)* ($cgst))/100;
+				}
+				if($sgst >0){
+					$sgstamt=(($total)* ($sgst))/100;
+				}
+
+				$credit=$gstamt+$cgstamt+$sgstamt+$total;
+				$balance=($balance+$debit)-($credit);
+				$result[]=array(
+					'date'=>$date,
+					'credit'=>$credit,
+					'debit'=>$debit,
+					'balance'=>$balance,
+					'description'=>'Raw Item Purchase',
+				);
+			}
+		}
+
+			$this->db->select('id');    
+			$this->db->from('purchase_master');
+			$this->db->where('type','Sales');
+			$this->db->where('purchase_id !=','0');
+			$this->db->where('party_id',$id);
+			$this->db->where('voucher_date', $date);
+		   $query3 = $this->db->get();
+		   if($query3->num_rows()>0){
+			 $purchased=$query3->result_array();
+ 
+			 foreach($purchased as $purchasebidi){
+				 $total=$purchasebidi['total'];
+				 $igst=$purchasebidi['igst'];
+				 $cgst=$purchasebidi['cgst'];
+				 $sgst=$purchasebidi['sgst'];
+				 $igstamt=0;
+				 $cgstamt=0;
+				 $sgstamt=0;
+				$credit=0;
+				$debit=0;
+				 if($igst >0){
+					 $gstamt=(($total)* ($igst))/100;
+				 }
+				 if($cgst >0){
+					 $cgstamt=(($total)* ($cgst))/100;
+				 }
+				 if($sgst >0){
+					 $sgstamt=(($total)* ($sgst))/100;
+				 }
+ 
+				 $debit=$gstamt+$cgstamt+$sgstamt+$total;
+				 $balance=($balance+$debit)-($credit);
+				 $result[]=array(
+					 'date'=>$date,
+					 'credit'=>$credit,
+					 'debit'=>$debit,
+					 'balance'=>$balance,
+					 'description'=>'Raw Item Sales',
+				 );
+			 }
+			}
+			//remiani voucher
+
+	}
+
+
+}
+    return $result;
+}
+
+public function getpartyinformation($id){
+	$this->db->select('*');    
+	$this->db->from('con-party_master');
+	$this->db->where('id',$id);
+	   $query = $this->db->get()->result();
+	   return $query;
+}
+	
 }
 ?>

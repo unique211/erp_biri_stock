@@ -1,18 +1,18 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Contractor_ledger extends CI_Controller
+class Party_ledger extends CI_Controller
 {
     function __construct(){
 		parent:: __construct();
-		$this->load->model('Con_ledger_model','m');
+		$this->load->model('Partyledger_model','m');
     }
     public function index(){
     }
     public function showData(){
         //'con-party_master';//
         $table_name=$this->input->post('table_name');
-        $data=$this->m->showData($table_name);
+        $data=$this->m->showData1($table_name);
         echo json_encode($data);
     }
     public function getTob(){
@@ -30,6 +30,13 @@ class Contractor_ledger extends CI_Controller
 		$table_name=$this->input->post('table_name');
 		$con=$this->input->post('con');
         $data=$this->m->getinformation($table_name,$con);
+        echo json_encode($data);
+
+	}
+	public function getpartyinfo(){
+	
+		$con=$this->input->post('con');
+        $data=$this->m->getpartyinformation($con);
         echo json_encode($data);
 
 	}

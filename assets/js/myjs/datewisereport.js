@@ -69,21 +69,21 @@ $(document).ready(function() {
                 for (var i = 1; i < data.length; i++) {
 
 
-                    totalaslbiri = (parseFloat(totalaslbiri) + parseFloat(data[i].asalbiri)).toFixed(3);
-                    totalchatbiri = (parseFloat(totalchatbiri) + parseFloat(data[i].chatbiri)).toFixed(3);
-                    totaltotalBiri = (parseFloat(totaltotalBiri) + parseFloat(data[i].totalBiri)).toFixed(3);
-                    totalobtob = (parseFloat(totalobtob) + parseFloat(data[i].obtob)).toFixed(3);
-                    totaloblev = (parseFloat(totaloblev) + parseFloat(data[i].oblev)).toFixed(3);
-                    totalitob = (parseFloat(totalitob) + parseFloat(data[i].itob)).toFixed(3);
-                    totalileave = (parseFloat(totalileave) + parseFloat(data[i].ileave)).toFixed(3);
-                    totalTotalTobbaco = (parseFloat(totalTotalTobbaco) + parseFloat(data[i].TotalTobbaco)).toFixed(3);
-                    totalTotalLeaves = (parseFloat(totalTotalLeaves) + parseFloat(data[i].TotalLeaves)).toFixed(3);
-                    totalcTob = (parseFloat(totalcTob) + parseFloat(data[i].cTob)).toFixed(3);
-                    totalcLev = (parseFloat(totalcLev) + parseFloat(data[i].cLev)).toFixed(3);
-                    totalsmTob = (parseFloat(totalsmTob) + parseFloat(data[i].smTob)).toFixed(3);
-                    totalsmLev = (parseFloat(totalsmLev) + parseFloat(data[i].smLev)).toFixed(3);
-                    totalclosingtobacco = (parseFloat(totalclosingtobacco) + parseFloat(data[i].closingtobacco)).toFixed(3);
-                    totalclosingleaves = (parseFloat(totalclosingleaves) + parseFloat(data[i].closingleaves)).toFixed(3);
+                    totalaslbiri = (parseFloat(totalaslbiri) + parseFloat((data[i].asalbiri).replace(/,/g, ""))).toFixed(3);
+                    totalchatbiri = (parseFloat(totalchatbiri) + parseFloat((data[i].chatbiri).replace(/,/g, ""))).toFixed(3);
+                    totaltotalBiri = (parseFloat(totaltotalBiri) + parseFloat((data[i].totalBiri).replace(/,/g, ""))).toFixed(3);
+                    totalobtob = (parseFloat(totalobtob) + parseFloat((data[i].obtob).replace(/,/g, ""))).toFixed(3);
+                    totaloblev = (parseFloat(totaloblev) + parseFloat((data[i].oblev).replace(/,/g, ""))).toFixed(3);
+                    totalitob = (parseFloat(totalitob) + parseFloat((data[i].itob).replace(/,/g, ""))).toFixed(3);
+                    totalileave = (parseFloat(totalileave) + parseFloat((data[i].ileave).replace(/,/g, ""))).toFixed(3);
+                    totalTotalTobbaco = (parseFloat(totalTotalTobbaco) + parseFloat((data[i].TotalTobbaco).replace(/,/g, ""))).toFixed(3);
+                    totalTotalLeaves = (parseFloat(totalTotalLeaves) + parseFloat((data[i].TotalLeaves).replace(/,/g, ""))).toFixed(3);
+                    totalcTob = (parseFloat(totalcTob) + parseFloat((data[i].cTob).replace(/,/g, ""))).toFixed(3);
+                    totalcLev = (parseFloat(totalcLev) + parseFloat((data[i].cLev).replace(/,/g, ""))).toFixed(3);
+                    totalsmTob = (parseFloat(totalsmTob) + parseFloat((data[i].smTob).replace(/,/g, ""))).toFixed(3);
+                    totalsmLev = (parseFloat(totalsmLev) + parseFloat((data[i].smLev).replace(/,/g, ""))).toFixed(3);
+                    totalclosingtobacco = (parseFloat(totalclosingtobacco) + parseFloat((data[i].closingtobacco).replace(/,/g, ""))).toFixed(3);
+                    totalclosingleaves = (parseFloat(totalclosingleaves) + parseFloat((data[i].closingleaves).replace(/,/g, ""))).toFixed(3);
 
                     if (data[i].asalbiri == 0 && data[i].chatbiri == 0 && data[i].totalBiri == 0 && data[i].obtob == 0 && data[i].oblev == 0 && data[i].itob == 0 && data[i].ileave == 0 && data[i].TotalTobbaco == 0 && data[i].TotalLeaves && data[i].cTob == 0 && data[i].cLev == 0 && data[i].smLev == 0 && data[i].closingtobacco == 0 && data[i].closingleaves == 0) {
 
@@ -117,6 +117,7 @@ $(document).ready(function() {
                             '</tr>';
                     }
                 }
+
                 html += '<tr>' +
                     '<td></td>' +
                     '<td  class="names">Total ===></td>' +
@@ -154,6 +155,7 @@ $(document).ready(function() {
 
     $(document).on('click', "#btnExportpdf", function(e) {
         e.preventDefault();
+        $('#file_info').css('width:80%');
         Export1();
     });
 
@@ -174,6 +176,7 @@ $(document).ready(function() {
                 pdfMake.createPdf(docDefinition).download("Table.pdf");
             }
         })
+        $('#file_info').css('width:90%');
     }
 
 });

@@ -12,6 +12,7 @@ $(document).ready(function() {
     });
 
     getDate();
+    var fromdate1 = "";
 
     function getDate() {
         $.ajax({
@@ -29,6 +30,8 @@ $(document).ready(function() {
                 var fdate = fdateslt[2] + '/' + fdateslt[1] + '/' + fdateslt[0];
                 var fdateslt = data[0].pedate.split('-');
                 var cdate = fdateslt[2] + '/' + fdateslt[1] + '/' + fdateslt[0];
+                fromdate1 = fdate;
+
                 $('#fdate').val(fdate);
                 $('#date').val(cdate);
             },
@@ -533,8 +536,9 @@ $(document).ready(function() {
         Export1();
     });
 
+
     function Export1() {
-        html2canvas($('#file_info')[0], {
+        html2canvas($('#dataTable')[0], {
             onrendered: function(canvas) {
                 var data = canvas.toDataURL();
                 var docDefinition = {
@@ -547,6 +551,35 @@ $(document).ready(function() {
             }
         })
     }
+
+    $(document).on('change', "#contractor", function(e) {
+        e.preventDefault();
+
+        var con = $(this).val();
+
+        $.ajax({
+            type: "POST",
+            url: baseurl + "Contractor_ledger/getpayinfo",
+            data: {
+                table_name: 'financial_period',
+                con: con,
+            },
+            dataType: "JSON",
+            async: false,
+            success: function(data) {
+                if (data != "") {
+                    var fdateslt = data.split('-');
+                    var fdate = fdateslt[2] + '/' + fdateslt[1] + '/' + fdateslt[0];
+
+                    $('#fdate').val(fdate);
+                } else {
+
+                    getDate();
+                }
+            }
+        });
+    });
+
 
 
 });

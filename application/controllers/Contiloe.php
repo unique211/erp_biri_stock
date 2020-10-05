@@ -470,4 +470,29 @@ set_time_limit(0);
 			redirect(base_url());
 		}
 	}
+	public function daybookrep(){
+		if(isset($this->session->userid)){
+			$title['title_name'] = " dbstock ";
+			$title['title_name1'] = "Day Book Report";
+			$title['active_menu'] = "r";
+			$this->load->view('daybook',$title);
+			
+
+		}
+		else{
+			redirect(base_url());
+		}
+	}
+	public function party_ledger(){
+		if(isset($this->session->userid)){
+			$title['title_name'] = " dbstock ";
+			$title['title_name1'] = " Party Ledger ";
+			$title['active_menu'] = "r";
+			$this->load->view('partyledger',$title);
+		}
+		else{
+			redirect(base_url());
+		}
+	}
+	
 }

@@ -129,8 +129,50 @@ if(isset($title_name)){
                                         </div>
                                         </form>
                                     </div>
-                                    <br/>
+									<br/>
+									<hr>
+
+									<div class="col-sm-12">
+										<form id="search_form" name="search_form"></form>
+                                            <div class="col-sm-1">
+                                                <div class="form-group">
+                                                    <label>From Date*</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="form-group">
+                                                    <div class="input-group date doj" data-provide="datepicker">
+                                                        <input type="text" form="search_form" class="form-control input-sm placeholdesize datepicker"  id="fromdate" name="fromdate" placeholder="Date" autocomplete="off" required  >
+                                                        <div class="input-group-addon">
+                                                            <span class="fa fa-calender"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+											</div>
+											<div class="col-sm-1">
+                                                <div class="form-group">
+                                                    <label>To Date*</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <div class="form-group">
+                                                    <div class="input-group date doj" data-provide="datepicker">
+                                                        <input type="text" form="search_form" class="form-control input-sm placeholdesize datepicker"  id="todate" name="todate" placeholder="Date" autocomplete="off" required  >
+                                                        <div class="input-group-addon">
+                                                            <span class="fa fa-calender"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+											</div>
+											<div class="col-sm-1">
+											&nbsp;	&nbsp;	<button type="submit" form="search_form"  id="search" class="btn btn-sm btn-success btn-sm pull-right">Search</button>
+
+											</div>
+									</div>
                                     <div class="col-lg-12 ">
+
+
+									
                                         <div class="table-responsive" id="show_master">
                                             <table id="example" class="display nowrap " width="100%" cellspacing="0">
                                                 <thead>
@@ -143,7 +185,8 @@ if(isset($title_name)){
                                                 </thead>
                                                 <tbody>
                                                 </tbody>
-                                            </table>
+											</table>
+                                        </div>
                                         </div>
                                     </div>
                                 </div><!-- /panel -->
@@ -174,6 +217,8 @@ if(isset($title_name)){
             var date = new Date();
             date = date.toString('dd/MM/yyyy');
             $("#date").val(date);
+            $("#fromdate").val(date);
+            $("#todate").val(date);
         </script>
     </body>
 </html>

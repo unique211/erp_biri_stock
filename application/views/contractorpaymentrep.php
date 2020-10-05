@@ -84,6 +84,11 @@ if (isset($title_name)) {
                                                 </div>
                                             </div>
 										</div>
+										<div class="col-sm-3">
+										<div class="form-group">
+										<!-- <input type="button" id="btnExport" class="btn btn-primary pull-right" value="Export" /> -->
+										</div>
+										</div>
 
 									</div><br>
 

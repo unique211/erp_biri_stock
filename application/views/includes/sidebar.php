@@ -133,7 +133,11 @@
 								<li><a href="<?php echo base_url(); ?>contiloe/centralexciseer"><span class="submenu-label"> Central Excise ER-1 </span></a></li>
 								<li><a href="<?php echo base_url(); ?>contiloe/controctorbill"><span class="submenu-label"> Contractor Bill</span></a></li>
                                 <li><a href="<?php echo base_url(); ?>contiloe/contractorpayment"><span class="submenu-label"> Contractor Payment List</span></a></li>
-                            </ul>
+								<li><a href="<?php echo base_url(); ?>contiloe/daybookrep"><span class="submenu-label">Day Book</span></a></li>
+								<li><a href="<?php echo base_url(); ?>contiloe/party_ledger"><span class="submenu-label">Party Ledger</span></a></li>
+								<li><a href="<?php echo base_url(); ?>Finished_product/downlpaddb"><span class="submenu-label">Database Backup</span></a></li>
+
+							</ul>
                         </li>
 
                         <li class="openable open <?php if ($active_menu == 's') {

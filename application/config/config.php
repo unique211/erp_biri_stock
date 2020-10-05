@@ -25,8 +25,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 //$config['base_url'] = 'https://erp-biri-stock.herokuapp.com/';
 
-$config['base_url'] = 'https://erp-biri-stock.herokuapp.com/';
-//$config['base_url'] = 'http://localhost/erp_biri_stock';
+//$config['base_url'] = 'https://erp-biri-stock.herokuapp.com/';
+$config['base_url'] = 'http://localhost/erp_biri_stock';
 
 /*
 |--------------------------------------------------------------------------
