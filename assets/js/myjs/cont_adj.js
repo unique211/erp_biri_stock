@@ -39,8 +39,8 @@ $(document).ready(function() {
     $(document).on("change", "#cont_name", function() {
         //alert("change");
         //var table_name='con-party_master';
-        var contractor=$('#cont_name').val();
-        var date=$('#tdate').val();
+        var contractor = $('#cont_name').val();
+        var date = $('#tdate').val();
         var fdateslt = date.split('/');
         var cdate = fdateslt[2] + '-' + fdateslt[1] + '-' + fdateslt[0];
         $.ajax({
@@ -48,90 +48,98 @@ $(document).ready(function() {
             url: baseurl + "Cont_adj/showCustomer",
             data: {
                 contractor: contractor,
-                date:cdate
+                date: cdate
             },
             dataType: "JSON",
             async: false,
             success: function(data) {
                 var data = eval(data);
                 console.log(data);
-                html='';var index=1;var Tsum=0;var Lsum=0;var bsum=0;var wsum=0;var fsum=0;
-                var nm='';
-                html='<div class="col-lg-12"><table id="file_info1" class="table table-striped" width="100%" cellspacing="0"><thead id="thead"><tr><th width="10%">SL No</th><th width="20%">Contractor Name</th><th width="10%">Time</th><th width="10%">Batch</th><th width="10%">Tobacco</th><th width="10%">Leaves</th><th width="10%">Black Yarn</th><th width="10%">White Yarn</th><th width="10%">Filter</th></thead> <tbody id="tbody">';
-                var val=0;    var row=0;var flag=0;
+                html = '';
+                var index = 1;
+                var Tsum = 0;
+                var Lsum = 0;
+                var bsum = 0;
+                var wsum = 0;
+                var fsum = 0;
+                var nm = '';
+                html = '<div class="col-lg-12"><table id="file_info1" class="table table-striped" width="100%" cellspacing="0"><thead id="thead"><tr><th width="10%">SL No</th><th width="20%">Contractor Name</th><th width="10%">Time</th><th width="10%">Batch</th><th width="10%">Tobacco</th><th width="10%">Leaves</th><th width="10%">Black Yarn</th><th width="10%">White Yarn</th><th width="10%">Filter</th></thead> <tbody id="tbody">';
+                var val = 0;
+                var row = 0;
+                var flag = 0;
                 for (var i = 1; i < data.length; i++) {
-                   row=data.length;
-                   //console.log(row);
-                   if((row-1) == i)
-                   {
-                       flag=1;
-                       console.log("flag is"+flag);
-                   }
-                    var contractoe=data[i].bname;
-                    if(contractoe != null){
-                        if(nm != data[i].bname){
-                            nm=data[i].bname;
-                            if(val != 0  ){ //
-                                html+='<tr class="trs">'+
-                                '<td></td><td></td><td></td><td></td><td class="names">'+Tsum.toFixed(3)+'</td><td class="names">'+Lsum.toFixed(3)+'</td><td class="names">'+bsum.toFixed(3)+'</td><td class="names">'+wsum.toFixed(3)+'</td><td class="names">'+fsum.toFixed(3)+'</td></tr><tr></tr>'; index+=1;
-                                val=val+1;
-                            } 
-                            
-                            else{
-                                html+='<tr></tr>';
+                    row = data.length;
+                    //console.log(row);
+                    if ((row - 1) == i) {
+                        flag = 1;
+                        console.log("flag is" + flag);
+                    }
+                    var contractoe = data[i].bname;
+                    if (contractoe != null) {
+                        if (nm != data[i].bname) {
+                            nm = data[i].bname;
+                            if (val != 0) { //
+                                html += '<tr class="trs">' +
+                                    '<td></td><td></td><td></td><td></td><td class="names">' + Tsum.toFixed(3) + '</td><td class="names">' + Lsum.toFixed(3) + '</td><td class="names">' + bsum.toFixed(3) + '</td><td class="names">' + wsum.toFixed(3) + '</td><td class="names">' + fsum.toFixed(3) + '</td></tr><tr></tr>';
+                                index += 1;
+                                val = val + 1;
+                            } else {
+                                html += '<tr></tr>';
                                 val++;
                             }
-                            Tsum=0;Lsum=0;bsum=0;wsum=0;fsum=0;
-                            Tsum=parseFloat(Tsum)+ parseFloat(data[i].name.tobacco);
-                            Lsum=parseFloat(Lsum)+ parseFloat(data[i].name.leaves);
-                            bsum=parseFloat(bsum)+ parseFloat(data[i].name.black_yarn);
-                            wsum=parseFloat(wsum)+ parseFloat(data[i].name.white_yarn);
-                            fsum=parseFloat(fsum)+ parseFloat(data[i].name.filter);
-                            html+='<tr>'+
-                            '<td>'+index+'</td>'+
-                            '<td>'+data[i].bname+'</td>'+ 
-                            '<td>'+data[i].count+'</td>'+
-                            '<td>'+data[i].name.batchName+'</td>'+
-                            '<td>'+data[i].name.tobacco+'</td>'+
-                            '<td>'+data[i].name.leaves+'</td>'+
-                            '<td>'+data[i].name.black_yarn+'</td>'+
-                            '<td>'+data[i].name.white_yarn+'</td>'+
-                            '<td>'+data[i].name.filter+'</td>'+
-                            '</tr>';
-                            
+                            Tsum = 0;
+                            Lsum = 0;
+                            bsum = 0;
+                            wsum = 0;
+                            fsum = 0;
+                            Tsum = parseFloat(Tsum) + parseFloat(data[i].name.tobacco);
+                            Lsum = parseFloat(Lsum) + parseFloat(data[i].name.leaves);
+                            bsum = parseFloat(bsum) + parseFloat(data[i].name.black_yarn);
+                            wsum = parseFloat(wsum) + parseFloat(data[i].name.white_yarn);
+                            fsum = parseFloat(fsum) + parseFloat(data[i].name.filter);
+                            html += '<tr>' +
+                                '<td>' + index + '</td>' +
+                                '<td>' + data[i].bname + '</td>' +
+                                '<td>' + data[i].count + '</td>' +
+                                '<td>' + data[i].name.batchName + '</td>' +
+                                '<td>' + data[i].name.tobacco + '</td>' +
+                                '<td>' + data[i].name.leaves + '</td>' +
+                                '<td>' + data[i].name.black_yarn + '</td>' +
+                                '<td>' + data[i].name.white_yarn + '</td>' +
+                                '<td>' + data[i].name.filter + '</td>' +
+                                '</tr>';
+
+                        } else {
+                            Tsum = parseFloat(Tsum) + parseFloat(data[i].name.tobacco);
+                            Lsum = parseFloat(Lsum) + parseFloat(data[i].name.leaves);
+                            bsum = parseFloat(bsum) + parseFloat(data[i].name.black_yarn);
+                            wsum = parseFloat(wsum) + parseFloat(data[i].name.white_yarn);
+                            fsum = parseFloat(fsum) + parseFloat(data[i].name.filter);
+                            html += '<tr>' +
+                                '<td>' + '</td>' +
+                                '<td>' + '</td>' +
+                                '<td>' + '</td>' +
+                                '<td>' + data[i].name.batchName + '</td>' +
+                                '<td>' + data[i].name.tobacco + '</td>' +
+                                '<td>' + data[i].name.leaves + '</td>' +
+                                '<td>' + data[i].name.black_yarn + '</td>' +
+                                '<td>' + data[i].name.white_yarn + '</td>' +
+                                '<td>' + data[i].name.filter + '</td>' +
+                                '</tr>';
                         }
-                        else{
-                            Tsum=parseFloat(Tsum)+ parseFloat(data[i].name.tobacco);
-                            Lsum=parseFloat(Lsum)+ parseFloat(data[i].name.leaves);
-                            bsum=parseFloat(bsum)+ parseFloat(data[i].name.black_yarn);
-                            wsum=parseFloat(wsum)+ parseFloat(data[i].name.white_yarn);
-                            fsum=parseFloat(fsum)+ parseFloat(data[i].name.filter);
-                            html+='<tr>'+
-                            '<td>'+'</td>'+
-                            '<td>'+'</td>'+
-                            '<td>'+'</td>'+
-                            '<td>'+data[i].name.batchName+'</td>'+
-                            '<td>'+data[i].name.tobacco+'</td>'+
-                            '<td>'+data[i].name.leaves+'</td>'+
-                            '<td>'+data[i].name.black_yarn+'</td>'+
-                            '<td>'+data[i].name.white_yarn+'</td>'+
-                            '<td>'+data[i].name.filter+'</td>'+
-                            '</tr>';
-                        }
-                    }
-                    else{
-                    }
-                    if(flag == 1){
-                        console.log(flag+" is the flag ??");
-                     html+='<tr class="trs">'+
-                     '<td></td><td></td><td></td><td></td><td class="names">'+Tsum.toFixed(3)+'</td><td class="names">'+Lsum.toFixed(3)+'</td><td class="names">'+bsum.toFixed(3)+'</td><td class="names">'+wsum.toFixed(3)+'</td><td class="names">'+fsum.toFixed(3)+'</td></tr><tr></tr>'; index+=1;
-                     val=val+1;
+                    } else {}
+                    if (flag == 1) {
+                        console.log(flag + " is the flag ??");
+                        html += '<tr class="trs">' +
+                            '<td></td><td></td><td></td><td></td><td class="names">' + Tsum.toFixed(3) + '</td><td class="names">' + Lsum.toFixed(3) + '</td><td class="names">' + bsum.toFixed(3) + '</td><td class="names">' + wsum.toFixed(3) + '</td><td class="names">' + fsum.toFixed(3) + '</td></tr><tr></tr>';
+                        index += 1;
+                        val = val + 1;
                     }
                 }
                 $('#tbody').html(html);
-                html+='<tfoot id="tfoot"></tfoot></table></div><br/> ';
+                html += '<tfoot id="tfoot"></tfoot></table></div><br/> ';
                 $('#div').html(html);
-//Total();
+                //Total();
             }
         });
     });
@@ -162,7 +170,7 @@ $(document).ready(function() {
                     wh_yarn_rate = data[i].wh_sutta;
                     filter_rate = data[i].filter;
 
-                   // mul();
+                    // mul();
                     /* $('#tobacco2').val(tobacco_rate);
                      $('#leaves2').val(leaves_rate);
                      $('#bl_yarn2').val(bl_yarn_rate);
@@ -189,17 +197,17 @@ $(document).ready(function() {
         tobacco_mul = parseFloat(tobacco_rate * tobacco);
         leaves_mul = parseFloat(leaves_rate * leaves);
         bl_yarn_mul = parseFloat(bl_yarn_rate * bl_yarn);
-        wh_yarn_mul = parseFloat(wh_yarn_rate * wh_yarn);   
+        wh_yarn_mul = parseFloat(wh_yarn_rate * wh_yarn);
         filter_mul = parseFloat(filter_rate * filter);
-        tobacco_mul=Math.round(tobacco_mul);
+        tobacco_mul = Math.round(tobacco_mul);
         $('#tobacco2').val(tobacco_mul.toFixed(3));
-        leaves_mul=Math.round(leaves_mul);
+        leaves_mul = Math.round(leaves_mul);
         $('#leaves2').val(leaves_mul.toFixed(3));
-        bl_yarn_mul=Math.round(bl_yarn_mul);
+        bl_yarn_mul = Math.round(bl_yarn_mul);
         $('#bl_yarn2').val(bl_yarn_mul.toFixed(3));
-        wh_yarn_mul=Math.round(wh_yarn_mul);
+        wh_yarn_mul = Math.round(wh_yarn_mul);
         $('#wh_yarn2').val(wh_yarn_mul.toFixed(3));
-        filter_mul=Math.round(filter_mul);
+        filter_mul = Math.round(filter_mul);
         $('#filter2').val(filter_mul.toFixed(3));
 
 
@@ -298,54 +306,69 @@ $(document).ready(function() {
         var fdateslt = date1.split('/');
         var date = fdateslt[2] + '-' + fdateslt[1] + '-' + fdateslt[0];
 
+        var flg = 0;
 
-        $.ajax({
-            type: "POST",
-            url: baseurl + "Cont_adj/adddata",
+        if (create_p > 0) {
+            flg = 1;
+        } else if (editrt > 0) {
+            if (id > 0) {
+                flg = 1;
+            }
+        }
 
-            data: {
-                id: id,
-                date: date,
-                contractor: contractor,
-                batch: batch,
-                tobacco: tobacco,
-                leaves: leaves,
-                bl_yarn: bl_yarn,
-                wh_yarn: wh_yarn,
-                filter: filter,
-                tobacco1:tobacco1,
-                leaves1:leaves1,
-                bl_yarn1:bl_yarn1,
-                wh_yarn1:wh_yarn1,
-                filter1:filter1,
-                table_name: table_name
-            },
-            dataType: "JSON",
-            async: false,
-            success: function(data) {
+        if (flg == 1) {
 
-                console.log(data);
-                if (data == true) {
-                    if (id != "") {
-                        successTost("Data Update Successfully");
+
+
+            $.ajax({
+                type: "POST",
+                url: baseurl + "Cont_adj/adddata",
+
+                data: {
+                    id: id,
+                    date: date,
+                    contractor: contractor,
+                    batch: batch,
+                    tobacco: tobacco,
+                    leaves: leaves,
+                    bl_yarn: bl_yarn,
+                    wh_yarn: wh_yarn,
+                    filter: filter,
+                    tobacco1: tobacco1,
+                    leaves1: leaves1,
+                    bl_yarn1: bl_yarn1,
+                    wh_yarn1: wh_yarn1,
+                    filter1: filter1,
+                    table_name: table_name
+                },
+                dataType: "JSON",
+                async: false,
+                success: function(data) {
+
+                    console.log(data);
+                    if (data == true) {
+                        if (id != "") {
+                            successTost("Data Update Successfully");
+                        } else {
+                            successTost("Data Save Successfully");
+                        }
+                        $('#master_form')[0].reset();
+
+                        $('.tablehideshow').show();
+                        $(".btnhideshow").show();
+                        datashow();
+                        $('.closehideshow').trigger('click');
                     } else {
-                        successTost("Data Save Successfully");
+                        errorTost("Data Cannot Save");
                     }
-                    $('#master_form')[0].reset();
 
-                    $('.tablehideshow').show();
-                    $(".btnhideshow").show();
-                    datashow();
-                    $('.closehideshow').trigger('click');
-                } else {
-                    errorTost("Data Cannot Save");
+
                 }
 
-
-            }
-
-        });
-
+            });
+        } else {
+            swal("You Not Have This Permission!", "success");
+        }
     });
     //----------------------submit form code end------------------------------
     datashow();
@@ -428,7 +451,15 @@ $(document).ready(function() {
                         '<td style="display:none;" id="blyamt_' + data[i].id + '">' + data[i].bl_yarn_amt + '</td>' +
                         '<td style="display:none;" id="whyamt_' + data[i].id + '">' + data[i].wh_yarn_amt + '</td>' +
                         '<td style="display:none;" id="filamt_' + data[i].id + '">' + data[i].filter_amt + '</td>' +
-                        '<td class="not-export-column" ><button name="edit" value="edit" class="edit_data btn btn-xs btn-success" id=' + data[i].id + '><i class="fa fa-edit"></i></button>&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' + data[i].id + '><i class="fa fa-trash"></i></button></td>' +
+                        //  '<td class="not-export-column" ><button name="edit" value="edit" class="edit_data btn btn-xs btn-success" id=' + data[i].id + '><i class="fa fa-edit"></i></button>&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' + data[i].id + '><i class="fa fa-trash"></i></button></td>' +
+                        '<td class="not-export-column" >';
+                    if (editrt == 1) {
+                        html += '<button name="edit" value="edit" class="edit_data btn btn-xs btn-success" id=' + data[i].id + '><i class="fa fa-edit"></i></button>';
+                    }
+                    if (delrt == 1) {
+                        html += '&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' + data[i].id + '><i class="fa fa-trash"></i></button>';
+                    }
+                    html += '</td>' +
                         '</tr>';
                 }
                 html += '</tbody><tfoot>' +
@@ -476,29 +507,29 @@ $(document).ready(function() {
 
     }
     //------------------show data in the tabale code end-----------------------------------------------
-//-----------------------edit data code start-----------------------------------
-$(document).on("click", ".edit_data", function() {
-    $('.formhideshow').show();
-    $('.tablehideshow').show();
-    $(".btnhideshow").hide();
-    $('#btnsave').text('Update');
-    var id = $(this).attr('id');
-    var contractor = $('#contractor_' + id).html();
-    defaultdate();
-    $('#cont_name').val(contractor).trigger('change');
-    $('#batch').val($('#batch_' + id).html());
-    $('#tobacco').val($('#tobacco_' + id).html());
-    $('#leaves').val($('#leaves_' + id).html());
-    $('#bl_yarn').val($('#bl_yarn_' + id).html());
-    $('#wh_yarn').val($('#wh_yarn_' + id).html());
-    $('#filter').val($('#filter_' + id).html());
-    $('#tobacco2').val($('#tobamt_'+id).html());
-    $('#leaves2').val($('#levamt_'+id).html());
-    $('#bl_yarn2').val($('#blyamt_'+id).html());
-    $('#wh_yarn2').val($('#whyamt_'+id).html());
-    $('#filter2').val($('#filamt_'+id).html());
-    $('#save_update').val(id);
-});
+    //-----------------------edit data code start-----------------------------------
+    $(document).on("click", ".edit_data", function() {
+        $('.formhideshow').show();
+        $('.tablehideshow').show();
+        $(".btnhideshow").hide();
+        $('#btnsave').text('Update');
+        var id = $(this).attr('id');
+        var contractor = $('#contractor_' + id).html();
+        defaultdate();
+        $('#cont_name').val(contractor).trigger('change');
+        $('#batch').val($('#batch_' + id).html());
+        $('#tobacco').val($('#tobacco_' + id).html());
+        $('#leaves').val($('#leaves_' + id).html());
+        $('#bl_yarn').val($('#bl_yarn_' + id).html());
+        $('#wh_yarn').val($('#wh_yarn_' + id).html());
+        $('#filter').val($('#filter_' + id).html());
+        $('#tobacco2').val($('#tobamt_' + id).html());
+        $('#leaves2').val($('#levamt_' + id).html());
+        $('#bl_yarn2').val($('#blyamt_' + id).html());
+        $('#wh_yarn2').val($('#whyamt_' + id).html());
+        $('#filter2').val($('#filamt_' + id).html());
+        $('#save_update').val(id);
+    });
     //-----------------------delete data code start-----------------------------------
 
 
@@ -550,5 +581,5 @@ $(document).on("click", ".edit_data", function() {
 
     });
     //-----------------------delete data code end-----------------------------------
-    
+
 });

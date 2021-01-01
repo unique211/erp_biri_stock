@@ -55,49 +55,63 @@ $(document).ready(function() {
         var fdateslt = date.split('/');
         var com_date = fdateslt[2] + '-' + fdateslt[1] + '-' + fdateslt[0];
 
-        $.ajax({
-            type: "POST",
-            url: baseurl + "Wages_fixation/adddata",
+        var flg = 0;
 
-            data: {
-                id: id,
-                name: name,
-                wages: wages,
-                bonus: bonus,
-                handling: handling,
-                pf: pf,
-                tds: tds,
-                chat_biri: chat_biri,
-                com_date: com_date,
-                commition: commition,
-                table_name: table_name
-            },
-            dataType: "JSON",
-            async: false,
-            success: function(data) {
+        if (create_p > 0) {
+            flg = 1;
+        } else if (editrt > 0) {
+            if (id > 0) {
+                flg = 1;
+            }
+        }
 
-                console.log(data);
-                if (data == true) {
-                    if (id != "") {
-                        successTost("Data Update Successfully");
+        if (flg == 1) {
+
+            $.ajax({
+                type: "POST",
+                url: baseurl + "Wages_fixation/adddata",
+
+                data: {
+                    id: id,
+                    name: name,
+                    wages: wages,
+                    bonus: bonus,
+                    handling: handling,
+                    pf: pf,
+                    tds: tds,
+                    chat_biri: chat_biri,
+                    com_date: com_date,
+                    commition: commition,
+                    table_name: table_name
+                },
+                dataType: "JSON",
+                async: false,
+                success: function(data) {
+
+                    console.log(data);
+                    if (data == true) {
+                        if (id != "") {
+                            successTost("Data Update Successfully");
+                        } else {
+                            successTost("Data Save Successfully");
+                        }
+                        $('#master_form')[0].reset();
+                        $('.formhideshow').hide();
+                        $('.tablehideshow').show();
+                        $(".btnhideshow").show();
+                        datashow();
+                        $('.closehideshow').trigger('click');
                     } else {
-                        successTost("Data Save Successfully");
+                        errorTost("Data Cannot Save");
                     }
-                    $('#master_form')[0].reset();
-                    $('.formhideshow').hide();
-                    $('.tablehideshow').show();
-                    $(".btnhideshow").show();
-                    datashow();
-                    $('.closehideshow').trigger('click');
-                } else {
-                    errorTost("Data Cannot Save");
+
+
                 }
 
-
-            }
-
-        });
-
+            });
+        } else {
+            swal("You Not Have This Permission!", "success");
+        }
     });
     //----------------------submit form code end---------------------------------------------
     datashow();
@@ -185,7 +199,15 @@ $(document).ready(function() {
                         '<td id="com_date_' + data[i].id + '">' + date + '</td>' +
                         '<td id="commition_' + data[i].id + '">' + data[i].commition + '</td>' +
                         '<td><input type="text" class="form-control index" id="index_' + data[i].id + '" style="width:55px;" value="' + data[i].index_value + '" name="' + data[i].id + '"/></td>' +
-                        '<td class="not-export-column" ><button name="edit" value="edit" class="edit_data btn btn-xs btn-success" id=' + data[i].id + '><i class="fa fa-edit"></i></button>&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' + data[i].id + '><i class="fa fa-trash"></i></button></td>' +
+                        //'<td class="not-export-column" ><button name="edit" value="edit" class="edit_data btn btn-xs btn-success" id=' + data[i].id + '><i class="fa fa-edit"></i></button>&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' + data[i].id + '><i class="fa fa-trash"></i></button></td>' +
+                        '<td class="not-export-column" >';
+                    if (editrt == 1) {
+                        html += '<button name="edit" value="edit" class="edit_data btn btn-xs btn-success" id=' + data[i].id + '><i class="fa fa-edit"></i></button>';
+                    }
+                    if (delrt == 1) {
+                        html += '&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' + data[i].id + '><i class="fa fa-trash"></i></button>';
+                    }
+                    html += '</td>' +
                         '</tr>';
 
                 }

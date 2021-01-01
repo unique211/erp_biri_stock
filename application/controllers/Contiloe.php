@@ -40,6 +40,8 @@ set_time_limit(0);
 		$title['title_name'] = " dbstock ";
 		$title['title_name1'] = "Dashboard";
 		$title['active_menu'] = "d";
+		$title['sidebar'] = $this->getpermssion();
+	
 		$this->load->view('index',$title);
 			}
 		else{
@@ -55,6 +57,9 @@ set_time_limit(0);
 		$title['title_name'] = " dbstock ";
 		$title['title_name1'] = " Company Management ";
 		$title['active_menu'] = "s";
+		$title['sidebar'] = $this->getpermssion();
+
+	
 		$this->load->view('company_management',$title);
 			}
 		else{
@@ -68,6 +73,7 @@ set_time_limit(0);
 		$title['title_name'] = " dbstock ";
 		$title['title_name1'] = " User Management ";
 		$title['active_menu'] = "s";
+		$title['sidebar'] = $this->getpermssion();
 		$this->load->view('user_management',$title);
 			}
 		else{
@@ -80,6 +86,7 @@ set_time_limit(0);
 		$title['title_name'] = " dbstock ";
 		$title['title_name1'] = " Role Master ";
 		$title['active_menu'] = "s";
+		$title['sidebar'] = $this->getpermssion();
 		$this->load->view('roll_type',$title);
 			}
 		else{
@@ -92,6 +99,7 @@ set_time_limit(0);
 		$title['title_name'] = " dbstock ";
 		$title['title_name1'] = " Ledger Creation ";
 		$title['active_menu'] = "m";
+		$title['sidebar'] = $this->getpermssion();
 		$this->load->view('contractor_partyMaster',$title);
 			}
 		else{
@@ -104,6 +112,7 @@ set_time_limit(0);
 		$title['title_name'] = " dbstock ";
 		$title['title_name1'] = " Item ";
 		$title['active_menu'] = "m";
+		$title['sidebar'] = $this->getpermssion();
 		$this->load->view('Item',$title);
 			}
 		else{
@@ -116,6 +125,7 @@ set_time_limit(0);
 		$title['title_name'] = " dbstock ";
 		$title['title_name1'] = " Batch Wise Stock ";
 		$title['active_menu'] = "m";
+		$title['sidebar'] = $this->getpermssion();
 		$this->load->view('Batch_Wise_Stock',$title);
 			}
 		else{
@@ -128,6 +138,7 @@ set_time_limit(0);
 		$title['title_name'] = " dbstock ";
 		$title['title_name1'] = " Wages Fixation ";
 		$title['active_menu'] = "m";
+		$title['sidebar'] = $this->getpermssion();
 		$this->load->view('wages_fixation',$title);
 			}
 		else{
@@ -140,6 +151,7 @@ set_time_limit(0);
 		$title['title_name'] = " dbstock ";
 		$title['title_name1'] = " Batch Creation ";
 		$title['active_menu'] = "m";
+		$title['sidebar'] = $this->getpermssion();
 		$this->load->view('batch_creation',$title);
 			}
 		else{
@@ -152,6 +164,7 @@ set_time_limit(0);
 		$title['title_name'] = " dbstock ";
 		$title['title_name1'] = " Checker Master ";
 		$title['active_menu'] = "m";
+		$title['sidebar'] = $this->getpermssion();
 		$this->load->view('checker_master',$title);
 			}
 		else{
@@ -164,6 +177,7 @@ set_time_limit(0);
 		$title['title_name'] = " dbstock ";
 		$title['title_name1'] = " Rate Master ";
 		$title['active_menu'] = "m";
+		$title['sidebar'] = $this->getpermssion();
 		$this->load->view('rate_master',$title);
 			}
 		else{
@@ -176,6 +190,7 @@ set_time_limit(0);
 		$title['title_name'] = " dbstock ";
 		$title['title_name1'] = " Packing Batch/Lable ";
 		$title['active_menu'] = "m";
+		$title['sidebar'] = $this->getpermssion();
 		$this->load->view('packing_batch',$title);
 			}
 		else{
@@ -188,6 +203,7 @@ set_time_limit(0);
 		$title['title_name'] = " dbstock ";
 		$title['title_name1'] = " Lable Wise Packing Item ";
 		$title['active_menu'] = "m";
+		$title['sidebar'] = $this->getpermssion();
 		$this->load->view('lable_wise_packing_item',$title);
 			}
 		else{
@@ -200,6 +216,7 @@ set_time_limit(0);
 		$title['title_name'] = " dbstock ";
 		$title['title_name1'] = " Weekly Received Adjustment ";
 		$title['active_menu'] = "u";
+		$title['sidebar'] = $this->getpermssion();
 		$this->load->view('weekly_adjustment',$title);
 			}
 		else{
@@ -212,6 +229,7 @@ set_time_limit(0);
 		$title['title_name'] = " dbstock ";
 		$title['title_name1'] = " Financial & Period ";
 		$title['active_menu'] = "u";
+		$title['sidebar'] = $this->getpermssion();
 		$this->load->view('financial&period',$title);
 			}
 		else{
@@ -224,6 +242,7 @@ set_time_limit(0);
 		$title['title_name'] = " dbstock ";
 		$title['title_name1'] = " Contractor Issue Receive ";
 		$title['active_menu'] = "t";
+		$title['sidebar'] = $this->getpermssion();
 		$this->load->view('cont_issue',$title);
 			}
 		else{
@@ -236,6 +255,7 @@ set_time_limit(0);
 		$title['title_name'] = " dbstock ";
 		$title['title_name1'] = " Contractor Adjustment ";
 		$title['active_menu'] = "t";
+		$title['sidebar'] = $this->getpermssion();
 		$this->load->view('cont_adj',$title);
 			}
 		else{
@@ -248,6 +268,7 @@ set_time_limit(0);
 		$title['title_name'] = " dbstock ";
 		$title['title_name1'] = " Voucher Entry ";
 		$title['active_menu'] = "t";
+		$title['sidebar'] = $this->getpermssion();
 		$this->load->view('voucher_entry',$title);
 			}
 		else{
@@ -260,6 +281,7 @@ set_time_limit(0);
 		$title['title_name'] = " dbstock ";
 		$title['title_name1'] = " Finished Product ";
 		$title['active_menu'] = "t";
+		$title['sidebar'] = $this->getpermssion();
 		$this->load->view('finished_product',$title);
 			}
 		else{
@@ -272,6 +294,7 @@ set_time_limit(0);
 		$title['title_name'] = " dbstock ";
 		$title['title_name1'] = " Raw Item Purchase & Sales ";
 		$title['active_menu'] = "t";
+		$title['sidebar'] = $this->getpermssion();
 		$this->load->view('Raw_PS',$title);
 			}
 		else{
@@ -284,6 +307,7 @@ set_time_limit(0);
 		$title['title_name'] = " dbstock ";
 		$title['title_name1'] = " Raw Item Transfer ";
 		$title['active_menu'] = "t";
+		$title['sidebar'] = $this->getpermssion();
 		$this->load->view('raw_item',$title);
 			}
 		else{
@@ -296,6 +320,7 @@ set_time_limit(0);
 		$title['title_name'] = " dbstock ";
 		$title['title_name1'] = " Finish Product Sale ";
 		$title['active_menu'] = "t";
+		$title['sidebar'] = $this->getpermssion();
 		$this->load->view('Finish_PS',$title);
 			}
 		else{
@@ -308,6 +333,7 @@ set_time_limit(0);
 		$title['title_name'] = " dbstock ";
 		$title['title_name1'] = " Tobacco Mixing ";
 		$title['active_menu'] = "t";
+		$title['sidebar'] = $this->getpermssion();
 		$this->load->view('tobacco_mix',$title);
 			}
 		else{
@@ -319,6 +345,7 @@ set_time_limit(0);
 			$title['title_name'] = " dbstock ";
 			$title['title_name1'] = " Contractor Trial Report ";
 			$title['active_menu'] = "r";
+			$title['sidebar'] = $this->getpermssion();
 			$this->load->view('Cotractor_report',$title);
 		}
 		else{
@@ -330,6 +357,7 @@ set_time_limit(0);
 			$title['title_name'] = " dbstock ";
 			$title['title_name1'] = " Date Wise Report ";
 			$title['active_menu'] = "r";
+			$title['sidebar'] = $this->getpermssion();
 			$this->load->view('DatewiseReport',$title);
 		}
 		else{
@@ -341,6 +369,7 @@ set_time_limit(0);
 			$title['title_name'] = " dbstock ";
 			$title['title_name1'] = "Wages Report ";
 			$title['active_menu'] = "r";
+			$title['sidebar'] = $this->getpermssion();
 			$this->load->view('ContractorSheet',$title);
 		}
 		else{
@@ -352,6 +381,7 @@ set_time_limit(0);
 			$title['title_name'] = " dbstock ";
 			$title['title_name1'] = " Contractor Ledger ";
 			$title['active_menu'] = "r";
+			$title['sidebar'] = $this->getpermssion();
 			$this->load->view('ContractorLedger',$title);
 		}
 		else{
@@ -363,6 +393,7 @@ set_time_limit(0);
 			$title['title_name'] = " dbstock ";
 			$title['title_name1'] = " Issue Report ";
 			$title['active_menu'] = "r";
+			$title['sidebar'] = $this->getpermssion();
 			$this->load->view('issuereport',$title);
 		}
 		else{
@@ -374,6 +405,7 @@ set_time_limit(0);
 			$title['title_name'] = " dbstock ";
 			$title['title_name1'] = " Recieved Report ";
 			$title['active_menu'] = "r";
+			$title['sidebar'] = $this->getpermssion();
 			$this->load->view('recievedreport',$title);
 		}
 		else{
@@ -385,6 +417,7 @@ set_time_limit(0);
 			$title['title_name'] = " dbstock ";
 			$title['title_name1'] = " Consumtion Report ";
 			$title['active_menu'] = "r";
+			$title['sidebar'] = $this->getpermssion();
 			$this->load->view('consumtion',$title);
 		}
 		else{
@@ -396,6 +429,7 @@ set_time_limit(0);
 			$title['title_name'] = " dbstock ";
 			$title['title_name1'] = "RG-12A";
 			$title['active_menu'] = "r";
+			$title['sidebar'] = $this->getpermssion();
 			$this->load->view('rg12A',$title);
 		}
 		else{
@@ -407,6 +441,7 @@ set_time_limit(0);
 			$title['title_name'] = " dbstock ";
 			$title['title_name1'] = "Bidi Sales Monthly";
 			$title['active_menu'] = "r";
+			$title['sidebar'] = $this->getpermssion();
 			$this->load->view('bidisalesmonthly',$title);
 		}
 		else{
@@ -418,6 +453,7 @@ set_time_limit(0);
 			$title['title_name'] = " dbstock ";
 			$title['title_name1'] = "ItemWise Stock Monthly";
 			$title['active_menu'] = "r";
+			$title['sidebar'] = $this->getpermssion();
 			$this->load->view('itemwisestockmonthly',$title);
 		}
 		else{
@@ -429,6 +465,7 @@ set_time_limit(0);
 			$title['title_name'] = " dbstock ";
 			$title['title_name1'] = "Central Excise ER-1";
 			$title['active_menu'] = "r";
+			$title['sidebar'] = $this->getpermssion();
 			$this->load->view('centralexciseer',$title);
 		}
 		else{
@@ -440,6 +477,7 @@ set_time_limit(0);
 			$title['title_name'] = " dbstock ";
 			$title['title_name1'] = "Contractor Payment List";
 			$title['active_menu'] = "r";
+			$title['sidebar'] = $this->getpermssion();
 			$this->load->view('contractorpaymentrep',$title);
 		}
 		else{
@@ -451,6 +489,7 @@ set_time_limit(0);
 			$title['title_name'] = " dbstock ";
 			$title['title_name1'] = "Contractor Bill";
 			$title['active_menu'] = "r";
+			$title['sidebar'] = $this->getpermssion();
 			$this->load->view('controcator_print',$title);
 		}
 		else{
@@ -462,6 +501,7 @@ set_time_limit(0);
 			$title['title_name'] = " dbstock ";
 			$title['title_name1'] = "Contractor Bill Master";
 			$title['active_menu'] = "m";
+			$title['sidebar'] = $this->getpermssion();
 			$this->load->view('contractorbillmaster',$title);
 			
 
@@ -475,6 +515,7 @@ set_time_limit(0);
 			$title['title_name'] = " dbstock ";
 			$title['title_name1'] = "Day Book Report";
 			$title['active_menu'] = "r";
+			$title['sidebar'] = $this->getpermssion();
 			$this->load->view('daybook',$title);
 			
 
@@ -488,11 +529,51 @@ set_time_limit(0);
 			$title['title_name'] = " dbstock ";
 			$title['title_name1'] = " Party Ledger ";
 			$title['active_menu'] = "r";
+			$title['sidebar'] = $this->getpermssion();
 			$this->load->view('partyledger',$title);
 		}
 		else{
 			redirect(base_url());
 		}
 	}
+	public function finishproductreport(){
+		if(isset($this->session->userid)){
+			$title['title_name'] = " dbstock ";
+			$title['title_name1'] = " Finish Product Stock ";
+			$title['active_menu'] = "r";
+			$title['sidebar'] = $this->getpermssion();
+
+			$this->load->view('finishproduct_itemreport',$title);
+		}
+		else{
+			redirect(base_url());
+		}
+	}
+	public function userpermission(){
+		if(isset($this->session->userid)){
+			$title['title_name'] = " dbstock ";
+			$title['title_name1'] = "User Permission";
+			$title['active_menu'] = "s";
+			$title['sidebar'] = $this->getpermssion();
+			$this->load->view('userpermission',$title);
+		}
+		else{
+			redirect(base_url());
+		}
+	}
+	public function getpermssion(){
+		$roleid=$this->session->roleid;
+
+		$this->db->select('user_permission.*');    
+						$this->db->from('user_permission');
+						$this->db->where('role_id', $roleid);;
+						$menuinfo =$this->db->get();
+						$menupermission =  $menuinfo ->result();
+						return $menupermission;
+
+		//$data= $this->Loginmodel->check_login();
+
+	}
+	
 	
 }

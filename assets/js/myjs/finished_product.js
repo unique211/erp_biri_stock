@@ -207,76 +207,90 @@ $(document).ready(function() {
 
         var fdateslt = date1.split('/');
         var date = fdateslt[2] + '-' + fdateslt[1] + '-' + fdateslt[0];
-        $.ajax({
-            type: "POST",
-            url: baseurl + "Finished_product/getmaxid",
 
-            data: {
+        var flg = 0;
 
-                table_name: table_name
-            },
-            dataType: "JSON",
-            async: false,
-            success: function(data) {
-                ref_id = data;
-                $('#btnprint').val(ref_id);
+        if (create_p > 0) {
+            flg = 1;
+        } else if (editrt > 0) {
+            if (id > 0) {
+                flg = 1;
             }
-        });
+        }
 
-
-        var row = $('#product').find('tbody').find('tr');
-        var r = row.length;
-        for (var i = 0; i < r; i++) {
-            label_id = $(row[i]).find('td:eq(0)').html();
-            cartons = $(row[i]).find("td:eq(2) input[type='number']").val();
-            total_bidi = $(row[i]).find('td:eq(3)').html();
-
+        if (flg == 1) {
             $.ajax({
                 type: "POST",
-                url: baseurl + "Finished_product/adddata",
+                url: baseurl + "Finished_product/getmaxid",
 
                 data: {
-                    id: id,
-                    date: date,
-                    total_bidi: total_bidi,
-                    ref_id: ref_id,
-                    cartons: cartons,
-                    label_id: label_id,
+
                     table_name: table_name
                 },
                 dataType: "JSON",
                 async: false,
-                success: function() {
-
-
-
+                success: function(data) {
+                    ref_id = data;
+                    $('#btnprint').val(ref_id);
                 }
-
             });
 
 
-        }
+            var row = $('#product').find('tbody').find('tr');
+            var r = row.length;
+            for (var i = 0; i < r; i++) {
+                label_id = $(row[i]).find('td:eq(0)').html();
+                cartons = $(row[i]).find("td:eq(2) input[type='number']").val();
+                total_bidi = $(row[i]).find('td:eq(3)').html();
+
+                $.ajax({
+                    type: "POST",
+                    url: baseurl + "Finished_product/adddata",
+
+                    data: {
+                        id: id,
+                        date: date,
+                        total_bidi: total_bidi,
+                        ref_id: ref_id,
+                        cartons: cartons,
+                        label_id: label_id,
+                        table_name: table_name
+                    },
+                    dataType: "JSON",
+                    async: false,
+                    success: function() {
 
 
-        if (id != "") {
-            successTost("Data Update Successfully");
+
+                    }
+
+                });
+
+
+            }
+
+
+            if (id != "") {
+                successTost("Data Update Successfully");
+            } else {
+                successTost("Data Save Successfully");
+            }
+            $('#master_form')[0].reset();
+            $('#product tr .sum_cartons').val(0);
+            $("#tot_cart").text('');
+            $('.formhideshow').hide();
+            $('.tablehideshow').show();
+            $(".btnhideshow").show();
+            defaultdate();
+
+            //latestdata();
+            //formdata();
+            $('.closehideshow').trigger('click');
+            datashow();
+
         } else {
-            successTost("Data Save Successfully");
+            swal("You Not Have This Permission!", "success");
         }
-        $('#master_form')[0].reset();
-        $('#product tr .sum_cartons').val(0);
-        $("#tot_cart").text('');
-        $('.formhideshow').hide();
-        $('.tablehideshow').show();
-        $(".btnhideshow").show();
-        defaultdate();
-
-        //latestdata();
-        //formdata();
-        $('.closehideshow').trigger('click');
-        datashow();
-
-
 
 
 
@@ -342,7 +356,16 @@ $(document).ready(function() {
                         '<td id="cartons_' + data[i].ref_id + '">' + data[i].cartons + '</td>' +
                         '<td id="total_bidi_' + data[i].ref_id + '">' + data[i].total_bidi + '</td>' +
                         '<td style="display:none;" id="ref_id_' + data[i].id + '">' + tot.toFixed(3) + '</td>' +
-                        '<td class="not-export-column" ><button name="edit" value="edit" class="edit_data btn btn-xs btn-success" id=' + data[i].ref_id + '><i class="fa fa-edit"></i></button>&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' + data[i].ref_id + '><i class="fa fa-trash"></i></button></td>' +
+                        //'<td class="not-export-column" ><button name="edit" value="edit" class="edit_data btn btn-xs btn-success" id=' + data[i].ref_id + '><i class="fa fa-edit"></i></button>&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' + data[i].ref_id + '><i class="fa fa-trash"></i></button></td>' +
+                        '<td class="not-export-column" >';
+                    if (editrt == 1) {
+                        html += '<button name="edit" value="edit" class="edit_data btn btn-xs btn-success" id=' + data[i].ref_id + '><i class="fa fa-edit"></i></button>';
+                    }
+                    if (delrt == 1) {
+                        html += '&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' + data[i].ref_id + '><i class="fa fa-trash"></i></button>';
+                    }
+                    html += '</td>' +
+
                         '</tr>';
 
                 }

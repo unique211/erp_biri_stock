@@ -7,6 +7,25 @@ if(isset($title_name)){
 	$title1 = $title_name1;
 }
 ?>
+<?php
+$edit_p=0;
+$delete_p=0;
+$read_p=0;
+$create_p=0;
+
+?>
+ <?php foreach($sidebar as $val){ 
+	  
+	  if(($val->menu_id==2 && $val->submenu_id==8) && ( $val->create_p==1 || $val->delete_p==1 || $val->edit_p==1 || $val->read_p	==1)){
+
+		$create_p=$val->create_p;
+		$edit_p=$val->edit_p;
+		$delete_p=$val->delete_p;
+		$read_p=$val->read_p;
+
+	  }
+  } 
+	 ?>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -44,6 +63,7 @@ if(isset($title_name)){
 							</div>
 							
 						<div class="panel-body ">
+						<?php if($create_p==1 || $edit_p ==1){ ?>
 							<div class="row " id="documents">
 									
 								   <form id="master_form" name="master_form">
@@ -82,6 +102,7 @@ if(isset($title_name)){
 
 									</form>
 				</div>
+						<?php } ?>
                 <br/>
 						<div class="col-lg-12 ">
 										<div class="table-responsive" id="show_master">
@@ -130,6 +151,13 @@ if(isset($title_name)){
     <!-- Placed at the end of the document so the pages load faster -->
     <?php include "includes/footerlink.php"; ?>   
 	<script type="text/javascript">var baseurl = "<?php print base_url(); ?>";</script>
+	<script>
+	var editrt="<?php  echo $edit_p; ?>";
+var delrt="<?php  echo $delete_p; ?>";
+var read_p="<?php  echo $read_p; ?>";
+var create_p="<?php  echo $create_p; ?>";
+	
+	</script>
     <script src="<?php echo base_url(); ?>assets/js/myjs/dynamic.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/myjs/conbill_master.js"></script>
 	

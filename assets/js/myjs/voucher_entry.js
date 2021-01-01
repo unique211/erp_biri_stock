@@ -291,89 +291,104 @@ $(document).ready(function() {
         var cdate = fdateslt[2] + '-' + fdateslt[1] + '-' + fdateslt[0];
         var table_name = 'vouchar';
         //alert(cdate+" / "+type+" / "+from+" / "+to+" / "+amount+" / "+remark);
-        $.ajax({
-            type: "POST",
-            url: baseurl + "Vouchar/addData",
-            data: {
-                id: id,
-                date: cdate,
-                type: type,
-                from: from,
-                to: to,
-                amount: amount,
-                remark: remark,
-                table_name: table_name
-            },
-            dataType: "JSON",
-            async: false,
-            success: function(data) {
+        var flg = 0;
 
-                if (type == 'Contractor') {
-                    id1 = id;
-                    var refid;
-                    console.log(data);
-                    if (data == true) {
-                        refid = id1;
-                    } else {
-                        refid = data;
-                    }
-                    var r1 = $('table#file_info').find('tbody').find('tr');
-                    var r = r1.length;
-                    for (var i = 0; i < r; i++) {
-
-                        //alert(refid+" ID "+id);
-                        name = $(r1[i]).find('td:eq(0)').html();
-                        amount = $(r1[i]).find("td:eq(2) input[type='text']").val();
-                        remark = $(r1[i]).find('td:eq(3)  input[type="text"]').val();
-
-                        $.ajax({
-                            type: "POST",
-                            url: baseurl + "Vouchar/addData",
-                            data: {
-                                id: id,
-                                refid: refid,
-                                name: name,
-                                amount: amount,
-                                remark: remark,
-                                table_name: 'information'
-                            },
-                            dataType: 'json',
-                            async: false,
-                            success: function(data) {
-                                successTost("Data Saved Successfully");
-
-                            },
-                            error: function() {
-                                errorTost("error from success");
-                            }
-                        });
-                    }
-                } else {
-                    successTost('Operation Successfull');
-                }
-                $('#master_form')[0].reset();
-                $('#save_update').val("");
-                $('#saveupdate').val("");
-                $(".btnhideshow").show();
-                $(".tablehideshow").show();
-                $(".formhideshow").hide();
-                $('#file_infobody').html('');
-                $('#file_info').hide();
-                $('#hide').show();
-                $('.doj').datepicker({
-                    'todayHighlight': true,
-                });
-                var date = new Date();
-                date = date.toString('dd/MM/yyyy');
-                $("#date").val(date);
-                datashow(fromdate, todate);
-
-            },
-            error: function() {
-                errorTost("Error");
+        if (create_p > 0) {
+            flg = 1;
+        } else if (editrt > 0) {
+            if (id > 0) {
+                flg = 1;
             }
+        }
 
-        });
+        if (flg == 1) {
+
+            $.ajax({
+                type: "POST",
+                url: baseurl + "Vouchar/addData",
+                data: {
+                    id: id,
+                    date: cdate,
+                    type: type,
+                    from: from,
+                    to: to,
+                    amount: amount,
+                    remark: remark,
+                    table_name: table_name
+                },
+                dataType: "JSON",
+                async: false,
+                success: function(data) {
+
+                    if (type == 'Contractor') {
+                        id1 = id;
+                        var refid;
+                        console.log(data);
+                        if (data == true) {
+                            refid = id1;
+                        } else {
+                            refid = data;
+                        }
+                        var r1 = $('table#file_info').find('tbody').find('tr');
+                        var r = r1.length;
+                        for (var i = 0; i < r; i++) {
+
+                            //alert(refid+" ID "+id);
+                            name = $(r1[i]).find('td:eq(0)').html();
+                            amount = $(r1[i]).find("td:eq(2) input[type='text']").val();
+                            remark = $(r1[i]).find('td:eq(3)  input[type="text"]').val();
+
+                            $.ajax({
+                                type: "POST",
+                                url: baseurl + "Vouchar/addData",
+                                data: {
+                                    id: id,
+                                    refid: refid,
+                                    name: name,
+                                    amount: amount,
+                                    remark: remark,
+                                    table_name: 'information'
+                                },
+                                dataType: 'json',
+                                async: false,
+                                success: function(data) {
+                                    successTost("Data Saved Successfully");
+
+                                },
+                                error: function() {
+                                    errorTost("error from success");
+                                }
+                            });
+                        }
+                    } else {
+                        successTost('Operation Successfull');
+                    }
+                    $('#master_form')[0].reset();
+                    $('#save_update').val("");
+                    $('#saveupdate').val("");
+                    $(".btnhideshow").show();
+                    $(".tablehideshow").show();
+                    $(".formhideshow").hide();
+                    $('#file_infobody').html('');
+                    $('#file_info').hide();
+                    $('#hide').show();
+                    $('.doj').datepicker({
+                        'todayHighlight': true,
+                    });
+                    var date = new Date();
+                    date = date.toString('dd/MM/yyyy');
+                    $("#date").val(date);
+                    datashow(fromdate, todate);
+
+                },
+                error: function() {
+                    errorTost("Error");
+                }
+
+            });
+        } else {
+            swal("You Not Have This Permission!", "success");
+        }
 
     });
     $(".closehideshow").click(function() {
@@ -462,7 +477,15 @@ $(document).ready(function() {
                         '<td >' + data[i].tcontractor + '</td>' +
                         '<td id="amount_' + data[i].id + '">' + data[i].amount + '</td>' +
                         '<td id="remark_' + data[i].id + '">' + data[i].remark + '</td>' +
-                        '<td class="not-export-column" ><button name="edit" value="edit" class="edit_data btn btn-success" id=' + data[i].id + '><i class="fa fa-edit"></i></button>&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-danger" id=' + data[i].id + '><i class="fa fa-trash"></i></button></td>' +
+                        // '<td class="not-export-column" ><button name="edit" value="edit" class="edit_data btn btn-success" id=' + data[i].id + '><i class="fa fa-edit"></i></button>&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-danger" id=' + data[i].id + '><i class="fa fa-trash"></i></button></td>' +
+                        '<td class="not-export-column" >';
+                    if (editrt == 1) {
+                        html += '<button name="edit" value="edit" class="edit_data btn btn-xs btn-success" id=' + data[i].id + '><i class="fa fa-edit"></i></button>';
+                    }
+                    if (delrt == 1) {
+                        html += '&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' + data[i].id + '><i class="fa fa-trash"></i></button>';
+                    }
+                    html += '</td>' +
                         '</tr>';
 
                 }

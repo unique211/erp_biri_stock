@@ -11,45 +11,57 @@ $(document).ready(function() {
         var address = $('#address').val();
         var short_code = $('#short_code').val();
         var id = $('#save_update').val();
+        var flg = 0;
 
-        $.ajax({
-            type: "POST",
-            url: baseurl + "Checker_master/adddata",
+        if (create_p > 0) {
+            flg = 1;
+        } else if (editrt > 0) {
+            if (id > 0) {
+                flg = 1;
+            }
+        }
 
-            data: {
-                id: id,
-                name: name,
-                mobile: mobile,
-                address: address,
-                short_code: short_code,
-                table_name: table_name
-            },
-            dataType: "JSON",
-            async: false,
-            success: function(data) {
+        if (flg == 1) {
+            $.ajax({
+                type: "POST",
+                url: baseurl + "Checker_master/adddata",
 
-                console.log(data);
-                if (data == true) {
-                    if (id != "") {
-                        successTost("Data Update Successfully");
+                data: {
+                    id: id,
+                    name: name,
+                    mobile: mobile,
+                    address: address,
+                    short_code: short_code,
+                    table_name: table_name
+                },
+                dataType: "JSON",
+                async: false,
+                success: function(data) {
+
+                    console.log(data);
+                    if (data == true) {
+                        if (id != "") {
+                            successTost("Data Update Successfully");
+                        } else {
+                            successTost("Data Save Successfully");
+                        }
+                        $('#master_form')[0].reset();
+                        $('.formhideshow').hide();
+                        $('.tablehideshow').show();
+                        $(".btnhideshow").show();
+                        datashow();
+                        $('.closehideshow').trigger('click');
                     } else {
-                        successTost("Data Save Successfully");
+                        errorTost("Data Cannot Save");
                     }
-                    $('#master_form')[0].reset();
-                    $('.formhideshow').hide();
-                    $('.tablehideshow').show();
-                    $(".btnhideshow").show();
-                    datashow();
-                    $('.closehideshow').trigger('click');
-                } else {
-                    errorTost("Data Cannot Save");
+
+
                 }
 
-
-            }
-
-        });
-
+            });
+        } else {
+            swal("You Not Have This Permission!", "success");
+        }
     });
     //----------------------submit form code end------------------------------
     datashow();
@@ -121,7 +133,15 @@ $(document).ready(function() {
                         '<td id="address_' + data[i].id + '">' + data[i].address + '</td>' +
                         '<td id="short_code_' + data[i].id + '">' + data[i].short_code + '</td>' +
                         '<td><input type="text" class="form-control index" id="index_' + data[i].id + '" style="width:55px;" value="' + data[i].index_value + '" name="' + data[i].id + '"/></td>' +
-                        '<td class="not-export-column" ><button name="edit" value="edit" class="edit_data btn btn-xs btn-success" id=' + data[i].id + '><i class="fa fa-edit"></i></button>&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' + data[i].id + '><i class="fa fa-trash"></i></button></td>' +
+                        // '<td class="not-export-column" ><button name="edit" value="edit" class="edit_data btn btn-xs btn-success" id=' + data[i].id + '><i class="fa fa-edit"></i></button>&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' + data[i].id + '><i class="fa fa-trash"></i></button></td>' +
+                        '<td class="not-export-column" >';
+                    if (editrt == 1) {
+                        html += '<button name="edit" value="edit" class="edit_data btn btn-xs btn-success" id=' + data[i].id + '><i class="fa fa-edit"></i></button>';
+                    }
+                    if (delrt == 1) {
+                        html += '&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' + data[i].id + '><i class="fa fa-trash"></i></button>';
+                    }
+                    html += '</td>' +
                         '</tr>';
 
                 }

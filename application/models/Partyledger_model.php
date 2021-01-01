@@ -961,7 +961,7 @@ class Partyledger_model extends CI_Model{
         $fdate=$this->input->post('fdate');
 		$id=$this->input->post('where');
         $startdate="";
-        // $fdate="2020-05-17";
+        // $fdate="2020-04-01";
         // $tdate="2020-05-31";;
 		// $id='44';
 		
@@ -1015,9 +1015,9 @@ class Partyledger_model extends CI_Model{
 			$balance=$debit-$credit;
 			$result[]=array(
 				'date'=>$startdate,
-				'credit'=>$credit,
-				'debit'=>$debit,
-				'balance'=>$balance,
+				'credit'=>round($credit),
+				'debit'=>round($debit),
+				'balance'=>round($balance),
 				'description'=>$description,
 			);
 			
@@ -1063,9 +1063,9 @@ class Partyledger_model extends CI_Model{
 				$balance=($balance+$debit)-($credit);
 				$result[]=array(
 					'date'=>$date,
-					'credit'=>$credit,
-					'debit'=>$debit,
-					'balance'=>$balance,
+					'credit'=>round($credit),
+					'debit'=>round($debit),
+					'balance'=>round($balance),
 					'description'=>'BIRI SALES',
 				);
 
@@ -1075,7 +1075,7 @@ class Partyledger_model extends CI_Model{
         $this->db->select('*');    
         $this->db->from('vouchar');
        
-        $this->db->where('from',$id);
+        $this->db->where('to',$id);
         $this->db->where('date', $date);
        $query44 = $this->db->get();
          if($query44->num_rows()>0){
@@ -1088,9 +1088,9 @@ class Partyledger_model extends CI_Model{
 		$credit=0;
 		$debit=0;
         if($type=="Received"){
-            $credit=$amount;
-        }else if($type=="Payment"){
-            $debit=$amount;
+            $credit=round($amount);
+        }else if(($type=="Payment") || ($type=="Journal")){
+            $debit=round($amount);
 
         }
 
@@ -1098,9 +1098,9 @@ class Partyledger_model extends CI_Model{
 		$balance=($balance+$debit)-($credit);
         $result[]=array(
             'date'=>$date,
-            'credit'=>$credit,
-            'debit'=>$debit,
-            'balance'=>$balance,
+            'credit'=>round($credit),
+            'debit'=>round($debit),
+            'balance'=>round($balance),
             'description'=>$remark,
         );
 
@@ -1108,19 +1108,57 @@ class Partyledger_model extends CI_Model{
        }
     }
 
+
+	$this->db->select('*');    
+	$this->db->from('vouchar');
+   
+	$this->db->where('from',$id);
+	$this->db->where('date', $date);
+   $query44 = $this->db->get();
+	 if($query44->num_rows()>0){
+   $voucherdata=$query44->result_array();
+
+   foreach($voucherdata as $voucherinfo){
+	$amount=$voucherinfo['amount'];
+	$type=$voucherinfo['type'];
+	$remark=$voucherinfo['remark'];
+	$credit=0;
+	$debit=0;
+	if($type=="Received"){
+		$credit=round($amount);
+	}else if(($type=="Payment") || ($type=="Journal")){
+		$debit=round($amount);
+
+	}
+
+   
+	$balance=($balance+$debit)-($credit);
+	$result[]=array(
+		'date'=>$date,
+		'credit'=>round($credit),
+		'debit'=>round($debit),
+		'balance'=>round($balance),
+		'description'=>$remark,
+	);
+
+
+   }
+}
         
 
-		   $this->db->select('id');    
+		   $this->db->select('*');    
 		   $this->db->from('purchase_master');
 		   $this->db->where('type','Purchase');
 		   $this->db->where('purchase_id !=','0');
 		   $this->db->where('party_id',$id);
 		   $this->db->where('voucher_date', $date);
 		  $query3 = $this->db->get();
+		 
+		  
 		  if($query3->num_rows()>0){
-			$purchased=$query3->result_array();
+			$purchaseda=$query3->result_array();
 
-			foreach($purchased as $purchasebidi){
+			foreach($purchaseda as $purchasebidi){
 				$total=$purchasebidi['total'];
 				$igst=$purchasebidi['igst'];
 				$cgst=$purchasebidi['cgst'];
@@ -1144,15 +1182,15 @@ class Partyledger_model extends CI_Model{
 				$balance=($balance+$debit)-($credit);
 				$result[]=array(
 					'date'=>$date,
-					'credit'=>$credit,
-					'debit'=>$debit,
-					'balance'=>$balance,
+					'credit'=>round($credit),
+					'debit'=>round($debit),
+					'balance'=>round($balance),
 					'description'=>'Raw Item Purchase',
 				);
 			}
 		}
 
-			$this->db->select('id');    
+			$this->db->select('*');    
 			$this->db->from('purchase_master');
 			$this->db->where('type','Sales');
 			$this->db->where('purchase_id !=','0');
@@ -1186,9 +1224,9 @@ class Partyledger_model extends CI_Model{
 				 $balance=($balance+$debit)-($credit);
 				 $result[]=array(
 					 'date'=>$date,
-					 'credit'=>$credit,
-					 'debit'=>$debit,
-					 'balance'=>$balance,
+					 'credit'=>round($credit),
+					 'debit'=>round($debit),
+					 'balance'=>round($balance),
 					 'description'=>'Raw Item Sales',
 				 );
 			 }
@@ -1235,11 +1273,39 @@ class Partyledger_model extends CI_Model{
 	
    }
 }
-
 $this->db->select('*');    
 $this->db->from('vouchar');
 
 $this->db->where('from',$id);
+$this->db->where('date', $fdate);
+$query44 = $this->db->get();
+ if($query44->num_rows()>0){
+$voucherdata=$query44->result_array();
+
+foreach($voucherdata as $voucherinfo){
+$amount=$voucherinfo['amount'];
+$type=$voucherinfo['type'];
+$remark=$voucherinfo['remark'];
+$credit=0;
+$debit=0;
+if($type=="Received"){
+	$credit=round($credit+$amount);
+}else if(($type=="Payment") || ($type=="Journal")){
+	$debit=round($debit+$amount);
+
+}
+
+
+
+
+
+}
+}
+
+$this->db->select('*');    
+$this->db->from('vouchar');
+
+$this->db->where('to',$id);
 $this->db->where('date <=', $fdate);
 $query44 = $this->db->get();
  if($query44->num_rows()>0){
@@ -1251,9 +1317,9 @@ $type=$voucherinfo['type'];
 $remark=$voucherinfo['remark'];
 
 if($type=="Received"){
-	$credit=$credit+$amount;
-}else if($type=="Payment"){
-	$debit= $debit+$amount;
+	$credit=round($credit+$amount);
+}else if(($type=="Payment") || ($type=="Journal")){
+	$debit=round($debit+$amount);
 
 }
 }
@@ -1261,7 +1327,7 @@ if($type=="Received"){
 
 
 
-   $this->db->select('id');    
+   $this->db->select('*');    
    $this->db->from('purchase_master');
    $this->db->where('type','Purchase');
    $this->db->where('purchase_id !=','0');
@@ -1295,7 +1361,7 @@ if($type=="Received"){
 	}
 }
 
-	$this->db->select('id');    
+	$this->db->select('*');    
 	$this->db->from('purchase_master');
 	$this->db->where('type','Sales');
 	$this->db->where('purchase_id !=','0');
@@ -1324,7 +1390,7 @@ if($type=="Received"){
 			 $sgstamt=(($total)* ($sgst))/100;
 		 }
 
-		 $debit=$debit+ $gstamt+$cgstamt+$sgstamt+$total;
+		 $debit=round($debit+ $gstamt+$cgstamt+$sgstamt+$total);
 		
 		 
 	 }
@@ -1346,9 +1412,9 @@ if($type=="Received"){
 			$balance=$debit-$credit;
 			$result[]=array(
 				'date'=>$fdate,
-				'credit'=>$credit,
-				'debit'=>$debit,
-				'balance'=>$balance,
+				'credit'=>round($credit),
+				'debit'=>round($debit),
+				'balance'=>round($balance),
 				'description'=>$description,
 			);
 			
@@ -1393,9 +1459,9 @@ if($type=="Received"){
 				$balance=($balance+$debit)-($credit);
 				$result[]=array(
 					'date'=>$date,
-					'credit'=>$credit,
-					'debit'=>$debit,
-					'balance'=>$balance,
+					'credit'=>round($credit),
+					'debit'=>round($debit),
+					'balance'=>round($balance),
 					'description'=>'BIRI SALES',
 				);
 
@@ -1405,7 +1471,7 @@ if($type=="Received"){
         $this->db->select('*');    
         $this->db->from('vouchar');
        
-        $this->db->where('from',$id);
+        $this->db->where('to',$id);
         $this->db->where('date', $date);
        $query44 = $this->db->get();
          if($query44->num_rows()>0){
@@ -1418,9 +1484,9 @@ if($type=="Received"){
 		$credit=0;
 		$debit=0;
         if($type=="Received"){
-            $credit=$amount;
-        }else if($type=="Payment"){
-            $debit=$amount;
+            $credit=round($amount);
+        }else if(($type=="Payment") || ($type=="Journal")){
+            $debit=round($amount);
 
         }
 
@@ -1428,9 +1494,9 @@ if($type=="Received"){
 		$balance=($balance+$debit)-($credit);
         $result[]=array(
             'date'=>$date,
-            'credit'=>$credit,
-            'debit'=>$debit,
-            'balance'=>$balance,
+            'credit'=>round($credit),
+            'debit'=>round($debit),
+            'balance'=>round($balance),
             'description'=>$remark,
         );
 
@@ -1438,9 +1504,44 @@ if($type=="Received"){
        }
     }
 
+	$this->db->select('*');    
+	$this->db->from('vouchar');
+   
+	$this->db->where('from',$id);
+	$this->db->where('date', $date);
+   $query44 = $this->db->get();
+	 if($query44->num_rows()>0){
+   $voucherdata=$query44->result_array();
+
+   foreach($voucherdata as $voucherinfo){
+	$amount=$voucherinfo['amount'];
+	$type=$voucherinfo['type'];
+	$remark=$voucherinfo['remark'];
+	$credit=0;
+	$debit=0;
+	if($type=="Received"){
+		$credit=round($amount);
+	}else if(($type=="Payment") || ($type=="Journal")){
+		$debit=round($amount);
+
+	}
+
+   
+	$balance=($balance+$debit)-($credit);
+	$result[]=array(
+		'date'=>$date,
+		'credit'=>round($credit),
+		'debit'=>round($debit),
+		'balance'=>round($balance),
+		'description'=>$remark,
+	);
+
+
+   }
+}
         
 
-		   $this->db->select('id');    
+		   $this->db->select('*');    
 		   $this->db->from('purchase_master');
 		   $this->db->where('type','Purchase');
 		   $this->db->where('purchase_id !=','0');
@@ -1474,15 +1575,15 @@ if($type=="Received"){
 				$balance=($balance+$debit)-($credit);
 				$result[]=array(
 					'date'=>$date,
-					'credit'=>$credit,
-					'debit'=>$debit,
-					'balance'=>$balance,
+					'credit'=>round($credit),
+					'debit'=>round($debit),
+					'balance'=>round($balance),
 					'description'=>'Raw Item Purchase',
 				);
 			}
 		}
 
-			$this->db->select('id');    
+			$this->db->select('*');    
 			$this->db->from('purchase_master');
 			$this->db->where('type','Sales');
 			$this->db->where('purchase_id !=','0');
@@ -1516,9 +1617,9 @@ if($type=="Received"){
 				 $balance=($balance+$debit)-($credit);
 				 $result[]=array(
 					 'date'=>$date,
-					 'credit'=>$credit,
-					 'debit'=>$debit,
-					 'balance'=>$balance,
+					 'credit'=>round($credit),
+					 'debit'=>round($debit),
+					 'balance'=>round($balance),
 					 'description'=>'Raw Item Sales',
 				 );
 			 }

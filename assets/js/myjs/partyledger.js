@@ -91,33 +91,32 @@ $(document).ready(function() {
 
 
 
-                for (var i = 1; i < data.length; i++) {
+                for (var i = 0; i < data.length; i++) {
                     var fdateval = data[i].date;
                     var fdateslt = fdateval.split('-');
                     var date = fdateslt[2] + '/' + fdateslt[1] + '/' + fdateslt[0];
 
-                    totaldebit = (parseFloat(data[i].debit) + parseFloat(totaldebit)).toFixed(3);
-                    totalcredit = (parseFloat(data[i].credit) + parseFloat(totalcredit)).toFixed(3);
-
+                    totaldebit = (parseFloat(data[i].debit) + parseFloat(totaldebit)).toFixed(2);
+                    totalcredit = (parseFloat(data[i].credit) + parseFloat(totalcredit)).toFixed(2);
 
                     html += '<tr>' +
                         '<td id="date_' + data[i].ref_id + '">' + date + '</td>' +
                         '<td id="batch_' + data[i].ref_id + '">' + data[i].description + '</td>' +
-                        '<td style="text-align:center;" id="cartons_' + data[i].ref_id + '">' + (data[i].debit).toFixed(3) + '</td>' +
-                        '<td style="text-align:center;" id="total_bidi_' + data[i].ref_id + '">' + (data[i].credit) + '</td>' +
-                        '<td style="text-align:center;"  id="ref_id_' + data[i].id + '">' + (data[i].balance).toFixed(3) + '</td>' +
+                        '<td style="text-align:right;" id="cartons_' + data[i].ref_id + '">' + (data[i].debit).toFixed(2) + '</td>' +
+                        '<td style="text-align:right;" id="total_bidi_' + data[i].ref_id + '">' + (data[i].credit).toFixed(2) + '</td>' +
+                        '<td style="text-align:right;"  id="ref_id_' + data[i].id + '">' + (data[i].balance).toFixed(2) + '</td>' +
 
                         '</tr>';
                 }
                 $('#tbody').html(html);
-                totalbalance = (parseFloat(totaldebit) - parseFloat(totalcredit)).toFixed(3);
+                totalbalance = (parseFloat(totaldebit) - parseFloat(totalcredit)).toFixed(2);
 
                 var html1 = '<tr>' +
                     '<td></td>' +
                     '<td><b>Total</b></td>' +
-                    '<td style="text-align:center;" ><b>' + totaldebit + '</b></td>' +
-                    '<td style="text-align:center;" ><b>' + totalcredit + '</b></td>' +
-                    '<td style="text-align:center;" ><b>' + totalbalance + '</b></td>' +
+                    '<td style="text-align:right;" ><b>' + totaldebit + '</b></td>' +
+                    '<td style="text-align:right;" ><b>' + totalcredit + '</b></td>' +
+                    '<td style="text-align:right;" ><b>' + totalbalance + '</b></td>' +
 
                     '</tr>';
                 $('#tfoot').html(html1);

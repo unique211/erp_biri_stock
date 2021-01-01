@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).ready(function() {
     var table_name = "cont_issue_receive";
     defaultdate();
     latestdata();
@@ -15,7 +15,7 @@ $(document).ready(function () {
             },
             dataType: "JSON",
             async: false,
-            success: function (data) {
+            success: function(data) {
                 var data = eval(data);
                 for (var i = 0; i < data.length; i++) {
                     if (data[i].date != null) {
@@ -34,7 +34,7 @@ $(document).ready(function () {
     }
 
 
-    $(document).on("change", "#batch", function () {
+    $(document).on("change", "#batch", function() {
 
         var table_name = "batch_master";
         var id = $(this).val();
@@ -48,7 +48,7 @@ $(document).ready(function () {
                 table_name: table_name,
 
             },
-            success: function (data) {
+            success: function(data) {
                 var data = eval(data);
                 for (var i = 0; i < data.length; i++) {
                     var tobacco_val = data[i].tobacco;
@@ -71,7 +71,7 @@ $(document).ready(function () {
         // $("#date2").val(date);
     }
 
-    $(".closehideshow").click(function () {
+    $(".closehideshow").click(function() {
         $('#master_form')[0].reset();
         $('#save_update').val("");
         $('#batch').val("").trigger('change');
@@ -88,19 +88,19 @@ $(document).ready(function () {
 
 
 
-    $(document).on("change", "#date2", function () {
+    $(document).on("change", "#date2", function() {
         datashow();
     });
-    $(document).on("change", "#date3", function () {
+    $(document).on("change", "#date3", function() {
         datashow();
     });
-    $('#filter').on('click', function () {
+    $('#filter').on('click', function() {
         datashow();
     });
     var dateofone;
 
     //submit form code start
-    $(document).on("submit", "#master_form", function (e) {
+    $(document).on("submit", "#master_form", function(e) {
         e.preventDefault();
 
         var date1 = $('#date').val();
@@ -128,60 +128,74 @@ $(document).ready(function () {
         var fdateslt = date1.split('/');
         var date = fdateslt[2] + '-' + fdateslt[1] + '-' + fdateslt[0];
         dateofone = date1;
-        $.ajax({
-            type: "POST",
-            url: baseurl + "Cont_IR/adddata",
 
-            data: {
-                id: id,
-                date: date,
-                cont_name: cont_name,
-                checker_name: checker_name,
-                batch1: batch1,
-                asal_bidi: asal_bidi,
-                chant_bidi_pcs: chant_bidi_pcs,
-                chant_bidi_kgs: chant_bidi_kgs,
-                wages: wages,
-                qlty: qlty,
-                tob_wt: tob_wt,
-                batch2: batch2,
-                tob: tob,
-                tob_bag: tob_bag,
-                leaves: leaves,
-                leaves_bag: leaves_bag,
-                bl_yarn: bl_yarn,
-                wh_yarn: wh_yarn,
-                filter: filter,
-                disc: disc,
-                cartons: cartons,
-                table_name: table_name
-            },
-            dataType: "JSON",
-            async: false,
-            success: function (data) {
 
-                console.log(data);
-                if (data == true) {
-                    if (id != "") {
-                        successTost("Data Update Successfully");
+        var flg = 0;
+
+        if (create_p > 0) {
+            flg = 1;
+        } else if (editrt > 0) {
+            if (id > 0) {
+                flg = 1;
+            }
+        }
+        if (flg == 1) {
+            $.ajax({
+                type: "POST",
+                url: baseurl + "Cont_IR/adddata",
+
+                data: {
+                    id: id,
+                    date: date,
+                    cont_name: cont_name,
+                    checker_name: checker_name,
+                    batch1: batch1,
+                    asal_bidi: asal_bidi,
+                    chant_bidi_pcs: chant_bidi_pcs,
+                    chant_bidi_kgs: chant_bidi_kgs,
+                    wages: wages,
+                    qlty: qlty,
+                    tob_wt: tob_wt,
+                    batch2: batch2,
+                    tob: tob,
+                    tob_bag: tob_bag,
+                    leaves: leaves,
+                    leaves_bag: leaves_bag,
+                    bl_yarn: bl_yarn,
+                    wh_yarn: wh_yarn,
+                    filter: filter,
+                    disc: disc,
+                    cartons: cartons,
+                    table_name: table_name
+                },
+                dataType: "JSON",
+                async: false,
+                success: function(data) {
+
+                    console.log(data);
+                    if (data == true) {
+                        if (id != "") {
+                            successTost("Data Update Successfully");
+                        } else {
+                            successTost("Data Save Successfully");
+                        }
+                        $('#master_form')[0].reset();
+                        $('.formhideshow').show();
+                        $('.tablehideshow').show();
+                        $(".btnhideshow").show();
+                        datashow();
+                        $('.closehideshow').trigger('click');
                     } else {
-                        successTost("Data Save Successfully");
+                        errorTost("Data Cannot Save");
                     }
-                    $('#master_form')[0].reset();
-                    $('.formhideshow').show();
-                    $('.tablehideshow').show();
-                    $(".btnhideshow").show();
-                    datashow();
-                    $('.closehideshow').trigger('click');
-                } else {
-                    errorTost("Data Cannot Save");
+
+                    $('#date').val(dateofone);
                 }
 
-                $('#date').val(dateofone);
-            }
-
-        });
-
+            });
+        } else {
+            swal("You Not Have This Permission!", "success");
+        }
     });
     //----------------------submit form code end------------------------------
     datashow();
@@ -207,7 +221,7 @@ $(document).ready(function () {
             },
             dataType: "JSON",
             async: false,
-            success: function (data) {
+            success: function(data) {
                 // console.log('data'+data);
                 var data = eval(data);
 
@@ -229,30 +243,30 @@ $(document).ready(function () {
                 html += '<table id="myTable" style="width:100%;table-layout:fixed;"  class="table table-striped">' +
                     '<thead>' +
                     '<tr>' +
-                    '<th style="display:none;"><font style="font-weight:bold">Id</font></th>' +//0
-                    '<th width="7%"><font style="font-weight:bold">Date</font></th>' +//1
-                    '<th style="display:none;"><font style="font-weight:bold">contractor No. </font></th>' +//2
-                    '<th width="8%"><font style="font-weight:bold">Contractor Name </font></th>' +//3
-                    '<th style="display:none;"><font style="font-weight:bold">Checker Name</font></th>' +//4
-                    '<th style="display:none;"><font style="font-weight:bold">Batchname </font></th>' +//5
-                    '<th width="5%"><font style="font-weight:bold">Batch </font></th>' +//6
-                    '<th width="5%"><font style="font-weight:bold">Asal Bidi </font></th>' +//7
-                    '<th width="5%"><font style="font-weight:bold">Chant Bidi Pcs </font></th>' +//8
-                    '<th width="5%"><font style="font-weight:bold">Chant Bidi Kgs </font></th> ' +//9
-                    '<th style="display:none;"><font style="font-weight:bold">Wages Group </font></th>' +//10
-                    '<th width="7%"><font style="font-weight:bold">Wages Group </font></th>' +//11
-                    '<th style="display:none;"><font style="font-weight:bold">Quality</font></th>' +//12
-                    '<th width="5%"><font style="font-weight:bold">Tobacco Weight </font></th>' +//13
-                    '<th width="5%"><font style="font-weight:bold">Tobacco </font></th>' +//14
-                    '<th width="5%"><font style="font-weight:bold">Tobacco Bag </font></th>' +//15
-                    '<th width="5%"><font style="font-weight:bold">Leaves </font></th>' +//16
-                    '<th style="display:none;"><font style="font-weight:bold">Batch </font></th>' +//17
-                    '<th width="5%"><font style="font-weight:bold">Leaves Bag </font></th>' +//18
-                    '<th width="5%"><font style="font-weight:bold">Black Yarn </font></th>' +//19
-                    '<th width="5%"><font style="font-weight:bold">White Yarn </font></th>' +//20
-                    '<th width="5%"><font style="font-weight:bold">Filter </font></th>' +//21
-                    '<th width="5%"><font style="font-weight:bold">Disc </font></th>' +//22
-                    '<th width="5%"><font style="font-weight:bold">Cartons </font></th>' +//23
+                    '<th style="display:none;"><font style="font-weight:bold">Id</font></th>' + //0
+                    '<th width="7%"><font style="font-weight:bold">Date</font></th>' + //1
+                    '<th style="display:none;"><font style="font-weight:bold">contractor No. </font></th>' + //2
+                    '<th width="8%"><font style="font-weight:bold">Contractor Name </font></th>' + //3
+                    '<th style="display:none;"><font style="font-weight:bold">Checker Name</font></th>' + //4
+                    '<th style="display:none;"><font style="font-weight:bold">Batchname </font></th>' + //5
+                    '<th width="5%"><font style="font-weight:bold">Batch </font></th>' + //6
+                    '<th width="5%"><font style="font-weight:bold">Asal Bidi </font></th>' + //7
+                    '<th width="5%"><font style="font-weight:bold">Chant Bidi Pcs </font></th>' + //8
+                    '<th width="5%"><font style="font-weight:bold">Chant Bidi Kgs </font></th> ' + //9
+                    '<th style="display:none;"><font style="font-weight:bold">Wages Group </font></th>' + //10
+                    '<th width="7%"><font style="font-weight:bold">Wages Group </font></th>' + //11
+                    '<th style="display:none;"><font style="font-weight:bold">Quality</font></th>' + //12
+                    '<th width="5%"><font style="font-weight:bold">Tobacco Weight </font></th>' + //13
+                    '<th width="5%"><font style="font-weight:bold">Tobacco </font></th>' + //14
+                    '<th width="5%"><font style="font-weight:bold">Tobacco Bag </font></th>' + //15
+                    '<th width="5%"><font style="font-weight:bold">Leaves </font></th>' + //16
+                    '<th style="display:none;"><font style="font-weight:bold">Batch </font></th>' + //17
+                    '<th width="5%"><font style="font-weight:bold">Leaves Bag </font></th>' + //18
+                    '<th width="5%"><font style="font-weight:bold">Black Yarn </font></th>' + //19
+                    '<th width="5%"><font style="font-weight:bold">White Yarn </font></th>' + //20
+                    '<th width="5%"><font style="font-weight:bold">Filter </font></th>' + //21
+                    '<th width="5%"><font style="font-weight:bold">Disc </font></th>' + //22
+                    '<th width="5%"><font style="font-weight:bold">Cartons </font></th>' + //23
                     '<th width="8%" class="not-export-column"><font style="font-weight:bold">Action</font></th>' +
                     '</tr>' +
                     '</thead>' +
@@ -305,7 +319,15 @@ $(document).ready(function () {
                         '<td id="filter_' + data[i].id + '">' + data[i].filter + '</td>' +
                         '<td id="disc_' + data[i].id + '">' + data[i].disc + '</td>' +
                         '<td id="cartons_' + data[i].id + '">' + data[i].cartons + '</td>' +
-                        '<td class="not-export-column" ><button name="edit" value="edit" class="edit_data btn btn-xs btn-success" id=' + data[i].id + '><i class="fa fa-edit"></i></button>&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' + data[i].id + '><i class="fa fa-trash"></i></button></td>' +
+                        // '<td class="not-export-column" ><button name="edit" value="edit" class="edit_data btn btn-xs btn-success" id=' + data[i].id + '><i class="fa fa-edit"></i></button>&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' + data[i].id + '><i class="fa fa-trash"></i></button></td>' +
+                        '<td class="not-export-column" >';
+                    if (editrt == 1) {
+                        html += '<button name="edit" value="edit" class="edit_data btn btn-xs btn-success" id=' + data[i].id + '><i class="fa fa-edit"></i></button>';
+                    }
+                    if (delrt == 1) {
+                        html += '&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' + data[i].id + '><i class="fa fa-trash"></i></button>';
+                    }
+                    html += '</td>' +
                         '</tr>';
 
                 }
@@ -325,7 +347,7 @@ $(document).ready(function () {
                     '<td class="boldness"  style="display:none;">0</td>' +
                     '<td></td>' +
                     '<td style="display:none;">0</td>' +
-                    '<td class="boldness" ></td>' +//' + sum_tob_wt.toFixed(3) + '
+                    '<td class="boldness" ></td>' + //' + sum_tob_wt.toFixed(3) + '
                     '<td class="boldness" >' + sum_tob.toFixed(3) + '</td>' +
                     '<td class="boldness" >' + sum_tob_bag + '</td>' +
                     '<td class="boldness" >' + sum_leaves.toFixed(3) + '</td>' +
@@ -340,7 +362,20 @@ $(document).ready(function () {
                     '</tfoot></table>';
                 $('#show_master').html(html);
 
-                var batch = ''; var abidi = 0; var cbidi = 0; var cbidikg = 0; var tob = 0; var tbag = 0; var lev = 0; var lbag = 0; var by = 0; var wy = 0; var fil = 0; var dis = 0; var carton = 0; var htm = '';
+                var batch = '';
+                var abidi = 0;
+                var cbidi = 0;
+                var cbidikg = 0;
+                var tob = 0;
+                var tbag = 0;
+                var lev = 0;
+                var lbag = 0;
+                var by = 0;
+                var wy = 0;
+                var fil = 0;
+                var dis = 0;
+                var carton = 0;
+                var htm = '';
                 $.ajax({
                     type: "POST",
                     url: baseurl + "Cont_IR/getbatch",
@@ -351,7 +386,7 @@ $(document).ready(function () {
                     },
                     dataType: "JSON",
                     async: false,
-                    success: function (data) {
+                    success: function(data) {
                         var data = eval(data);
                         console.log(data);
                         var count = data.length;
@@ -382,35 +417,37 @@ $(document).ready(function () {
                         $('#tfoot').append(htm);
                         $('.TRS').insertBefore('#total');
                         //$('#TRS').insertBefore('#total');
-                    }, error: function () {
+                    },
+                    error: function() {
                         //alert("Error");
                     }
                 });
                 $('#myTable').DataTable({
                     dom: 'Bfrtip',
                     buttons: [{
-                        extend: 'pdfHtml5',
-                        pageSize: 'A4',
-                        orientation: 'landscape',
-                        title: 'DB Stock-Contractor Issue Receive',
-                        exportOptions: {
-                            columns: [1, 3, 6, 7, 8, 9, 11, 13, 14, 15, 16, 18, 19, 20, 21, 22, 23]
+                            extend: 'pdfHtml5',
+                            pageSize: 'A4',
+                            orientation: 'landscape',
+                            title: 'DB Stock-Contractor Issue Receive',
+                            exportOptions: {
+                                columns: [1, 3, 6, 7, 8, 9, 11, 13, 14, 15, 16, 18, 19, 20, 21, 22, 23]
+                            },
                         },
-                    },
-                    {
-                        extend: 'excelHtml5',
-                        title: 'DB Stock-Contractor Issue Receive',
-                        exportOptions: {
-                            columns: [1, 3, 6, 7, 8, 9, 11, 13, 14, 15, 16, 18, 19, 20, 21, 22, 23],
-                            footer: true,
-                            stripNewlines: false, format: {
-                                footer: function (data, column, row) {
-                                    console.log(data.replace(/<br\s*[\/]?>/gi, '\n'));
-                                    return data.replace(/<br\s*[\/]?>/gi, '\n');
+                        {
+                            extend: 'excelHtml5',
+                            title: 'DB Stock-Contractor Issue Receive',
+                            exportOptions: {
+                                columns: [1, 3, 6, 7, 8, 9, 11, 13, 14, 15, 16, 18, 19, 20, 21, 22, 23],
+                                footer: true,
+                                stripNewlines: false,
+                                format: {
+                                    footer: function(data, column, row) {
+                                        console.log(data.replace(/<br\s*[\/]?>/gi, '\n'));
+                                        return data.replace(/<br\s*[\/]?>/gi, '\n');
+                                    }
                                 }
-                            }
-                        },
-                    }
+                            },
+                        }
                     ]
                 });
             }
@@ -423,7 +460,7 @@ $(document).ready(function () {
     //-----------------------delete data code start-----------------------------------
 
 
-    $(document).on('click', '.delete_data', function () {
+    $(document).on('click', '.delete_data', function() {
 
         var id1 = $(this).attr('id');
 
@@ -431,15 +468,15 @@ $(document).ready(function () {
 
         if (id1 != "") {
             swal({
-                title: "Are you sure to delete ?",
-                text: "You will not be able to recover this Data !!",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Yes, delete it !!",
-                closeOnConfirm: false
-            },
-                function () {
+                    title: "Are you sure to delete ?",
+                    text: "You will not be able to recover this Data !!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes, delete it !!",
+                    closeOnConfirm: false
+                },
+                function() {
 
                     $.ajax({
                         type: "POST",
@@ -449,7 +486,7 @@ $(document).ready(function () {
                             id: id1,
                             table_name: table_name,
                         },
-                        success: function (data) {
+                        success: function(data) {
                             if (data == true) {
                                 swal("Deleted !!", "Hey, your Data has been deleted !!", "success");
                                 $('.closehideshow').trigger('click');
@@ -472,7 +509,7 @@ $(document).ready(function () {
     });
     //-----------------------delete data code end-----------------------------------
     //-----------------------edit data code start-----------------------------------
-    $(document).on("click", ".edit_data", function () {
+    $(document).on("click", ".edit_data", function() {
 
         $('.formhideshow').show();
         $('.tablehideshow').show();
