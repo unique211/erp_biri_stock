@@ -7,6 +7,26 @@ if(isset($title_name)){
 	$title1 = $title_name1;
 }
 ?>
+<?php
+$edit_p=0;
+$delete_p=0;
+$read_p=0;
+$create_p=0;
+$export_p=0;
+?>
+ <?php foreach($sidebar as $val){ 
+	  
+	  if(($val->menu_id==5 && $val->submenu_id==21) && ( $val->create_p==1 || $val->delete_p==1 || $val->edit_p==1 || $val->read_p	==1 ||  $val->export_p	==1)){
+
+		$create_p=$val->create_p;
+		$edit_p=$val->edit_p;
+		$delete_p=$val->delete_p;
+		$read_p=$val->read_p;
+		$export_p=$val->export_p;
+
+	  }
+  } 
+	 ?>
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -14,7 +34,9 @@ if(isset($title_name)){
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
-    <?php include "includes/headerlink.php"; ?>    
+	<?php include "includes/headerlink.php"; ?>    
+	<link href="<?php echo base_url(); ?>assets/css/endless1.min.css" rel="stylesheet">
+
     <style>
     .names { font-weight: bold; },
 	
@@ -60,6 +82,7 @@ th, td {
 							    </div>
                                 <div class="panel-body ">
                                     <div class="row " id="documents">
+									<?php if($create_p==1 || $edit_p ==1){ ?>	
                                         <div class="col-sm-12">
                                         <div class="col-sm-3">
                                                 <div class="form-group">
@@ -93,20 +116,37 @@ th, td {
                                             </div>
                                             <div class="col-sm-3">
                                                 <div class="form-group">
-                                                    <label></label>
+													<label></label>
+													<?php 	if($export_p==1){ ?>
                                                     <div class="form">
                                                     <input type="button" id="btnExport" class="btn btn-primary pull-right" value="Export" />
 												    <input type="button" id="btnExportpdf" class="btn btn-primary pull-right" value="ExportPdf" />
 												</div>
+													<?php } ?>
                                                 </div>
                                             </div>
-                                        </div><br>
+										</div><br>
+									<?php } ?>
                                         <div class="col-sm-12">
                                         <div class="table-responsive" id="show_master" style="overflow-x: auto;">
 											
                                            
                                     <table id="file_info" class="  " cellspacing="0"  style="width:100%;">
                                             <thead id="thead">
+											<tr >
+                                                    
+                                                    <th colspan="2">Company Name :</th>
+                                                    
+                                                    <th colspan="5" id="companynm"></th>
+                                                    
+                                                    <th colspan="2" >From Date :</th>
+													<th colspan="2" id="dfromdate"></th>
+													
+													<th colspan="2">To Date :</th>
+													<th colspan="2" id="dtodate"></th>
+													<th colspan="3"></th>
+                                                  
+                                                </tr>  
                                                 <tr>
                                                     <th width="5%" rowspan="2">SL No</th>
                                                     <th width="20%" rowspan="2">Contractor Name</th>

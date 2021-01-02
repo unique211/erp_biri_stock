@@ -327,107 +327,122 @@ $(document).ready(function() {
 
         var r1 = $('table#file_info').find('tbody').find('tr');
         var r = r1.length;
-        if (r > 0) {
-            $.ajax({
-                type: "POST",
-                url: baseurl + "FinishPS/adddata",
 
-                data: {
-                    id: id,
-                    purchase_id: purchase_id,
-                    sales_id: sales_id,
-                    voucher_date: voucher_date,
-                    billno: billno,
-                    type: type,
-                    bill_date: bill_date,
-                    party_id: party_id,
-                    sgst: sgst,
-                    cgst: cgst,
-                    igst: igst,
-                    nccd: nccd,
-                    total: total,
-                    truck: truck,
-                    freight: freight,
-                    basic_per: basic_per,
-                    gstinvoice: gstinvoice,
-                    table_name: table_name
-                },
-                dataType: "JSON",
-                async: false,
-                success: function(data) {
-                    var sale_id = 0;
+        var flg = 0;
 
-                    if (id == "") {
-                        sale_id = data;
-                    } else {
-                        sale_id = id;
-                    }
-
-                    var r1 = $('table#file_info').find('tbody').find('tr');
-                    var r = r1.length;
-
-                    table_name = "sale_data";
-
-
-                    for (var i = 0; i < r; i++) {
-
-                        batch_id = $(r1[i]).find('td:eq(1)').html();
-                        stock = $(r1[i]).find('td:eq(2)').html();
-                        pack = $(r1[i]).find('td:eq(3)').html();
-                        qty = $(r1[i]).find('td:eq(4)').html();
-                        rate = $(r1[i]).find('td:eq(5)').html();
-
-                        $.ajax({
-                            type: "POST",
-                            url: baseurl + "FinishPS/adddata1",
-
-                            data: {
-                                id: id,
-                                sale_id: sale_id,
-                                batch_id: batch_id,
-                                stock: stock,
-                                qty: qty,
-                                pack: pack,
-                                rate: rate,
-                                table_name: table_name
-                            },
-                            dataType: "JSON",
-                            async: false,
-                            success: function(result) {
-
-                            }
-
-                        });
-                    }
-                }
-
-            });
-
-
-
-
-
-            if (id != "") {
-                successTost("Data Update Successfully");
-            } else {
-                successTost("Data Save Successfully");
+        if (create_p > 0) {
+            flg = 1;
+        } else if (editrt > 0) {
+            if (id > 0) {
+                flg = 1;
             }
-            // $('#master_form')[0].reset();
-            formclear();
-            getsaleid();
-            defaultdate();
-            $('#row').val("0");
-            $('#file_info tbody').html('');
-
-            $('.tablehideshow').show();
-
-            datashow();
-            $('.closehideshow').trigger('click');
-        } else {
-            swal("Selcet One Batch For Sale!!");
         }
 
+        if (flg == 1) {
+            if (r > 0) {
+                $.ajax({
+                    type: "POST",
+                    url: baseurl + "FinishPS/adddata",
 
+                    data: {
+                        id: id,
+                        purchase_id: purchase_id,
+                        sales_id: sales_id,
+                        voucher_date: voucher_date,
+                        billno: billno,
+                        type: type,
+                        bill_date: bill_date,
+                        party_id: party_id,
+                        sgst: sgst,
+                        cgst: cgst,
+                        igst: igst,
+                        nccd: nccd,
+                        total: total,
+                        truck: truck,
+                        freight: freight,
+                        basic_per: basic_per,
+                        gstinvoice: gstinvoice,
+                        table_name: table_name
+                    },
+                    dataType: "JSON",
+                    async: false,
+                    success: function(data) {
+                        var sale_id = 0;
+
+                        if (id == "") {
+                            sale_id = data;
+                            $('#btnprint').val(sale_id);
+                        } else {
+                            sale_id = id;
+                        }
+
+                        var r1 = $('table#file_info').find('tbody').find('tr');
+                        var r = r1.length;
+
+                        table_name = "sale_data";
+
+
+                        for (var i = 0; i < r; i++) {
+
+                            batch_id = $(r1[i]).find('td:eq(1)').html();
+                            stock = $(r1[i]).find('td:eq(2)').html();
+                            pack = $(r1[i]).find('td:eq(3)').html();
+                            qty = $(r1[i]).find('td:eq(4)').html();
+                            rate = $(r1[i]).find('td:eq(5)').html();
+
+                            $.ajax({
+                                type: "POST",
+                                url: baseurl + "FinishPS/adddata1",
+
+                                data: {
+                                    id: id,
+                                    sale_id: sale_id,
+                                    batch_id: batch_id,
+                                    stock: stock,
+                                    qty: qty,
+                                    pack: pack,
+                                    rate: rate,
+                                    table_name: table_name
+                                },
+                                dataType: "JSON",
+                                async: false,
+                                success: function(result) {
+
+                                }
+
+                            });
+                        }
+                    }
+
+                });
+
+
+
+
+
+                if (id != "") {
+                    successTost("Data Update Successfully");
+                } else {
+                    successTost("Data Save Successfully");
+                }
+                // $('#master_form')[0].reset();
+                formclear();
+                getsaleid();
+                defaultdate();
+                $('#row').val("0");
+                $('#file_info tbody').html('');
+
+                $('.tablehideshow').show();
+
+                datashow();
+                $('.closehideshow').trigger('click');
+            } else {
+                swal("Selcet One Batch For Sale!!");
+            }
+
+        } else {
+            swal("You Not Have This Permission!", "success");
+        }
 
     });
 
@@ -611,6 +626,8 @@ $(document).ready(function() {
                     var cgst = Math.round(data[i].cgst);
                     var igst = Math.round(data[i].igst);
 
+
+
                     var sgst_amt = parseFloat(tot) * parseFloat(sgst) / 100;
                     var cgst_amt = parseFloat(tot) * parseFloat(cgst) / 100;
                     var igst_amt = parseFloat(tot) * parseFloat(igst) / 100;
@@ -661,7 +678,16 @@ $(document).ready(function() {
                         '<td  id="truck_' + data[i].id + '">' + data[i].truck_no + '</td>' +
                         '<td  id="freight_' + data[i].id + '">' + data[i].freight + '</td>' +
                         '<td  style="display:none;"  id="gst_invoice_no_' + data[i].id + '">' + data[i].gst_invoice_no + '</td>' +
-                        '<td class="not-export-column" ><button name="edit" value="edit" class="edit_data btn btn-xs btn-success" id=' + data[i].id + '><i class="fa fa-edit"></i></button>&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' + data[i].id + '><i class="fa fa-trash"></i></button></td>' +
+                        // '<td class="not-export-column" ><button name="edit" value="edit" class="edit_data btn btn-xs btn-success" id=' + data[i].id + '><i class="fa fa-edit"></i></button>&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' + data[i].id + '><i class="fa fa-trash"></i></button>&nbsp;<button name="delete" value="Delete" class="print_pdf btn btn-xs btn-danger" id=' + data[i].id + '><i class="fa fa-print"></i></button></td>' +
+                        '<td class="not-export-column" >';
+                    if (editrt == 1) {
+                        html += '<button name="edit" value="edit" class="edit_data btn btn-xs btn-success" id=' + data[i].id + '><i class="fa fa-edit"></i></button>';
+                    }
+                    if (delrt == 1) {
+                        html += '&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' + data[i].id + '><i class="fa fa-trash"></i></button>';
+                    }
+                    html += '&nbsp;&nbsp;<button name="delete" value="Delete" class="print_pdf btn btn-xs btn-danger" id=' + data[i].id + '><i class="fa fa-print"></i></button>';
+                    html += '</td>' +
                         '</tr>';
 
                 }
@@ -799,9 +825,11 @@ $(document).ready(function() {
         $('.tablehideshow').show();
         $(".btnhideshow").hide();
 
+
         $('#btnsave').text('Update');
         //   $('#file_info_tbody').html('');
         var id = $(this).attr('id');
+        $('#btnprint').val(id);
         var voucher_date1 = $('#voucher_date_' + id).html();
 
         var billno = $('#billno_' + id).html();
@@ -886,6 +914,13 @@ $(document).ready(function() {
             }
 
         });
+
+    });
+
+    $(document).on('click', '.print_pdf', function() {
+        var id1 = $(this).attr('id');
+        $('#btnprint').val(id1);
+        $("#pdfgenerate").trigger('submit');
 
     });
 });

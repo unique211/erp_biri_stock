@@ -15,7 +15,8 @@ $(document).ready(function() {
         $(".formhideshow").hide();
         $("#disbuget tbody").html('');
         form_clear();
-        show_master();displayitem();
+        show_master();
+        displayitem();
 
     });
 
@@ -99,89 +100,103 @@ $(document).ready(function() {
         var asalbidi = $('#asalbidi').val();
         var chantbidi = $('#chantbidi').val();
 
-        $.ajax({
-            type: "POST",
-            url: baseurl + "settings/save_settings",
-            dataType: "JSON",
-            async: false,
-            data: {
-                id: id,
-                name: name,
-                labelname: labelname,
-                ratio1: ratio1,
-                ratio2: ratio2,
-                ratio3: ratio3,
-                opening_cartun: opening_cartun,
-                asalbidi: asalbidi,
-                chantbidi: chantbidi,
-                table_name: 'packingbatch',
-            },
-            success: function(data) {
-                console.log('id:' + data);
-                if (data == '404') {
-                    errorTost("Selected Data  Already Exists !!!");
-                } else {
-                    var pid;
-                    var id = $('#save_update').val();
-                    if (id == "") {
-                        pid = data;
+        var flg = 0;
+
+        if (create_p > 0) {
+            flg = 1;
+        } else if (editrt > 0) {
+            if (id > 0) {
+                flg = 1;
+            }
+        }
+
+        if (flg == 1) {
+
+            $.ajax({
+                type: "POST",
+                url: baseurl + "settings/save_settings",
+                dataType: "JSON",
+                async: false,
+                data: {
+                    id: id,
+                    name: name,
+                    labelname: labelname,
+                    ratio1: ratio1,
+                    ratio2: ratio2,
+                    ratio3: ratio3,
+                    opening_cartun: opening_cartun,
+                    asalbidi: asalbidi,
+                    chantbidi: chantbidi,
+                    table_name: 'packingbatch',
+                },
+                success: function(data) {
+                    console.log('id:' + data);
+                    if (data == '404') {
+                        errorTost("Selected Data  Already Exists !!!");
                     } else {
-                        pid = id;
+                        var pid;
+                        var id = $('#save_update').val();
+                        if (id == "") {
+                            pid = data;
+                        } else {
+                            pid = id;
+                        }
+
+
+                        var r1 = $('table#disbuget').find('tbody').find('tr');
+                        var r = r1.length;
+                        var itemid = '';
+                        var qty = '';
+                        var unit = '';
+                        for (var i = 0; i < r; i++) {
+
+                            var sr = i + 1;
+                            var t = document.getElementById('disbuget');
+                            itemid = $(r1[i]).find('td:eq(1)').html();
+                            // headid = $(t.rows[i].cells[1]).text();
+                            qty = $("#qty_" + sr).val();
+                            unit = $(r1[i]).find('td:eq(4)').html();
+
+
+
+                            $.ajax({
+                                type: "POST",
+                                url: baseurl + "settings/save_settings",
+                                dataType: "JSON",
+                                async: false,
+                                data: {
+                                    itemid: itemid,
+                                    pid: pid,
+                                    qty: qty,
+                                    unit: unit,
+
+                                    table_name: 'packingbatchdetails',
+                                },
+                                success: function(data) {
+
+                                }
+                            });
+
+                        }
+
+                        if (id != "") {
+                            successTost("Data Update Successfully");
+                        } else {
+                            successTost("Data Save Successfully");
+
+                        }
+                        $('.closehideshow').trigger('click');
+                        form_clear(); //call function clear role_master form
+                        show_master();
+
                     }
 
-
-                    var r1 = $('table#disbuget').find('tbody').find('tr');
-                    var r = r1.length;
-                    var itemid = '';
-                    var qty = '';
-                    var unit = '';
-                    for (var i = 0; i < r; i++) {
-
-                        var sr = i + 1;
-                        var t = document.getElementById('disbuget');
-                        itemid = $(r1[i]).find('td:eq(1)').html();
-                        // headid = $(t.rows[i].cells[1]).text();
-                        qty = $("#qty_" + sr).val();
-                        unit = $(r1[i]).find('td:eq(4)').html();
-
-
-
-                        $.ajax({
-                            type: "POST",
-                            url: baseurl + "settings/save_settings",
-                            dataType: "JSON",
-                            async: false,
-                            data: {
-                                itemid: itemid,
-                                pid: pid,
-                                qty: qty,
-                                unit: unit,
-
-                                table_name: 'packingbatchdetails',
-                            },
-                            success: function(data) {
-
-                            }
-                        });
-
-                    }
-
-                    if (id != "") {
-                        successTost("Data Update Successfully");
-                    } else {
-                        successTost("Data Save Successfully");
-
-                    }
-                    $('.closehideshow').trigger('click');
-                    form_clear(); //call function clear role_master form
-                    show_master();
 
                 }
-
-
-            }
-        });
-
+            });
+        } else {
+            swal("You Not Have This Permission!", "success");
+        }
     });
     /*-----------end of sunmite-----*/
 
@@ -252,25 +267,25 @@ $(document).ready(function() {
         var where = $('#index_' + id1).val();
         var url = baseurl + "settings/updateindex";
         // alert(id1+" & "+where);
-        
-            $.ajax({
-                type: "POST",
-                url: url,
-                data: {
-                    table_name: 'packingbatch',
-                    where: where,
-                    id1: id1
-                },
-                dataType: "Json",
-                async: false,
-                success: function(data) {
-                    successTost("index value has bees set Successfully");
-                },
-                error: function() {
-                    alert("error");
-                }
-            });
-       
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: {
+                table_name: 'packingbatch',
+                where: where,
+                id1: id1
+            },
+            dataType: "Json",
+            async: false,
+            success: function(data) {
+                successTost("index value has bees set Successfully");
+            },
+            error: function() {
+                alert("error");
+            }
+        });
+
     });
     /*-----------------show data in table Master---------------*/
     function show_master() {
@@ -326,33 +341,45 @@ $(document).ready(function() {
                         '<td id="areaname_' + data[i].id + '">' + data[i].asalbidi + '</td>' +
                         '<td id="areaname_' + data[i].id + '">' + data[i].chantbidi + '</td>' +
                         '<td><input type="text" class="form-control index" id="index_' + data[i].id + '" style="width:55px;" value="' + data[i].index_value + '" name="' + data[i].id + '"/></td>' +
-                        '<td class="not-export-column" ><button name="edit" value="edit" class="edit_data btn btn-xs btn-success" id=' + data[i].id + '><i class="fa fa-edit"></i></button>&nbsp;<button name="delete" value="Delete" class="delete_data btn-xs  btn btn-danger" id=' + data[i].id + '><i class="fa fa-trash"></i></button></td>' +
+                        // '<td class="not-export-column" ><button name="edit" value="edit" class="edit_data btn btn-xs btn-success" id=' + data[i].id + '><i class="fa fa-edit"></i></button>&nbsp;<button name="delete" value="Delete" class="delete_data btn-xs  btn btn-danger" id=' + data[i].id + '><i class="fa fa-trash"></i></button></td>' +
                         //   '<td><button  class="edit_data btn btn-sm  btn-xs  btn-primary" id="'+data[i].id+'" name="'+data[i].status+'" ><i class="fa fa-edit"></i></button>'+
+                        '<td class="not-export-column" >';
+                    if (editrt == 1) {
+                        html += '<button name="edit" value="edit" class="edit_data btn btn-xs btn-success" id=' + data[i].id + '><i class="fa fa-edit"></i></button>';
+                    }
+                    if (delrt == 1) {
+                        html += '&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' + data[i].id + '><i class="fa fa-trash"></i></button>';
+                    }
+                    html += '</td>' +
                         '</tr>';
                 }
 
 
                 $('#show_master').html(html);
-                $('#myTable').DataTable({
-                    dom: 'Bfrtip',
-                    buttons: [{
-                            extend: 'pdfHtml5',
-                            pageSize: 'A4',
-                            orientation: 'landscape',
-                            title: 'DB Stock-Packing Batch/Lable',
-                            exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+                if (export_p == 1) {
+                    $('#myTable').DataTable({
+                        dom: 'Bfrtip',
+                        buttons: [{
+                                extend: 'pdfHtml5',
+                                pageSize: 'A4',
+                                orientation: 'landscape',
+                                title: 'DB Stock-Packing Batch/Lable',
+                                exportOptions: {
+                                    columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+                                },
                             },
-                        },
-                        {
-                            extend: 'excelHtml5',
-                            title: 'DB Stock-Packing Batch/Lable',
-                            exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
-                            },
-                        }
-                    ]
-                });
+                            {
+                                extend: 'excelHtml5',
+                                title: 'DB Stock-Packing Batch/Lable',
+                                exportOptions: {
+                                    columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+                                },
+                            }
+                        ]
+                    });
+                } else {
+                    $('#myTable').DataTable({});
+                }
             }
 
         });
@@ -400,7 +427,7 @@ $(document).ready(function() {
                     },
                     success: function(result) {
 
-                        
+
                         console.log('result' + result.length);
                         if (result == "") {
 
@@ -423,7 +450,7 @@ $(document).ready(function() {
                         // $(".tablehideshow").hide();
 
                         $('.btnhideshow').trigger('click');
-                       // displayitem();
+                        // displayitem();
                     }
                 });
                 multiratio();

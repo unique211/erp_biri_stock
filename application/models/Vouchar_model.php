@@ -29,14 +29,18 @@ class Vouchar_model extends CI_Model{
             return $query->result();
         }
         else if($table=="vouchar"){
-            
+            $fromdate=$this->input->post('fromdate');
+			$todate=$this->input->post('todate');
             $result ='';$tcontractor='';$data[]='';$query='';$id='';$date='';$type='';$from=0;$to=0;$contractor='';
             $amount=''; $remark='';
             $this->db->select('vouchar.*,cm.name as contractor');    
             $this->db->from($table);
-            $this->db->join('con-party_master cm' ,'cm.id=vouchar.from');
+			$this->db->join('con-party_master cm' ,'cm.id=vouchar.from');
+			$this->db->where('vouchar.date >=', $fromdate);
+					$this->db->where('vouchar.date <=', $todate);
             //$this->db->join('con-party_master cm1','cm1.id=vouchar.to');,cm1.name as tcontractor
-            $query = $this->db->get()->result();
+			$query = $this->db->get()->result();
+			// echo $this->db->last_query();
             foreach($query as $row){
                 $id=$row->id;
                 $date=$row->date;

@@ -288,100 +288,114 @@ $(document).ready(function() {
             batch = $(row[0]).find('td:eq(0)').html();
 
         }
-        $.ajax({
-            type: "POST",
-            url: baseurl + "Tob_Mix/adddata",
 
-            data: {
-                id: id,
-                date: date,
-                batch: batch,
-                unit: unit,
-                alt_bag: alt_bag,
-                labour_charge: labour_charge,
-                table_name: table_name
-            },
-            dataType: "JSON",
-            async: false,
-            success: function(data) {
-                var ref_id = 0;
-                var batch = 0;
-                var unit = 0;
-                var alt_bag = 0;
+        var flg = 0;
 
-                if (id == "") {
-                    ref_id = data;
-                } else {
-                    ref_id = id;
-                }
-
-                var r1 = $('table#tab1').find('tbody').find('tr');
-                var r = r1.length;
-
-                table_name = "tobaccomix_data";
-
-
-                for (var i = 0; i < r; i++) {
-
-                    batch = $(r1[i]).find('td:eq(0)').html();
-                    unit = $(r1[i]).find("td:eq(2) input[type='number']").val();
-                    alt_bag = $(r1[i]).find("td:eq(3) input[type='number']").val();
-
-
-                    $.ajax({
-                        type: "POST",
-                        url: baseurl + "Tob_Mix/adddata1",
-
-                        data: {
-                            id: id,
-                            ref_id: ref_id,
-                            batch: batch,
-                            unit: unit,
-                            alt_bag: alt_bag,
-                            table_name: table_name
-                        },
-                        dataType: "JSON",
-                        async: false,
-                        success: function() {
-
-                        }
-
-                    });
-                }
+        if (create_p > 0) {
+            flg = 1;
+        } else if (editrt > 0) {
+            if (id > 0) {
+                flg = 1;
             }
-
-
-
-
-        });
-
-
-
-
-
-
-
-        if (id != "") {
-            successTost("Data Update Successfully");
-        } else {
-            successTost("Data Save Successfully");
         }
-        $('#master_form')[0].reset();
 
-        $("#tot_unit1").text('');
-        $("#tot_unit2").text('');
-        $("#tot_bag1").text('');
-        $("#tot_bag2").text('');
-        $('.formhideshow').hide();
-        $('.tablehideshow').show();
-        $(".btnhideshow").show();
-        defaultdate();
-        datashow();
-        //latestdata();
-        //formdata();
-        $('.closehideshow').trigger('click');
+        if (flg == 1) {
+            $.ajax({
+                type: "POST",
+                url: baseurl + "Tob_Mix/adddata",
+
+                data: {
+                    id: id,
+                    date: date,
+                    batch: batch,
+                    unit: unit,
+                    alt_bag: alt_bag,
+                    labour_charge: labour_charge,
+                    table_name: table_name
+                },
+                dataType: "JSON",
+                async: false,
+                success: function(data) {
+                    var ref_id = 0;
+                    var batch = 0;
+                    var unit = 0;
+                    var alt_bag = 0;
+
+                    if (id == "") {
+                        ref_id = data;
+                    } else {
+                        ref_id = id;
+                    }
+
+                    var r1 = $('table#tab1').find('tbody').find('tr');
+                    var r = r1.length;
+
+                    table_name = "tobaccomix_data";
 
 
+                    for (var i = 0; i < r; i++) {
+
+                        batch = $(r1[i]).find('td:eq(0)').html();
+                        unit = $(r1[i]).find("td:eq(2) input[type='number']").val();
+                        alt_bag = $(r1[i]).find("td:eq(3) input[type='number']").val();
+
+
+                        $.ajax({
+                            type: "POST",
+                            url: baseurl + "Tob_Mix/adddata1",
+
+                            data: {
+                                id: id,
+                                ref_id: ref_id,
+                                batch: batch,
+                                unit: unit,
+                                alt_bag: alt_bag,
+                                table_name: table_name
+                            },
+                            dataType: "JSON",
+                            async: false,
+                            success: function() {
+
+                            }
+
+                        });
+                    }
+                }
+
+
+
+
+            });
+
+
+
+
+
+
+
+            if (id != "") {
+                successTost("Data Update Successfully");
+            } else {
+                successTost("Data Save Successfully");
+            }
+            $('#master_form')[0].reset();
+
+            $("#tot_unit1").text('');
+            $("#tot_unit2").text('');
+            $("#tot_bag1").text('');
+            $("#tot_bag2").text('');
+            $('.formhideshow').hide();
+            $('.tablehideshow').show();
+            $(".btnhideshow").show();
+            defaultdate();
+            datashow();
+            //latestdata();
+            //formdata();
+            $('.closehideshow').trigger('click');
+
+        } else {
+            swal("You Not Have This Permission!", "success");
+        }
 
 
 
@@ -441,7 +455,15 @@ $(document).ready(function() {
                         '<td id="alt_bag_' + data[i].id + '">' + data[i].alt_bag + '</td>' +
                         '<td id="labor_charge_' + data[i].id + '">' + data[i].labor_charge + '</td>' +
                         '<td style="display:none;" id="ref_id_' + data[i].id + '">' + data[i].id + '</td>' +
-                        '<td class="not-export-column" ><button name="edit" value="edit" class="edit_data btn btn-xs btn-success" id=' + data[i].id + '><i class="fa fa-edit"></i></button>&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' + data[i].id + '><i class="fa fa-trash"></i></button></td>' +
+                        // '<td class="not-export-column" ><button name="edit" value="edit" class="edit_data btn btn-xs btn-success" id=' + data[i].id + '><i class="fa fa-edit"></i></button>&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' + data[i].id + '><i class="fa fa-trash"></i></button></td>' +
+                        '<td class="not-export-column" >';
+                    if (editrt == 1) {
+                        html += '<button name="edit" value="edit" class="edit_data btn btn-xs btn-success" id=' + data[i].id + '><i class="fa fa-edit"></i></button>';
+                    }
+                    if (delrt == 1) {
+                        html += '&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' + data[i].id + '><i class="fa fa-trash"></i></button>';
+                    }
+                    html += '</td>' +
                         '</tr>';
 
                 }

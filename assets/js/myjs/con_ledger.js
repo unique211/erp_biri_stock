@@ -12,6 +12,7 @@ $(document).ready(function() {
     });
 
     getDate();
+    var fromdate1 = "";
 
     function getDate() {
         $.ajax({
@@ -29,6 +30,8 @@ $(document).ready(function() {
                 var fdate = fdateslt[2] + '/' + fdateslt[1] + '/' + fdateslt[0];
                 var fdateslt = data[0].pedate.split('-');
                 var cdate = fdateslt[2] + '/' + fdateslt[1] + '/' + fdateslt[0];
+                fromdate1 = fdate;
+
                 $('#fdate').val(fdate);
                 $('#date').val(cdate);
             },
@@ -465,23 +468,26 @@ $(document).ready(function() {
                     '</tr>';
                 batches += '<tr class="names">' +
                     '<td style="text-align:center;" colspan="2">Gross Total  </td>' +
-                    '<td>Leaves</td>' +
-                    '<td>Tobacco</td>' +
-                    '<td>Bl-Sutta</td>' +
-                    '<td>Wh-Sutta</td>' +
-                    '<td>Bags</td>' +
-                    '<td>Dice</td>' +
-                    '<td>T-Short</td>' +
-                    '<td>Advance</td>' +
-                    '<td> P.F.</td>' +
+                    '<td style="text-align:center;">Leaves</td>' +
+                    '<td style="text-align:center;">Tobacco</td>' +
+                    '<td style="text-align:center;">Bl-Sutta</td>' +
+                    '<td style="text-align:center;">Wh-Sutta</td>' +
+                    '<td style="text-align:center;">Bags</td>' +
+                    '<td style="text-align:center;">Dice</td>' +
+                    '<td style="text-align:center;">T-Short</td>' +
+                    '<td style="text-align:center;">Advance</td>' +
+                    '<td style="text-align:center;"> P.F.</td>' +
                     //'<td>'+'</td>'+
                     '</tr>';
                 for (var i = 0; i < data.length; i++) {
 
                     if (data[i].batchname != null) {
+                        console.log("asdffsdfsd" + data[i].batchname);
                         //var gross=data[i].finalTotal.gtotal;
 
                         grosstotal = parseFloat(grosstotal) + parseFloat(data[i].finalTotal.gtotal.replace(/,/g, ""));
+
+
                         lev = parseFloat(lev) + parseFloat(data[i].finalTotal.tLev.replace(/,/g, ""));
                         tob = parseFloat(tob) + parseFloat(data[i].finalTotal.tTob.replace(/,/g, ""));
                         blsutta = parseFloat(blsutta) + parseFloat(data[i].finalTotal.blsutta.replace(/,/g, ""));
@@ -530,8 +536,9 @@ $(document).ready(function() {
         Export1();
     });
 
+
     function Export1() {
-        html2canvas($('#file_info')[0], {
+        html2canvas($('#dataTable')[0], {
             onrendered: function(canvas) {
                 var data = canvas.toDataURL();
                 var docDefinition = {
@@ -544,6 +551,35 @@ $(document).ready(function() {
             }
         })
     }
+
+    $(document).on('change', "#contractor", function(e) {
+        e.preventDefault();
+
+        var con = $(this).val();
+
+        $.ajax({
+            type: "POST",
+            url: baseurl + "Contractor_ledger/getpayinfo",
+            data: {
+                table_name: 'financial_period',
+                con: con,
+            },
+            dataType: "JSON",
+            async: false,
+            success: function(data) {
+                if (data != "") {
+                    var fdateslt = data.split('-');
+                    var fdate = fdateslt[2] + '/' + fdateslt[1] + '/' + fdateslt[0];
+
+                    $('#fdate').val(fdate);
+                } else {
+
+                    getDate();
+                }
+            }
+        });
+    });
+
 
 
 });

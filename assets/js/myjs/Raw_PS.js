@@ -1,7 +1,7 @@
 $(document).ready(function() {
     var table_name = "purchase_master";
     //submit form code start
-   
+
     $("#if_pur").hide();
 
     defaultdate();
@@ -15,11 +15,11 @@ $(document).ready(function() {
         }
 
     });
-   // getMastercont("con-party_master", "#cont_name", "party");
+    // getMastercont("con-party_master", "#cont_name", "party");
 
 
     function getMastercont(table_name, selecter, where) {
-        
+
         $.ajax({
             type: "POST",
             url: baseurl + "settings/get_master_where",
@@ -76,33 +76,34 @@ $(document).ready(function() {
     });
     $(document).on('click', '#btnsave', function(e) {
         e.preventDefault();
-        table_name="raw_batch_master";
-       // var id=$('#id').val();
-        var bname=$('#bname').val();
-        var item=$('#item').val();
-        if(bname !=""){
-        $.ajax({
-            type: "POST",
-            url: baseurl + "RawItem_PS/insert",
-            data: {
-                table_name: table_name,
-                bname,bname,
-                item:item,
-            },
-            dataType: "JSON",
-            async: false,
-            success: function(data) {
-                $('#myModal').modal('hide');
-               successTost("Batch Added","success");
-               $('#item').val(item).trigger('change');
-            }
-        });
-    }
+        table_name = "raw_batch_master";
+        // var id=$('#id').val();
+        var bname = $('#bname').val();
+        var item = $('#item').val();
+        if (bname != "") {
+            $.ajax({
+                type: "POST",
+                url: baseurl + "RawItem_PS/insert",
+                data: {
+                    table_name: table_name,
+                    bname,
+                    bname,
+                    item: item,
+                },
+                dataType: "JSON",
+                async: false,
+                success: function(data) {
+                    $('#myModal').modal('hide');
+                    successTost("Batch Added", "success");
+                    $('#item').val(item).trigger('change');
+                }
+            });
+        }
 
     });
     $(document).on("change", "#batch", function() {
-        var batch=$('#batch').val();
-        if(batch == "new"){
+        var batch = $('#batch').val();
+        if (batch == "new") {
             $('#myModal').modal('show');
         }
 
@@ -126,13 +127,11 @@ $(document).ready(function() {
 
                 html = '';
                 var batch = '';
-                var type=$('#type').val();
-                console.log("type"+type)
-                if(type=="Purchase")
-                {
-                    html += '<option selected disabled value="" >Select</option>'+'<option value="new" >New</option>';
-                }
-                else{
+                var type = $('#type').val();
+                console.log("type" + type)
+                if (type == "Purchase") {
+                    html += '<option selected disabled value="" >Select</option>' + '<option value="new" >New</option>';
+                } else {
                     html += '<option selected disabled value="" >Select</option>';
                 }
                 for (i = 0; i < data.length; i++) {
@@ -297,143 +296,156 @@ $(document).ready(function() {
         var truck = $('#truckno').val();
         var freight = $('#freight').val();
         var id = $('#save_update').val();
-        if (id == "") {
-            if (type == "Purchase") {
+        var flg = 0;
 
-                // sales_id = 0;
-                $.ajax({
-                    type: "POST",
-                    url: baseurl + "RawItem_PS/getmaxid",
-                    data: {
-                        table_name: table_name,
-
-                    },
-                    dataType: "JSON",
-                    async: false,
-                    success: function(data) {
-                        purchase_id = data;
-                    }
-                });
-
-            } else if (type == "Sales") {
-                //  purchase_id = 0;
-                $.ajax({
-                    type: "POST",
-                    url: baseurl + "RawItem_PS/getmaxid2",
-                    data: {
-                        table_name: table_name,
-
-                    },
-                    dataType: "JSON",
-                    async: false,
-                    success: function(data) {
-                        sales_id = data;
-                    }
-                });
+        if (create_p > 0) {
+            flg = 1;
+        } else if (editrt > 0) {
+            if (id > 0) {
+                flg = 1;
             }
         }
-        var fdateslt = voucher_date1.split('/');
-        var voucher_date = fdateslt[2] + '-' + fdateslt[1] + '-' + fdateslt[0];
-        var fdateslt = bill_date1.split('/');
-        var bill_date = fdateslt[2] + '-' + fdateslt[1] + '-' + fdateslt[0];
 
-        var r1 = $('table#file_info').find('tbody').find('tr');
-        var r = r1.length;
-       
-        if(r >0){
-        $.ajax({
-            type: "POST",
-            url: baseurl + "RawItem_PS/adddata",
+        if (flg == 1) {
+            if (id == "") {
+                if (type == "Purchase") {
 
-            data: {
-                id: id,
-                purchase_id: purchase_id,
-                sales_id: sales_id,
-                voucher_date: voucher_date,
-                billno: billno,
-                type: type,
-                bill_date: bill_date,
-                party_id: party_id,
-                sgst: sgst,
-                cgst: cgst,
-                igst: igst,
-                total: total,
-                truck: truck,
-                freight: freight,
-                table_name: table_name
-            },
-            dataType: "JSON",
-            async: false,
-            success: function(data) {
-                if (id == "") { purchase_id = data; } else {
-                    purchase_id = id;
-                }
-
-                var r1 = $('table#file_info').find('tbody').find('tr');
-                var r = r1.length;
-
-                table_name = "purchase_data";
-
-
-                for (var i = 0; i < r; i++) {
-
-                    item_id = $(r1[i]).find('td:eq(1)').html();
-                    item_batch = $(r1[i]).find('td:eq(2)').html();
-                    qty = $(r1[i]).find('td:eq(3)').html();
-                    alt_qty = $(r1[i]).find('td:eq(4)').html();
-                    rate = $(r1[i]).find('td:eq(5)').html();
-
-
+                    // sales_id = 0;
                     $.ajax({
                         type: "POST",
-                        url: baseurl + "RawItem_PS/adddata1",
-
+                        url: baseurl + "RawItem_PS/getmaxid",
                         data: {
-                            id: id,
-                            purchase_id: purchase_id,
-                            item_id: item_id,
-                            item_batch: item_batch,
-                            qty: qty,
-                            alt_qty: alt_qty,
-                            rate: rate,
-                            table_name: table_name
+                            table_name: table_name,
+
                         },
                         dataType: "JSON",
                         async: false,
-                        success: function(result) {
-
+                        success: function(data) {
+                            purchase_id = data;
                         }
+                    });
 
+                } else if (type == "Sales") {
+                    //  purchase_id = 0;
+                    $.ajax({
+                        type: "POST",
+                        url: baseurl + "RawItem_PS/getmaxid2",
+                        data: {
+                            table_name: table_name,
+
+                        },
+                        dataType: "JSON",
+                        async: false,
+                        success: function(data) {
+                            sales_id = data;
+                        }
                     });
                 }
             }
+            var fdateslt = voucher_date1.split('/');
+            var voucher_date = fdateslt[2] + '-' + fdateslt[1] + '-' + fdateslt[0];
+            var fdateslt = bill_date1.split('/');
+            var bill_date = fdateslt[2] + '-' + fdateslt[1] + '-' + fdateslt[0];
 
-        });
+            var r1 = $('table#file_info').find('tbody').find('tr');
+            var r = r1.length;
+
+            if (r > 0) {
+                $.ajax({
+                    type: "POST",
+                    url: baseurl + "RawItem_PS/adddata",
+
+                    data: {
+                        id: id,
+                        purchase_id: purchase_id,
+                        sales_id: sales_id,
+                        voucher_date: voucher_date,
+                        billno: billno,
+                        type: type,
+                        bill_date: bill_date,
+                        party_id: party_id,
+                        sgst: sgst,
+                        cgst: cgst,
+                        igst: igst,
+                        total: total,
+                        truck: truck,
+                        freight: freight,
+                        table_name: table_name
+                    },
+                    dataType: "JSON",
+                    async: false,
+                    success: function(data) {
+                        if (id == "") { purchase_id = data; } else {
+                            purchase_id = id;
+                        }
+
+                        var r1 = $('table#file_info').find('tbody').find('tr');
+                        var r = r1.length;
+
+                        table_name = "purchase_data";
+
+
+                        for (var i = 0; i < r; i++) {
+
+                            item_id = $(r1[i]).find('td:eq(1)').html();
+                            item_batch = $(r1[i]).find('td:eq(2)').html();
+                            qty = $(r1[i]).find('td:eq(3)').html();
+                            alt_qty = $(r1[i]).find('td:eq(4)').html();
+                            rate = $(r1[i]).find('td:eq(5)').html();
+
+
+                            $.ajax({
+                                type: "POST",
+                                url: baseurl + "RawItem_PS/adddata1",
+
+                                data: {
+                                    id: id,
+                                    purchase_id: purchase_id,
+                                    item_id: item_id,
+                                    item_batch: item_batch,
+                                    qty: qty,
+                                    alt_qty: alt_qty,
+                                    rate: rate,
+                                    table_name: table_name
+                                },
+                                dataType: "JSON",
+                                async: false,
+                                success: function(result) {
+
+                                }
+
+                            });
+                        }
+                    }
+
+                });
 
 
 
 
 
-        if (id != "") {
-            successTost("Data Update Successfully");
+                if (id != "") {
+                    successTost("Data Update Successfully");
+                } else {
+                    successTost("Data Save Successfully");
+                }
+
+                // $('#master_form')[0].reset();
+                formclear();
+                $('#row').val("0");
+                defaultdate();
+                $('#file_info tbody').html('');
+
+                $('.tablehideshow').show();
+
+                datashow();
+                $('.closehideshow').trigger('click');
+            } else {
+                swal("Selcet One Item To Purchase Or Sale!!");
+            }
         } else {
-            successTost("Data Save Successfully");
+            swal("You Not Have This Permission!", "success");
         }
-   
-        // $('#master_form')[0].reset();
-        formclear();
-        $('#row').val("0");
-        defaultdate();
-        $('#file_info tbody').html('');
-
-        $('.tablehideshow').show();
-
-        datashow();
-        $('.closehideshow').trigger('click');
-    }else{
-        swal("Selcet One Item To Purchase Or Sale!!");
-    }
-
 
 
     });
@@ -476,7 +488,7 @@ $(document).ready(function() {
                 }
             },
             error: function() {
-               // alert("Error..");
+                // alert("Error..");
             }
         });
     });
@@ -496,7 +508,7 @@ $(document).ready(function() {
             taxable = parseFloat(taxable) + parseFloat(amt);
 
         }
-        taxable =Math.round(taxable);
+        taxable = Math.round(taxable);
         $('#tax_amt').val(taxable.toFixed(2));
 
         var p_total = taxable;
@@ -612,7 +624,16 @@ $(document).ready(function() {
                         '<td id="total_' + data[i].id + '">' + grand_tot + '</td>' +
                         '<td style="display:none;" id="truck_' + data[i].id + '">' + data[i].truck_no + '</td>' +
                         '<td style="display:none;" id="freight_' + data[i].id + '">' + data[i].freight + '</td>' +
-                        '<td class="not-export-column" ><button name="edit" value="edit" class="edit_data btn btn-xs btn-success" id=' + data[i].id + '><i class="fa fa-edit"></i></button>&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' + data[i].id + '><i class="fa fa-trash"></i></button></td>' +
+                        //   '<td class="not-export-column" ><button name="edit" value="edit" class="edit_data btn btn-xs btn-success" id=' + data[i].id + '><i class="fa fa-edit"></i></button>&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' + data[i].id + '><i class="fa fa-trash"></i></button></td>' +
+                        '<td class="not-export-column" >';
+                    if (editrt == 1) {
+                        html += '<button name="edit" value="edit" class="edit_data btn btn-xs btn-success" id=' + data[i].id + '><i class="fa fa-edit"></i></button>';
+                    }
+                    if (delrt == 1) {
+                        html += '&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' + data[i].id + '><i class="fa fa-trash"></i></button>';
+                    }
+                    html += '</td>' +
+
                         '</tr>';
 
                 }

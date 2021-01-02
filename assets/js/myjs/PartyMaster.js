@@ -4,17 +4,16 @@ $(document).ready(function() {
     //  console.log("Hii");
     //var baseurl="<?php echo base_url(); ?>";
     $('#len').hide();
-    $(document).on('change','#pf',function(){
-       /// alert("hELLO");
-       var pf=$('#pf').val();
-       if(pf=="yes"){
-        $("#lbl").html("PF Code*");
-        $("#pfcode").prop('required',true);
-       }
-       else{
-        $("#lbl").html("PF Code");
-        $("#pfcode").prop('required',false);
-       }
+    $(document).on('change', '#pf', function() {
+        /// alert("hELLO");
+        var pf = $('#pf').val();
+        if (pf == "yes") {
+            $("#lbl").html("PF Code*");
+            $("#pfcode").prop('required', true);
+        } else {
+            $("#lbl").html("PF Code");
+            $("#pfcode").prop('required', false);
+        }
     });
     $(document).on('change', '#party', function() {
         var name = $('#party').val();
@@ -38,8 +37,7 @@ $(document).ready(function() {
             $('#file_infobody').html('');
             $('#len').hide();
             $('#len1').show();
-        }
-        else if(name=='ledger'){
+        } else if (name == 'ledger') {
             $('#len').show();
             $('#len1').hide();
 
@@ -52,27 +50,27 @@ $(document).ready(function() {
 
     });
     var closeid = '';
-    $(document).on("click",'.close_data',function() {
+    $(document).on("click", '.close_data', function() {
 
         $('#myModal').modal('show');
         closeid = $(this).attr('id');
         $('#doj').datepicker({
-            'todayHighlight':true,
+            'todayHighlight': true,
             format: 'yyyy-mm-dd',
             autoclose: true,
         });
         $('#doj1').datepicker({
-            'todayHighlight':true,
+            'todayHighlight': true,
             format: 'yyyy-mm-dd',
-             autoclose: true,
+            autoclose: true,
         });
         var date = new Date();
         date = date.toString('dd/MM/yyyy');
         $("#doj1").val(date);
-     
+
     });
-    $(document).on('click','.active',function(){
-      //  alert("Heyy");
+    $(document).on('click', '.active', function() {
+        //  alert("Heyy");
         active = $(this).attr('id');
         var url = baseurl + "CPMaster/updatestatusSet";
         $.ajax({
@@ -247,7 +245,7 @@ $(document).ready(function() {
             $('#blackYarn_' + save).text(blackYarn);
             $('#whiteyarn_' + save).text(whiteyarn);
             $('#filter_' + save).text(filter);
-           // $('#security').val('');
+            // $('#security').val('');
             $('#batch').val('');
             $('#tobacco').val('');
             $('#leaves').val('');
@@ -270,7 +268,7 @@ $(document).ready(function() {
             $('#file_infobody').append(table);
             $('#row').val(row_id) + 1;
             $('#saveupdate').val('');
-           // $('#security').val('');
+            // $('#security').val('');
             var atr = $('#batchName_' + row_id).text();
             $('#batchname').val(atr);
             $('#batch').val('');
@@ -279,7 +277,7 @@ $(document).ready(function() {
             $('#blackYarn').val('');
             $('#whiteyarn').val('');
             $('#filter').val('');
-           // successTost("Data Save Successfully");
+            // successTost("Data Save Successfully");
 
         }
     });
@@ -304,17 +302,16 @@ $(document).ready(function() {
     $(document).on('submit', '#master_form', function(e) {
         e.preventDefault();
         var url = baseurl + "CPMaster/adddata";
-        var ledger='';
+        var ledger = '';
         var id = $('#save_update').val();
         //alert(url+" "+ id);
         var party = $('#party').val();
-        if(party == 'ledger'){
-            ledger=$('#ledger').val();
+        if (party == 'ledger') {
+            ledger = $('#ledger').val();
+        } else {
+            ledger = $('#ledger1').val();
         }
-        else{
-           ledger=$('#ledger1').val();
-        }
-       
+
         var name = $('#name').val();
         var state = $('#state').val();
         var state_code = $('#scode').val();
@@ -328,8 +325,8 @@ $(document).ready(function() {
         var pfcode = $('#pfcode').val();
         var date = $('#doj').val();
         var security = $('#security').val();
-        var pf=$('#pf').val();
-        var tds=$('#tds').val();
+        var pf = $('#pf').val();
+        var tds = $('#tds').val();
         var bankac = $('#bankac').val();
         var bankname = $('#bankname').val();
         var amount = $('#amount').val();
@@ -338,115 +335,130 @@ $(document).ready(function() {
         var fdateslt = date.split('/');
         var doj = fdateslt[2] + '-' + fdateslt[1] + '-' + fdateslt[0];
 
-        $.ajax({
-            type: "POST",
-            url: url,
-            data: {
-                id: id,
-                party: party,
-                ledger:ledger,
-                name: name,
-                state: state,
-                state_code: state_code,
-                address: address,
-                postoffice: postoffice,
-                district: district,
-                pin: pin,
-                pan: pan,
-                aadhar: aadhar,
-                gstno: gstno,
-                pfcode: pfcode,
-                doj: doj,
-                security: security,
-                pf:pf,
-                tds:tds,
-                bankac: bankac,
-                bankname: bankname,
-                amount: amount,
-                ifsc: ifsc,
-                table_name: 'con-party_master'
-            },
-            dataType: "json",
-            async: false,
-            success: function(data) {
-                //alert("data is"+data);
-                $('#master_form')[0].reset();
-                var id = $('#saveupdate').val();
-                id1 = $('#save_update').val();
+        var flg = 0;
 
-                //alert("ID is"+id1);
-                if (data == true) {
-                    $("#ids").val(id1);
-                } else {
-                    $("#ids").val(data);
-                }
-                if (party == 'contractor') {
-
-                    var r1 = $('table#file_info').find('tbody').find('tr');
-                    var r = r1.length;
-                    for (var i = 0; i < r; i++) {
-                        c_id = $('#ids').val();
-                        bat = $(r1[i]).find('td:eq(0)').html();
-                        tob = $(r1[i]).find('td:eq(2)').html();
-                        lea = $(r1[i]).find('td:eq(3)').html();
-                        black = $(r1[i]).find('td:eq(4)').html();
-                        white = $(r1[i]).find('td:eq(5)').html();
-                        fil = $(r1[i]).find('td:eq(6)').html();
-                        $.ajax({
-                            type: "POST",
-                            url: url,
-                            data: {
-                                id: id,
-                                c_id: c_id,
-                                bat: bat,
-                                tob: tob,
-                                lea: lea,
-                                black: black,
-                                white: white,
-                                fil: fil,
-                                table_name: 'contractor_master'
-                            },
-                            dataType: 'json',
-                            async: false,
-                            success: function(data) {
-                                $('#master_form')[0].reset();
-                                //  alert("Operation Successfull");
-                            },
-                            error: function() {
-                                // alert("error from success");
-                            }
-                        });
-                    }
-                    successTost("Data Save Successfully");
-                    //   alert("Operation Successfull");
-                    $('#master_form')[0].reset();
-                    $(".formhideshow").hide();
-                    $(".tablehideshow").show();
-                    $(".btnhideshow").show();
-                    $('#save_update').val("");
-                    //datashow();
-                } else {
-                    successTost("Data Update Successfully");
-                    // alert("Operation Successfull from else");
-                    $('#master_form')[0].reset();
-                    $(".formhideshow").hide();
-                    $(".tablehideshow").show();
-                    $(".btnhideshow").show();
-                    $('#save_update').val("");
-                    //datashow();
-                }
-                $('#file_infobody').html('');
-                datashow();
-            },
-            error: function() {
-                errorTost("from error");
+        if (create_p > 0) {
+            flg = 1;
+        } else if (editrt > 0) {
+            if (id > 0) {
+                flg = 1;
             }
+        }
 
-        });
+        if (flg == 1) {
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: {
+                    id: id,
+                    party: party,
+                    ledger: ledger,
+                    name: name,
+                    state: state,
+                    state_code: state_code,
+                    address: address,
+                    postoffice: postoffice,
+                    district: district,
+                    pin: pin,
+                    pan: pan,
+                    aadhar: aadhar,
+                    gstno: gstno,
+                    pfcode: pfcode,
+                    doj: doj,
+                    security: security,
+                    pf: pf,
+                    tds: tds,
+                    bankac: bankac,
+                    bankname: bankname,
+                    amount: amount,
+                    ifsc: ifsc,
+                    table_name: 'con-party_master'
+                },
+                dataType: "json",
+                async: false,
+                success: function(data) {
+                    //alert("data is"+data);
+                    $('#master_form')[0].reset();
+                    var id = $('#saveupdate').val();
+                    id1 = $('#save_update').val();
+
+                    //alert("ID is"+id1);
+                    if (data == true) {
+                        $("#ids").val(id1);
+                    } else {
+                        $("#ids").val(data);
+                    }
+                    if (party == 'contractor') {
+
+                        var r1 = $('table#file_info').find('tbody').find('tr');
+                        var r = r1.length;
+                        for (var i = 0; i < r; i++) {
+                            c_id = $('#ids').val();
+                            bat = $(r1[i]).find('td:eq(0)').html();
+                            tob = $(r1[i]).find('td:eq(2)').html();
+                            lea = $(r1[i]).find('td:eq(3)').html();
+                            black = $(r1[i]).find('td:eq(4)').html();
+                            white = $(r1[i]).find('td:eq(5)').html();
+                            fil = $(r1[i]).find('td:eq(6)').html();
+                            $.ajax({
+                                type: "POST",
+                                url: url,
+                                data: {
+                                    id: id,
+                                    c_id: c_id,
+                                    bat: bat,
+                                    tob: tob,
+                                    lea: lea,
+                                    black: black,
+                                    white: white,
+                                    fil: fil,
+                                    table_name: 'contractor_master'
+                                },
+                                dataType: 'json',
+                                async: false,
+                                success: function(data) {
+                                    $('#master_form')[0].reset();
+                                    //  alert("Operation Successfull");
+                                },
+                                error: function() {
+                                    // alert("error from success");
+                                }
+                            });
+                        }
+                        successTost("Data Save Successfully");
+                        //   alert("Operation Successfull");
+                        $('#master_form')[0].reset();
+                        $(".formhideshow").hide();
+                        $(".tablehideshow").show();
+                        $(".btnhideshow").show();
+                        $('#save_update').val("");
+                        //datashow();
+                    } else {
+                        successTost("Data Update Successfully");
+                        // alert("Operation Successfull from else");
+                        $('#master_form')[0].reset();
+                        $(".formhideshow").hide();
+                        $(".tablehideshow").show();
+                        $(".btnhideshow").show();
+                        $('#save_update').val("");
+                        //datashow();
+                    }
+                    $('#file_infobody').html('');
+                    datashow();
+                },
+                error: function() {
+                    errorTost("from error");
+                }
+
+            });
+        } else {
+            swal("You Not Have This Permission!", "success");
+        }
 
     });
 
-    
+
     function datashow() {
         //var table_name="customer_master"; 
         $.ajax({
@@ -496,7 +508,7 @@ $(document).ready(function() {
                 for (var i = 0; i < data.length; i++) {
                     var nameofparty = data[i].party;
                     console.log(nameofparty);
-                    var status=data[i].status;
+                    var status = data[i].status;
                     //alert(status);
                     var fdateval = data[i].doj;
                     var fdateslt = data[i].doj.split('-');
@@ -525,22 +537,32 @@ $(document).ready(function() {
                         '<td width="0%" hidden id="ifsc_' + data[i].id + '">' + data[i].ifsc + '</td>' +
                         '<td width="7%" id="security_' + data[i].id + '">' + data[i].security + '</td>' +
                         '<td width="8%" id="amount_' + data[i].id + '">' + data[i].amount + '</td>' +
-                        '<td width="0%" hidden id="tds_'+data[i].id+'">'+data[i].tds+'</td>'+
-                        '<td width="0%" hidden id="pf_'+data[i].id+'">'+data[i].pf+'</td>'+
+                        '<td width="0%" hidden id="tds_' + data[i].id + '">' + data[i].tds + '</td>' +
+                        '<td width="0%" hidden id="pf_' + data[i].id + '">' + data[i].pf + '</td>' +
                         '<td width="0%" hidden id="postoffice_' + data[i].id + '">' + data[i].postoffice + '</td>' +
                         '<td width="0%" hidden id="district_' + data[i].id + '">' + data[i].district + '</td>' +
                         '<td width="0%" hidden id="pin_' + data[i].id + '">' + data[i].pin + '</td>' +
                         '<td width="0%" hidden id="bankname_' + data[i].id + '">' + data[i].bankname + '</td>' +
                         '<td width="7%" ><input type="text" class="form-control index" id="index_' + data[i].id + '" style="width:55px;" value="' + data[i].index_value + '" name="' + data[i].id + '"/></td>' +
                         '<td width="8%" id="date_' + data[i].id + '">' + cdate + '</td>' +
-                        '<td width="10%"><button type="button" name="edit" class="edit_data1 btn-success btn btn-xs" id="' + data[i].id + '"><i class="fa fa-edit"></i></button>  <button type="button" name="delete" value="Delete" class="btn btn-xs delete_data1 btn-danger" id="' + data[i].id + '"><i class="fa fa-trash"></i></button>';
-                        if(status == 1){
-                            table +='  <button type="button"  name="delete" value="Close" class="close_data btn btn-xs btn-info" id="' + data[i].id + '"><i class="fa fa-close"></i></button>'
-                        }
-                        else{
-                            table +='  <button type="button"  name="delete" value="Close" class="active btn btn-xs btn-success" id="' + data[i].id + '"><i class="fa fa-check"></i></button>'
-                        }
-                        table +='</td>' +
+                        //'<td width="10%"><button type="button" name="edit" class="edit_data1 btn-success btn btn-xs" id="' + data[i].id + '"><i class="fa fa-edit"></i></button>  <button type="button" name="delete" value="Delete" class="btn btn-xs delete_data1 btn-danger" id="' + data[i].id + '"><i class="fa fa-trash"></i></button>';
+                        '<td class="not-export-column" >';
+
+                    if (editrt == 1) {
+                        html += '<button name="edit" value="edit" class="edit_data btn btn-xs btn-success" id=' + data[i].id + '><i class="fa fa-edit"></i></button>';
+                    }
+                    if (delrt == 1) {
+                        html += '&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' + data[i].id + '><i class="fa fa-trash"></i></button>';
+                    }
+
+
+
+                    if (status == 1) {
+                        table += '  <button type="button"  name="delete" value="Close" class="close_data btn btn-xs btn-info" id="' + data[i].id + '"><i class="fa fa-close"></i></button>'
+                    } else {
+                        table += '  <button type="button"  name="delete" value="Close" class="active btn btn-xs btn-success" id="' + data[i].id + '"><i class="fa fa-check"></i></button>'
+                    }
+                    table += '</td>' +
                         '</tr>';
                     /*} else if (nameofparty == "party") {
                         table += '<tr>' +
@@ -569,26 +591,30 @@ $(document).ready(function() {
                 table += '</tbody></table>';
 
                 $('#show_master').html(table);
-                $('#myTable').DataTable({
-                    dom: 'Bfrtip',
-                    buttons: [{
-                            extend: 'pdfHtml5',
-                            title: 'DB Stock-Contractor/Party Master',
-                            orientation: 'landscape',
-                            pageSize: 'A4',
-                            exportOptions: {
-                                columns: [1, 2, 3, 4, 5, 6, 7, 8, 11, 12]
+                if (export_p == 1) {
+                    $('#myTable').DataTable({
+                        dom: 'Bfrtip',
+                        buttons: [{
+                                extend: 'pdfHtml5',
+                                title: 'DB Stock-Contractor/Party Master',
+                                orientation: 'landscape',
+                                pageSize: 'A4',
+                                exportOptions: {
+                                    columns: [1, 2, 3, 4, 5, 6, 7, 8, 11, 12]
+                                },
                             },
-                        },
-                        {
-                            title: 'DB Stock-Contractor/Party Master',
-                            extend: 'excelHtml5',
-                            exportOptions: {
-                                columns: [1, 2, 3, 4, 5, 6, 7, 8, 11, 12]
+                            {
+                                title: 'DB Stock-Contractor/Party Master',
+                                extend: 'excelHtml5',
+                                exportOptions: {
+                                    columns: [1, 2, 3, 4, 5, 6, 7, 8, 11, 12]
+                                }
                             }
-                        }
-                    ]
-                });
+                        ]
+                    });
+                } else {
+                    $('#myTable').DataTable({});
+                }
             },
             error: function() {}
         });
@@ -655,7 +681,7 @@ $(document).ready(function() {
             $('#gstno').val($('#gdtno_' + id1).text());
             $('#bankname').val($('#bankname_' + id1).text());
             datashow();
-        } else if(par == "contractor") {
+        } else if (par == "contractor") {
             var id = id1;
             //alert(id);
             $(".formhideshow").show();
@@ -675,8 +701,8 @@ $(document).ready(function() {
             $('#bankac').val($('#bankac_' + id1).text());
             $('#ifsc').val($('#ifsc_' + id1).text());
             $('#security').val($('#security_' + id1).text());
-            $('#tds').val($('#tds_'+id1).text()).trigger('change');
-            $('#pf').val($('#pf_'+id1).text()).trigger('change');
+            $('#tds').val($('#tds_' + id1).text()).trigger('change');
+            $('#pf').val($('#pf_' + id1).text()).trigger('change');
             $('#amount').val($('#amount_' + id1).text());
             $('#address').val($('#address_' + id1).text());
             $('#postoffice').val($('#postoffice_' + id1).text());
@@ -721,7 +747,7 @@ $(document).ready(function() {
                 }
             });
             datashow();
-        }else {
+        } else {
             var id = id1;
             //alert(id);
             $(".formhideshow").show();

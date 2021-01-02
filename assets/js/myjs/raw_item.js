@@ -1,6 +1,6 @@
 $(document).ready(function() {
     var table_name = "raw_item";
-    
+
     defaultdate();
     latestdata();
 
@@ -75,50 +75,66 @@ $(document).ready(function() {
         var bags = $('#bags').val();
         var batch2 = $('#batch2').val();
         var id = $('#save_update').val();
-        console.log("bags:"+bags);
+        console.log("bags:" + bags);
         var fdateslt = date1.split('/');
         var date = fdateslt[2] + '-' + fdateslt[1] + '-' + fdateslt[0];
 
-        $.ajax({
-            type: "POST",
-            url: baseurl + "Raw_IT/adddata",
+        var flg = 0;
 
-            data: {
-                id: id,
-                date: date,
-                t_from: t_from,
-                batch1: batch1,
-                b_qty: b_qty,
-                t_qty: t_qty,
-                t_to: t_to,
-                bags:bags,
-                batch2: batch2,
-                table_name: table_name
-            },
-            dataType: "JSON",
-            async: false,
-            success: function(data) {
-                datashow();
-                console.log(data);
-                if (data == true) {
-                    if (id != "") {
-                        successTost("Data Update Successfully");
-                    } else {
-                        successTost("Data Save Successfully");
-                    }
-                    $('#master_form')[0].reset();
-                    $('.tablehideshow').show();
-                    $(".btnhideshow").show();
+        if (create_p > 0) {
+            flg = 1;
+        } else if (editrt > 0) {
+            if (id > 0) {
+                flg = 1;
+            }
+        }
+
+        if (flg == 1) {
+
+            $.ajax({
+                type: "POST",
+                url: baseurl + "Raw_IT/adddata",
+
+                data: {
+                    id: id,
+                    date: date,
+                    t_from: t_from,
+                    batch1: batch1,
+                    b_qty: b_qty,
+                    t_qty: t_qty,
+                    t_to: t_to,
+                    bags: bags,
+                    batch2: batch2,
+                    table_name: table_name
+                },
+                dataType: "JSON",
+                async: false,
+                success: function(data) {
                     datashow();
-                    $('.closehideshow').trigger('click');
-                } else {
-                    errorTost("Data Cannot Save");
+                    console.log(data);
+                    if (data == true) {
+                        if (id != "") {
+                            successTost("Data Update Successfully");
+                        } else {
+                            successTost("Data Save Successfully");
+                        }
+                        $('#master_form')[0].reset();
+                        $('.tablehideshow').show();
+                        $(".btnhideshow").show();
+                        datashow();
+                        $('.closehideshow').trigger('click');
+                    } else {
+                        errorTost("Data Cannot Save");
+                    }
+
+
                 }
 
+            });
 
-            }
-
-        });
+        } else {
+            swal("You Not Have This Permission!", "success");
+        }
 
     });
     //----------------------submit form code end------------------------------
@@ -184,7 +200,15 @@ $(document).ready(function() {
                         '<td id="bags_' + data[i].id + '">' + data[i].bags + '</td>' +
                         '<td style="display:none" id="t_to_' + data[i].id + '">' + data[i].t_to + '</td>' +
                         '<td style="display:none" id="batch2_' + data[i].id + '">' + data[i].batch2 + '</td>' +
-                        '<td class="not-export-column" ><button name="edit" value="edit" class="edit_data btn btn-xs btn-success" id=' + data[i].id + '><i class="fa fa-edit"></i></button>&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' + data[i].id + '><i class="fa fa-trash"></i></button></td>' +
+                        //'<td class="not-export-column" ><button name="edit" value="edit" class="edit_data btn btn-xs btn-success" id=' + data[i].id + '><i class="fa fa-edit"></i></button>&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' + data[i].id + '><i class="fa fa-trash"></i></button></td>' +
+                        '<td class="not-export-column" >';
+                    if (editrt == 1) {
+                        html += '<button name="edit" value="edit" class="edit_data btn btn-xs btn-success" id=' + data[i].id + '><i class="fa fa-edit"></i></button>';
+                    }
+                    if (delrt == 1) {
+                        html += '&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' + data[i].id + '><i class="fa fa-trash"></i></button>';
+                    }
+                    html += '</td>' +
                         '</tr>';
 
                 }

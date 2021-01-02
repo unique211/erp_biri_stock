@@ -20,6 +20,26 @@ if (isset($title_name)) {
 	$title1 = $title_name1;
 }
 ?>
+<?php
+$edit_p=0;
+$delete_p=0;
+$read_p=0;
+$create_p=0;
+$export_p=0;
+?>
+ <?php foreach($sidebar as $val){ 
+	  
+	  if(($val->menu_id==5 && $val->submenu_id==32) && ( $val->create_p==1 || $val->delete_p==1 || $val->edit_p==1 || $val->read_p	==1 ||  $val->export_p	==1)){
+
+		$create_p=$val->create_p;
+		$edit_p=$val->edit_p;
+		$delete_p=$val->delete_p;
+		$read_p=$val->read_p;
+		$export_p=$val->export_p;
+
+	  }
+  } 
+	 ?>
 <html lang="en">
 
 <head>
@@ -57,8 +77,9 @@ if (isset($title_name)) {
 								<b><?php echo $title1 ?></b>
 							</div>
 							<div class="panel-body ">
+							<?php if($create_p==1 || $edit_p ==1){ ?>
 								<div class="row " id="documents">
-									
+									<form id="contractorpayment" name="contractorpayment"></form>
 									<div class="col-sm-2">
 											<div class="form-group">
 												<label>From</label>
@@ -69,7 +90,7 @@ if (isset($title_name)) {
 										<div class="col-sm-3">
 											<div class="form-group">
 											<div class="input-group date " data-provide="datepicker">
-                                                        <input type="text" class="form-control input-sm placeholdesize datepicker doj"  id="fdate" name="fdate">
+                                                        <input type="text" form="contractorpayment" class="form-control input-sm placeholdesize datepicker doj"  id="fdate" name="fdate" required>
                                                         <div class="input-group-addon">
                                                             <span class="fa fa-calender"></span>
                                                         </div>
@@ -80,13 +101,18 @@ if (isset($title_name)) {
 										<div class="form-group">
                                                 
                                                 <div class="input-group">
-                                                    <input type="submit" class="btn btn-info" id="search" name="search">
+                                                    <input type="submit" form="contractorpayment" class="btn btn-info" id="search" name="search">
                                                 </div>
                                             </div>
 										</div>
+										<div class="col-sm-3">
+										<div class="form-group">
+										<!-- <input type="button" id="btnExport" class="btn btn-primary pull-right" value="Export" /> -->
+										</div>
+										</div>
 
 									</div><br>
-
+							<?php } ?>
 
 
 									<!-- <div class="col-sm-12">
@@ -138,121 +164,11 @@ if (isset($title_name)) {
 
 												</thead>
 												<tbody id="tbody">
-													<tr>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td>0.00</td>
-														<td>0.00</td>
-														
-
-													</tr>
-													<tr>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td>0.00</td>
-														<td>0.00</td>
-
-													</tr>
-													<tr>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td>0.00</td>
-														<td>0.00</td>
-
-													</tr>
-													<tr>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td>0.00</td>
-														<td>0.00</td>
-
-													</tr>
-													<tr>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td>0.00</td>
-														<td>0.00</td>
-
-													</tr>
-													<tr>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td>0.00</td>
-														<td>0.00</td>
-
-													</tr>
-													<tr>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td>0.00</td>
-														<td>0.00</td>
-
-													</tr>
-													<tr>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td>0.00</td>
-														<td>0.00</td>
-
-													</tr>
-													<tr>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td>0.00</td>
-														<td>0.00</td>
-
-													</tr>
-													<tr>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td>0.00</td>
-														<td>0.00</td>
-
-													</tr>
-													<tr>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td></td>
-														<td>0.00</td>
-														<td>0.00</td>
-
-													</tr>
+												
 
 												</tbody>
 												<tfoot id="tfootid">
-												<tr class="names">
+												<!-- <tr class="names">
 														<td class="texes"></td>
 														<td class="texes"></td>
 														<td class="texes"></td>
@@ -261,7 +177,7 @@ if (isset($title_name)) {
 														<td class="texes">0.00</td>
 														<td class="texes">0.00</td>
 
-													</tr>
+													</tr> -->
 												</tfoot>
 											</table>
 										</div>
@@ -284,8 +200,16 @@ if (isset($title_name)) {
 	<script type="text/javascript">
 		var baseurl = "<?php print base_url(); ?>";
 	</script>
+	<script>
+	var editrt="<?php  echo $edit_p; ?>";
+var delrt="<?php  echo $delete_p; ?>";
+var read_p="<?php  echo $read_p; ?>";
+var create_p="<?php  echo $create_p; ?>";
+var export_p="<?php  echo $export_p; ?>";
+	
+	</script>
 	<script src="<?php echo base_url(); ?>assets/js/jquery.table2excel.js" type="text/javascript"></script>
-	<script src="<?php echo base_url(); ?>assets/js/myjs/itemwisestockmonthly.js"></script>
+	<script src="<?php echo base_url(); ?>assets/js/myjs/contractorpayment.js"></script>
 	<script>
 		$('#date #fdate').datepicker({
 			'todayHighlight': true,

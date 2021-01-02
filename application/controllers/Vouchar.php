@@ -52,7 +52,9 @@ class Vouchar extends CI_Controller
     }
     public function showData(){
         $table_name=$this->input->post('table_name');
-        $id=$this->input->post('id');
+		$id=$this->input->post('id');
+		
+		
         $data=$this->m->showalldata($table_name,$id);
         echo json_encode($data);
     }

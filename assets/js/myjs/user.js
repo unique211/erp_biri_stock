@@ -65,40 +65,52 @@ $(document).ready(function() {
         var doj = tdateAr[2] + '-' + tdateAr[1] + '-' + tdateAr[0].slice();
 
         var id = $('#save_update').val();
+        var flg = 0;
 
-        $.ajax({
-            type: "POST",
-            url: baseurl + "user/save_master",
-            dataType: "JSON",
-            async: false,
-            data: {
-                id: id,
-                user_name: user_name,
-                user_id: user_id,
-                email: email,
-                phone: phone,
-                mobile: mobile,
-                user_type: user_type,
-                password: password,
-                doj: doj,
-
-
-            },
-            success: function(data) {
-                if (data == true) {
-                    if (id != "") {
-                        successTost("Data Update Successfully");
-                    } else {
-                        successTost("Data Save Successfully");
-                    }
-                    form_clear(); //call function clear role_master form
-                    show_master(); //call function show role_master table
-                    $('.closehideshow').trigger('click');
-                } else {
-                    errorTost("Data Cannot Save");
-                }
+        if (create_p > 0) {
+            flg = 1;
+        } else if (editrt > 0) {
+            if (id > 0) {
+                flg = 1;
             }
-        });
+        }
+        if (flg == 1) {
+            $.ajax({
+                type: "POST",
+                url: baseurl + "user/save_master",
+                dataType: "JSON",
+                async: false,
+                data: {
+                    id: id,
+                    user_name: user_name,
+                    user_id: user_id,
+                    email: email,
+                    phone: phone,
+                    mobile: mobile,
+                    user_type: user_type,
+                    password: password,
+                    doj: doj,
+
+
+                },
+                success: function(data) {
+                    if (data == true) {
+                        if (id != "") {
+                            successTost("Data Update Successfully");
+                        } else {
+                            successTost("Data Save Successfully");
+                        }
+                        form_clear(); //call function clear role_master form
+                        show_master(); //call function show role_master table
+                        $('.closehideshow').trigger('click');
+                    } else {
+                        errorTost("Data Cannot Save");
+                    }
+                }
+            });
+        } else {
+            swal("You Not Have This Permission!");
+        }
     });
     /*---------insert data into area_master end-----------------*/
 
@@ -154,33 +166,41 @@ $(document).ready(function() {
 
                         '<td  style="white-space:nowrap;display:none;" id="role_' + data[i].id + '">' + data[i].role + '</td>' +
                         '<td  style="white-space:nowrap;" id="role_name' + data[i].id + '">' + data[i].role_name + '</td>' +
-                        '<td  style="white-space:nowrap;" id="doj_' + data[i].id + '">' + date + '</td>' +
-                        '<td  style="white-space:nowrap;"><button  class="edit_data btn btn-xs btn-sm btn-primary" value="' + data[i].status + '"  id="' + data[i].id + '"  ><i class="fa fa-edit"></i></button>' +
-                        '</tr>';
+                        '<td  style="white-space:nowrap;" id="doj_' + data[i].id + '">' + date + '</td>';
+                    if (editrt == 1) {
+                        html += '<td  style="white-space:nowrap;"><button  class="edit_data btn btn-xs btn-sm btn-primary" value="' + data[i].status + '"  id="' + data[i].id + '"  ><i class="fa fa-edit"></i></button>';
+                    } else {
+                        html += '<td></td>';
+                    }
+                    '</tr>';
                 }
 
                 html += '</tbody></table>';
                 $('#show_master').html(html);
-                $('#myTable').DataTable({
-                    dom: 'Bfrtip',
-                    buttons: [{
-                            extend: 'pdfHtml5',
-                            pageSize: 'A4',
-                            //orientation: 'landscape',
-                            title: 'DB Stock-User Management',
-                            exportOptions: {
-                                columns: [0, 1, 2, 3, 8, 9]
+                if (export_p == 1) {
+                    $('#myTable').DataTable({
+                        dom: 'Bfrtip',
+                        buttons: [{
+                                extend: 'pdfHtml5',
+                                pageSize: 'A4',
+                                //orientation: 'landscape',
+                                title: 'DB Stock-User Management',
+                                exportOptions: {
+                                    columns: [0, 1, 2, 3, 8, 9]
+                                },
                             },
-                        },
-                        {
-                            extend: 'excelHtml5',
-                            title: 'DB Stock-User Management',
-                            exportOptions: {
-                                columns: [0, 1, 2, 3, 8, 9]
-                            },
-                        }
-                    ]
-                });
+                            {
+                                extend: 'excelHtml5',
+                                title: 'DB Stock-User Management',
+                                exportOptions: {
+                                    columns: [0, 1, 2, 3, 8, 9]
+                                },
+                            }
+                        ]
+                    });
+                } else {
+                    $('#myTable').DataTable({});
+                }
             }
 
         });

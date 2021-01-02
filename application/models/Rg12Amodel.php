@@ -172,7 +172,8 @@ foreach($datedata as $date){
       $id=$purchase_data['id'];
          $this->db->select('sum(qty) as qtysum');    
          $this->db->from('purchase_data');
-         $this->db->where('purchase_id', $id);
+				 $this->db->where('purchase_id', $id);
+				 $this->db->where_in('id','4,5');
        $query4 = $this->db->get();
       foreach($query4->result_array() as $purchaseqty){
         $qtysum=$purchaseqty['qtysum'];
@@ -212,7 +213,8 @@ foreach($datedata as $date){
       $id=$purchase_data1['id'];
          $this->db->select('sum(qty) as qtysum');    
          $this->db->from('purchase_data');
-         $this->db->where('purchase_id', $id);
+				 $this->db->where('purchase_id', $id);
+				 
        $query4 = $this->db->get();
        if($query4->num_rows >0){
       foreach($query4->result_array() as $purchaseqty){

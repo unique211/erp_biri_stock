@@ -5,9 +5,20 @@ class Con_ledger_model extends CI_Model{
         $this->db->from($table);
         $result=$this->db->get()->result();
         return $result;
-    }
+	}
+	function data_insert($data){
+		
+		
+				$result = $this->db->insert('payment_store',$data);
+				return $result;
+		
+			}
+	
+
     function showData($table){
-       
+	   
+		
+		
         $date=$this->input->post('date');
         $fdate=$this->input->post('fdate');
 		$id=$this->input->post('where');
@@ -853,8 +864,10 @@ class Con_ledger_model extends CI_Model{
                 }
                 $this->db->select_sum('amount');
                 //$this->db->group_by('name');
-                $this->db->from('information');
-                $this->db->where('name',$id);
+				$this->db->from('vouchar');
+				$this->db->where('date >=',$fdate);
+				$this->db->where('date <=',$date);
+                $this->db->where('to',$id);
                 $amount=$this->db->get()->row()->amount;
                 //echo $this->db->last_query();
                 //echo $sumTsort." <BR>";
@@ -920,6 +933,26 @@ class Con_ledger_model extends CI_Model{
         else{
         }
         
-    }
+	}
+	public function getinformation($table,$con){
+		$date1="";
+		$con;
+		$this->db->select('*');    
+           $this->db->from('payment_store');
+		   $this->db->where('con_id',$con);
+		   $this->db->order_by("id", "desc");
+		   $this->db->limit(1);  
+           $query = $this->db->get()->result();
+		
+			
+
+		   foreach($query as $row){
+				$date2=$row->date;
+				
+				$date1 = date('Y-m-d',strtotime($date2 .' +1 day'));
+
+		   }
+		   return $date1;
+	}
 }
 ?>

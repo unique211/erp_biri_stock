@@ -255,27 +255,30 @@ $(document).ready(function() {
                     html += '</tbody></table>';
 
                     $('#show_master').html(html);
-                    $('#myTable').DataTable({
-                        dom: 'Bfrtip',
-                        buttons: [{
-                                extend: 'pdfHtml5',
-                                title: 'DB Stock-Raw Item Purchase & Sales',
-                                orientation: 'landscape',
-                                pageSize: 'LEGAL',
-                                exportOptions: {
-                                    columns: [0, 1, 2, 7, 8, 9, 11, 12, 14, 16, 17, 18]
+                    if (export_p == 1) {
+                        $('#myTable').DataTable({
+                            dom: 'Bfrtip',
+                            buttons: [{
+                                    extend: 'pdfHtml5',
+                                    title: 'DB Stock-Raw Item Purchase & Sales',
+                                    orientation: 'landscape',
+                                    pageSize: 'LEGAL',
+                                    exportOptions: {
+                                        columns: [0, 1, 2, 7, 8, 9, 11, 12, 14, 16, 17, 18]
+                                    },
                                 },
-                            },
-                            {
-                                title: 'DB Stock-Raw Item Purchase & Sales',
-                                extend: 'excelHtml5',
-                                exportOptions: {
-                                    columns: [0, 1, 2, 7, 8, 9, 11, 12, 14, 16, 17, 18]
+                                {
+                                    title: 'DB Stock-Raw Item Purchase & Sales',
+                                    extend: 'excelHtml5',
+                                    exportOptions: {
+                                        columns: [0, 1, 2, 7, 8, 9, 11, 12, 14, 16, 17, 18]
+                                    }
                                 }
-                            }
-                        ]
-                    });
-
+                            ]
+                        });
+                    } else {
+                        $('#myTable').DataTable({});
+                    }
                 }
 
             });

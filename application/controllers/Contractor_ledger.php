@@ -25,6 +25,13 @@ class Contractor_ledger extends CI_Controller
         $table_name=$this->input->post('table_name');
         $data=$this->m->getdata($table_name);
         echo json_encode($data);
-    }
+	}
+	public function getpayinfo(){
+		$table_name=$this->input->post('table_name');
+		$con=$this->input->post('con');
+        $data=$this->m->getinformation($table_name,$con);
+        echo json_encode($data);
+
+	}
 }
 ?>
