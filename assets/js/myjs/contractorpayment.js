@@ -95,27 +95,31 @@ $(document).ready(function() {
                         '</tr>';
                 }
                 $('#tbody').html(html);
-                $('#dataTable').DataTable({
-                    "pageLength": 200,
-                    dom: 'Bfrtip',
-                    buttons: [{
-                            extend: 'pdfHtml5',
-                            pageSize: 'A4',
-                            // orientation: 'landscape',
-                            title: 'Contractor Payment List',
-                            exportOptions: {
-                                columns: [0, 1, 2, 3, 6]
+                if (export_p == 1) {
+                    $('#dataTable').DataTable({
+                        "pageLength": 200,
+                        dom: 'Bfrtip',
+                        buttons: [{
+                                extend: 'pdfHtml5',
+                                pageSize: 'A4',
+                                // orientation: 'landscape',
+                                title: 'Contractor Payment List',
+                                exportOptions: {
+                                    columns: [0, 1, 2, 3, 6]
+                                },
                             },
-                        },
-                        {
-                            extend: 'excelHtml5',
-                            title: 'Contractor Payment List',
-                            exportOptions: {
-                                columns: [0, 1, 2, 3, 6]
-                            },
-                        }
-                    ]
-                });
+                            {
+                                extend: 'excelHtml5',
+                                title: 'Contractor Payment List',
+                                exportOptions: {
+                                    columns: [0, 1, 2, 3, 6]
+                                },
+                            }
+                        ]
+                    });
+                } else {
+                    $('#dataTable').DataTable({});
+                }
 
 
             }

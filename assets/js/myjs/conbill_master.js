@@ -142,27 +142,30 @@ $(document).ready(function() {
                 html += '</tbody></table>';
 
                 $('#show_master').html(html);
-                $('#myTable').DataTable({
-                    dom: 'Bfrtip',
-                    buttons: [{
-                            extend: 'pdfHtml5',
-                            pageSize: 'A4',
-                            //orientation: 'landscape',
-                            title: 'DB Stock-Cintractor-Bill',
-                            exportOptions: {
-                                columns: [0, 1, 2, 3]
+                if (export_p == 1) {
+                    $('#myTable').DataTable({
+                        dom: 'Bfrtip',
+                        buttons: [{
+                                extend: 'pdfHtml5',
+                                pageSize: 'A4',
+                                //orientation: 'landscape',
+                                title: 'DB Stock-Cintractor-Bill',
+                                exportOptions: {
+                                    columns: [0, 1, 2, 3]
+                                },
                             },
-                        },
-                        {
-                            extend: 'excelHtml5',
-                            title: 'DB Stock-Cintractor-Bill',
-                            exportOptions: {
-                                columns: [0, 1, 2, 3]
-                            },
-                        }
-                    ]
-                });
-
+                            {
+                                extend: 'excelHtml5',
+                                title: 'DB Stock-Cintractor-Bill',
+                                exportOptions: {
+                                    columns: [0, 1, 2, 3]
+                                },
+                            }
+                        ]
+                    });
+                } else {
+                    $('#myTable').DataTable({});
+                }
             }
 
         });

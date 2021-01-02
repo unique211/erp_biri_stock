@@ -58,6 +58,7 @@ class Userpermissionmodel extends CI_Model{
 								'read_p' =>$value["readpermission"] ,
 								'edit_p' =>$value["editpermission"],
 								'delete_p' =>$value["deletepermission"],
+								'export_p' =>$value["exportpermission"],
 						);
 						$result = $this->db->insert('user_permission',$data);
 					}
@@ -70,6 +71,7 @@ class Userpermissionmodel extends CI_Model{
 								'read_p' =>$value["readpermission"] ,
 								'edit_p' =>$value["editpermission"],
 								'delete_p' =>$value["deletepermission"],
+								'export_p' =>$value["exportpermission"],
 						);
 						$result = $this->db->insert('user_permission',$data);
 					

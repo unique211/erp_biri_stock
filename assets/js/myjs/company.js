@@ -15,42 +15,56 @@ $(document).ready(function() {
         var ac_no = $('#ac_no').val();
         var ifsc = $('#ifsc').val();
         var id = $('#save_update').val();
-        $.ajax({
-            type: "POST",
-            url: baseurl + "company/save_master",
-            dataType: "JSON",
-            async: false,
-            data: {
-                id: id,
-                company_name: company_name,
-                state: state,
-                state_code: state_code,
-                address: address,
-                email: email,
-                phone: phone,
-                gst: gst,
-                pan: pan,
-                bank_name: bank_name,
-                branch_name: branch_name,
-                ac_no: ac_no,
-                ifsc: ifsc,
-            },
-            success: function(data) {
-                console.log(data);
-                if (data == true) {
-                    if (id != "") {
-                        successTost("Data Update Successfully");
-                    } else {
-                        successTost("Data Save Successfully");
-                    }
-                    form_clear(); //call function clear role_master form
-                    show_master(); //call function show role_master table
-                    $('.closehideshow').trigger('click');
-                } else {
-                    errorTost("Data Cannot Save");
-                }
+        var flg = 0;
+
+        if (create_p > 0) {
+            flg = 1;
+        } else if (editrt > 0) {
+            if (id > 0) {
+                flg = 1;
             }
-        });
+        }
+
+        if (flg == 1) {
+            $.ajax({
+                type: "POST",
+                url: baseurl + "company/save_master",
+                dataType: "JSON",
+                async: false,
+                data: {
+                    id: id,
+                    company_name: company_name,
+                    state: state,
+                    state_code: state_code,
+                    address: address,
+                    email: email,
+                    phone: phone,
+                    gst: gst,
+                    pan: pan,
+                    bank_name: bank_name,
+                    branch_name: branch_name,
+                    ac_no: ac_no,
+                    ifsc: ifsc,
+                },
+                success: function(data) {
+                    console.log(data);
+                    if (data == true) {
+                        if (id != "") {
+                            successTost("Data Update Successfully");
+                        } else {
+                            successTost("Data Save Successfully");
+                        }
+                        form_clear(); //call function clear role_master form
+                        show_master(); //call function show role_master table
+                        $('.closehideshow').trigger('click');
+                    } else {
+                        errorTost("Data Cannot Save");
+                    }
+                }
+            });
+        } else {
+            swal("You Not Have This Permission!", "success");
+        }
     });
     /*---------insert data into area_master end-----------------*/
     $(document).on("change", '#state', function() {
@@ -129,34 +143,41 @@ $(document).ready(function() {
                         '<td id="bank_' + data[i].id + '">' + data[i].bank + '</td>' +
                         '<td id="branch_' + data[i].id + '">' + data[i].branch + '</td>' +
                         '<td id="ac_no_' + data[i].id + '">' + data[i].ac_no + '</td>' +
-                        '<td id="ifsc_' + data[i].id + '">' + data[i].ifsc + '</td>' +
-                        '<td ><button  class="edit_data btn btn-xs btn-sm btn-primary" value="' + data[i].status + '"  id="' + data[i].id + '"  ><i class="fa fa-edit"></i></button>' +
-                        '</tr>';
+                        '<td id="ifsc_' + data[i].id + '">' + data[i].ifsc + '</td>';
+                    if (editrt == 1) {
+                        html += '<td ><button  class="edit_data btn btn-xs btn-sm btn-primary" value="' + data[i].status + '"  id="' + data[i].id + '"  ><i class="fa fa-edit"></i></button>';
+                    } else {
+                        html += '<td ></td>';
+                    }
+                    '</tr>';
                 }
 
                 html += '</tbody></table>';
                 $('#show_master').html(html);
-                $('#myTable').DataTable({
-                    dom: 'Bfrtip',
-                    buttons: [{
-                            extend: 'pdfHtml5',
-                            pageSize: 'A4',
-                            orientation: 'landscape',
-                            title: 'DB Stock-Company Management',
-                            exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                if (export_p == 1) {
+                    $('#myTable').DataTable({
+                        dom: 'Bfrtip',
+                        buttons: [{
+                                extend: 'pdfHtml5',
+                                pageSize: 'A4',
+                                orientation: 'landscape',
+                                title: 'DB Stock-Company Management',
+                                exportOptions: {
+                                    columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                                },
                             },
-                        },
-                        {
-                            extend: 'excelHtml5',
-                            title: 'DB Stock-Company Management',
-                            exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-                            },
-                        }
-                    ]
-                });
-
+                            {
+                                extend: 'excelHtml5',
+                                title: 'DB Stock-Company Management',
+                                exportOptions: {
+                                    columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+                                },
+                            }
+                        ]
+                    });
+                } else {
+                    $('#myTable').DataTable({});
+                }
             }
 
         });

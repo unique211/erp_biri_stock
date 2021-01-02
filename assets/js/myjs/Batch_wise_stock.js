@@ -203,27 +203,30 @@ $(document).ready(function() {
                 html += '</tbody></table>';
 
                 $('#show_master').html(html);
-                $('#myTable').DataTable({
-                    dom: 'Bfrtip',
-                    buttons: [{
-                            extend: 'pdfHtml5',
-                            title: 'DB Stock-Batch Wise Stock',
-                            //orientation: 'landscape',
-                            //pageSize: 'A4',
-                            exportOptions: {
-                                columns: [0, 1, 3, 4, 5, 6]
+                if (export_p == 1) {
+                    $('#myTable').DataTable({
+                        dom: 'Bfrtip',
+                        buttons: [{
+                                extend: 'pdfHtml5',
+                                title: 'DB Stock-Batch Wise Stock',
+                                //orientation: 'landscape',
+                                //pageSize: 'A4',
+                                exportOptions: {
+                                    columns: [0, 1, 3, 4, 5, 6]
+                                },
                             },
-                        },
-                        {
-                            title: 'DB Stock-Batch Wise Stock',
-                            extend: 'excelHtml5',
-                            exportOptions: {
-                                columns: [0, 1, 3, 4, 5, 6]
+                            {
+                                title: 'DB Stock-Batch Wise Stock',
+                                extend: 'excelHtml5',
+                                exportOptions: {
+                                    columns: [0, 1, 3, 4, 5, 6]
+                                }
                             }
-                        }
-                    ]
-                });
-
+                        ]
+                    });
+                } else {
+                    $('#myTable').DataTable({});
+                }
             }
 
         });

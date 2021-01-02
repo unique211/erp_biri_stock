@@ -214,26 +214,30 @@ $(document).ready(function() {
                 html += '</tbody></table>';
 
                 $('#show_master').html(html);
-                $('#myTable').DataTable({
-                    dom: 'Bfrtip',
-                    buttons: [{
-                            extend: 'pdfHtml5',
-                            title: 'DB Stock-Wages Fixation',
-                            orientation: 'landscape',
-                            pageSize: 'A4',
-                            exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+                if (export_p == 1) {
+                    $('#myTable').DataTable({
+                        dom: 'Bfrtip',
+                        buttons: [{
+                                extend: 'pdfHtml5',
+                                title: 'DB Stock-Wages Fixation',
+                                orientation: 'landscape',
+                                pageSize: 'A4',
+                                exportOptions: {
+                                    columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+                                },
                             },
-                        },
-                        {
-                            title: 'DB Stock-Wages Fixation',
-                            extend: 'excelHtml5',
-                            exportOptions: {
-                                columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+                            {
+                                title: 'DB Stock-Wages Fixation',
+                                extend: 'excelHtml5',
+                                exportOptions: {
+                                    columns: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+                                }
                             }
-                        }
-                    ]
-                });
+                        ]
+                    });
+                } else {
+                    $('#myTable').DataTable({});
+                }
 
             }
 

@@ -7,6 +7,26 @@ if (isset($title_name)) {
     $title1 = $title_name1;
 }
 ?>
+<?php
+$edit_p=0;
+$delete_p=0;
+$read_p=0;
+$create_p=0;
+$export_p=0;
+?>
+ <?php foreach($sidebar as $val){ 
+	  
+	  if(($val->menu_id==5 && $val->submenu_id==24) && ( $val->create_p==1 || $val->delete_p==1 || $val->edit_p==1 || $val->read_p	==1 ||  $val->export_p	==1)){
+
+		$create_p=$val->create_p;
+		$edit_p=$val->edit_p;
+		$delete_p=$val->delete_p;
+		$read_p=$val->read_p;
+		$export_p=$val->export_p;
+
+	  }
+  } 
+	 ?>
 <html lang="en">
 
 <head>
@@ -48,6 +68,7 @@ if (isset($title_name)) {
                             </div>
                             <div class="panel-body ">
                                 <div class="row " id="documents">
+								<?php if($create_p==1 || $edit_p ==1){ ?>	
                                     <div class="col-sm-12">
                                         <div class="col-sm-3">
                                             <div class="form-group">
@@ -83,13 +104,15 @@ if (isset($title_name)) {
                                             <div class="form-group">
                                                 <label></label>
                                                 <div class="form">
+												<?php 	if($export_p==1){ ?>
                                                     <input type="button" id="btnExport" class="btn btn-primary pull-right" value="Export" />
 													<input type="button" id="btnExportpdf" class="btn btn-primary pull-right" value="ExportPdf" />
-
+												<?php } ?>
 												</div>
                                             </div>
                                         </div>
-                                    </div><br>
+									</div><br>
+								<?php } ?>
                                     <div class="col-sm-12">
                                         <div class="table-responsive" id="show_master" style="overflow-x: auto;">
 

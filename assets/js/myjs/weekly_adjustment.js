@@ -62,43 +62,57 @@ $(document).ready(function() {
         var fdateslt = to_date1.split('/');
         var to_date = fdateslt[2] + '-' + fdateslt[1] + '-' + fdateslt[0];
 
-        $.ajax({
-            type: "POST",
-            url: baseurl + "Weekly_adjustment/adddata",
+        var flg = 0;
 
-            data: {
-                id: id,
-                entry_date: entry_date,
-                to_date: to_date,
-                qty: qty,
-                table_name: table_name
-            },
-            dataType: "JSON",
-            async: false,
-            success: function(data) {
+        if (create_p > 0) {
+            flg = 1;
+        } else if (editrt > 0) {
+            if (id > 0) {
+                flg = 1;
+            }
+        }
 
-                console.log(data);
-                if (data == true) {
-                    if (id != "") {
-                        successTost("Data Update Successfully");
+        if (flg == 1) {
+
+            $.ajax({
+                type: "POST",
+                url: baseurl + "Weekly_adjustment/adddata",
+
+                data: {
+                    id: id,
+                    entry_date: entry_date,
+                    to_date: to_date,
+                    qty: qty,
+                    table_name: table_name
+                },
+                dataType: "JSON",
+                async: false,
+                success: function(data) {
+
+                    console.log(data);
+                    if (data == true) {
+                        if (id != "") {
+                            successTost("Data Update Successfully");
+                        } else {
+                            successTost("Data Save Successfully");
+                        }
+                        $('#master_form')[0].reset();
+                        $('.formhideshow').hide();
+                        $('.tablehideshow').show();
+                        $(".btnhideshow").show();
+                        datashow();
+                        $('.closehideshow').trigger('click');
                     } else {
-                        successTost("Data Save Successfully");
+                        errorTost("Data Cannot Save");
                     }
-                    $('#master_form')[0].reset();
-                    $('.formhideshow').hide();
-                    $('.tablehideshow').show();
-                    $(".btnhideshow").show();
-                    datashow();
-                    $('.closehideshow').trigger('click');
-                } else {
-                    errorTost("Data Cannot Save");
+
+
                 }
 
-
-            }
-
-        });
-
+            });
+        } else {
+            swal("You Not Have This Permission!", "success");
+        }
     });
     //----------------------submit form code end------------------------------
     datashow();
@@ -147,33 +161,45 @@ $(document).ready(function() {
                         '<td id="entry_' + data[i].id + '">' + entry + '</td>' +
                         '<td id="to_' + data[i].id + '">' + to + '</td>' +
                         '<td id="qty_' + data[i].id + '">' + data[i].qty + '</td>' +
-                        '<td class="not-export-column" ><button name="edit" value="edit" class="edit_data btn btn-xs btn-success" id=' + data[i].id + '><i class="fa fa-edit"></i></button>&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' + data[i].id + '><i class="fa fa-trash"></i></button></td>' +
+                        // '<td class="not-export-column" ><button name="edit" value="edit" class="edit_data btn btn-xs btn-success" id=' + data[i].id + '><i class="fa fa-edit"></i></button>&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' + data[i].id + '><i class="fa fa-trash"></i></button></td>' +
+                        '<td class="not-export-column" >';
+                    if (editrt == 1) {
+                        html += '<button name="edit" value="edit" class="edit_data btn btn-xs btn-success" id=' + data[i].id + '><i class="fa fa-edit"></i></button>';
+                    }
+                    if (delrt == 1) {
+                        html += '&nbsp;<button name="delete" value="Delete" class="delete_data btn btn-xs btn-danger" id=' + data[i].id + '><i class="fa fa-trash"></i></button>';
+                    }
+                    html += '</td>' +
                         '</tr>';
 
                 }
                 html += '</tbody></table>';
 
                 $('#show_master').html(html);
-                $('#myTable').DataTable({
-                    dom: 'Bfrtip',
-                    buttons: [{
-                            extend: 'pdfHtml5',
-                            pageSize: 'A4',
-                            //orientation: 'landscape',
-                            title: 'DB Stock-Weekly Received Adjustment',
-                            exportOptions: {
-                                columns: [0, 1, 2, 3]
+                if (export_p == 1) {
+                    $('#myTable').DataTable({
+                        dom: 'Bfrtip',
+                        buttons: [{
+                                extend: 'pdfHtml5',
+                                pageSize: 'A4',
+                                //orientation: 'landscape',
+                                title: 'DB Stock-Weekly Received Adjustment',
+                                exportOptions: {
+                                    columns: [0, 1, 2, 3]
+                                },
                             },
-                        },
-                        {
-                            extend: 'excelHtml5',
-                            title: 'DB Stock-Weekly Received Adjustment',
-                            exportOptions: {
-                                columns: [0, 1, 2, 3]
-                            },
-                        }
-                    ]
-                });
+                            {
+                                extend: 'excelHtml5',
+                                title: 'DB Stock-Weekly Received Adjustment',
+                                exportOptions: {
+                                    columns: [0, 1, 2, 3]
+                                },
+                            }
+                        ]
+                    });
+                } else {
+                    $('#myTable').DataTable({});
+                }
 
             }
 

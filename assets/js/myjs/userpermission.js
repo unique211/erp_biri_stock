@@ -62,6 +62,7 @@ $(document).ready(function() {
                             '<td></td>' +
                             '<td></td>' +
                             '<td></td>' +
+                            '<td></td>' +
                             '</tr>';
                         for (var j = 0; j < data[i].submenudata.length; j++) {
                             table += '<tr class="sub_menu submenuinfo_' + data[i].menuid + '" id="sub_' + data[i].submenudata[j].submenu_id + '">' +
@@ -72,7 +73,7 @@ $(document).ready(function() {
 
                                 '<td><label class="main"><input type="checkbox" class="editchk"  name="main_chk_' + data[i].menuid + '_' + data[i].submenudata[j].submenu_id + '"  id="edit_' + data[i].submenudata[j].submenu_id + '"  value="0" /><span class="geekmark"></span></label></td>' +
                                 '<td><label class="main"><input type="checkbox" class="deletechk"   name="main_chk_' + data[i].menuid + '_' + data[i].submenudata[j].submenu_id + '"  id="delete_' + data[i].submenudata[j].submenu_id + '"  value="0" /><span class="geekmark"></span></label></td>' +
-                                //'<td><label class="main"><input type="checkbox" class="printchk" name="main_chk_' + data[i].menuid + '_' + data[i].submenudata[j].submenu_id + '"  id="print_' + data[i].submenudata[j].submenu_id + '"  value="0" /><span class="geekmark"></span></label></td>' +
+                                '<td><label class="main"><input type="checkbox" class="exportchk" name="main_chk_' + data[i].menuid + '_' + data[i].submenudata[j].submenu_id + '"  id="export_' + data[i].submenudata[j].submenu_id + '"  value="0" /><span class="geekmark"></span></label></td>' +
                                 '</tr>';
                         }
 
@@ -84,11 +85,11 @@ $(document).ready(function() {
                                 '<td><label class="main"><input type="checkbox" class="readchk submenu_' + data[i].menuid + '" name="main_chk_' + data[i].menuid + '"  id="mread_' + data[i].menuid + '"  value="0" /><span class="geekmark"></span></label></td>' +
 
                                 '<td><label class="main"><input type="checkbox" class="editchk submenu_' + data[i].menuid + '" name="main_chk_' + data[i].menuid + '"  id="medit_' + data[i].menuid + '"  value="0" /><span class="geekmark"></span></label></td>' +
-                                '<td><label class="main"><input type="checkbox" class="deletechk submenu_' + data[i].menuid + '" name="main_chk_' + data[i].menuid + '"  id="mdelete_' + data[i].menuid + '"  value="0" /><span class="geekmark"></span></label></td>';
-                            //  '<td><label class="main"><input type="checkbox" class="exportchk submenu_' + data[i].menuid + '" name="main_chk_' + data[i].menuid + '"  id="mexport_' + data[i].menuid + '"  value="0" /><span class="geekmark"></span></label></td>' +
+                                '<td><label class="main"><input type="checkbox" class="deletechk submenu_' + data[i].menuid + '" name="main_chk_' + data[i].menuid + '"  id="mdelete_' + data[i].menuid + '"  value="0" /><span class="geekmark"></span></label></td>' +
+                                '<td><label class="main"><input type="checkbox" class="exportchk submenu_' + data[i].menuid + '" name="main_chk_' + data[i].menuid + '"  id="mexport_' + data[i].menuid + '"  value="0" /><span class="geekmark"></span></label></td>';
                             // '<td><label class="main"><input type="checkbox" class="printchk submenu_' + data[i].menuid + '" name="main_chk_' + data[i].menuid + '"  id="mprint_' + data[i].menuid + '"  value="0" /><span class="geekmark"></span></label></td>';
                         } else {
-                            table += '<td colspan="5"></td>';
+                            table += '<td colspan="6"></td>';
                         }
                         table += '</tr>';
                     }
@@ -418,6 +419,13 @@ $(document).ready(function() {
                 } else {
                     permission["readpermission"] = 0;
                 }
+                if ($("#mexport_" + id1[1]).prop("checked") == true) {
+
+                    permission["exportpermission"] = 1;
+                    flg = 1;
+                } else {
+                    permission["exportpermission"] = 0;
+                }
                 // if ($("#mprint_" + id1[1]).prop("checked") == true) {
 
                 //     permission["printpermission"] = 1;
@@ -482,13 +490,13 @@ $(document).ready(function() {
                     } else {
                         permission["readpermission"] = 0;
                     }
-                    // if ($("#print_" + submenu[1]).prop("checked") == true) {
+                    if ($("#export_" + submenu[1]).prop("checked") == true) {
 
-                    //     permission["printpermission"] = 1;
-                    //     flg = 1;
-                    // } else {
-                    //     permission["printpermission"] = 0;
-                    // }
+                        permission["exportpermission"] = 1;
+                        flg = 1;
+                    } else {
+                        permission["exportpermission"] = 0;
+                    }
 
 
                     if (flg == 1) {
@@ -584,6 +592,17 @@ $(document).ready(function() {
                         $('#read_' + data[i].submenu_id).prop('checked', false);
                     }
 
+                    if (data[i].export_p == 1) {
+
+                        $('#_' + data[i].menu_id).prop('checked', true);
+
+                        $('#export_' + data[i].submenu_id).prop('checked', true);
+
+
+                    } else {
+                        $('#export_' + data[i].submenu_id).prop('checked', false);
+                    }
+
 
 
 
@@ -629,6 +648,16 @@ $(document).ready(function() {
                         } else {
                             $('#mread_' + data[i].menu_id).prop('checked', false);
                         }
+                        if (data[i].export_p == 1) {
+
+                            $('#_' + data[i].menu_id).prop('checked', true);
+
+                            $('#mexport_' + data[i].submenu_id).prop('checked', true);
+
+
+                        } else {
+                            $('#mexport_' + data[i].submenu_id).prop('checked', false);
+                        }
 
 
 
@@ -654,7 +683,11 @@ $(document).ready(function() {
                 $('.deletechk').prop("checked", true);
             } else if (id == "allreadchk") {
                 $('.readchk').prop("checked", true);
+            } else if (id == "allexport") {
+                $('.exportchk').prop("checked", true);
             }
+
+
         } else {
 
             if (id == "alladdchk") {
@@ -665,6 +698,8 @@ $(document).ready(function() {
                 $('.deletechk').prop("checked", false);
             } else if (id == "allreadchk") {
                 $('.readchk').prop("checked", false);
+            } else if (id == "allexport") {
+                $('.exportchk').prop("checked", false);
             }
         }
     });

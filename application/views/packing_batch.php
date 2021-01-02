@@ -16,13 +16,13 @@ $create_p=0;
 ?>
  <?php foreach($sidebar as $val){ 
 	  
-	  if(($val->menu_id==2 && $val->submenu_id==7) && ( $val->create_p==1 || $val->delete_p==1 || $val->edit_p==1 || $val->read_p	==1)){
+	  if(($val->menu_id==2 && $val->submenu_id==7) && ( $val->create_p==1 || $val->delete_p==1 || $val->edit_p==1 || $val->read_p	==1 || $val->export_p	==1)){
 
 		$create_p=$val->create_p;
 		$edit_p=$val->edit_p;
 		$delete_p=$val->delete_p;
 		$read_p=$val->read_p;
-
+		$export_p=$val->export_p;
 	  }
   } 
 	 ?>
@@ -248,6 +248,7 @@ $create_p=0;
 var delrt="<?php  echo $delete_p; ?>";
 var read_p="<?php  echo $read_p; ?>";
 var create_p="<?php  echo $create_p; ?>";
+var export_p="<?php  echo $export_p; ?>";
 	
 	</script>
     <script src="<?php echo base_url(); ?>assets/js/myjs/dynamic.js"></script>

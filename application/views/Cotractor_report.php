@@ -7,6 +7,26 @@ if(isset($title_name)){
 	$title1 = $title_name1;
 }
 ?>
+<?php
+$edit_p=0;
+$delete_p=0;
+$read_p=0;
+$create_p=0;
+$export_p=0;
+?>
+ <?php foreach($sidebar as $val){ 
+	  
+	  if(($val->menu_id==5 && $val->submenu_id==20) && ( $val->create_p==1 || $val->delete_p==1 || $val->edit_p==1 || $val->read_p	==1 ||  $val->export_p	==1)){
+
+		$create_p=$val->create_p;
+		$edit_p=$val->edit_p;
+		$delete_p=$val->delete_p;
+		$read_p=$val->read_p;
+		$export_p=$val->export_p;
+
+	  }
+  } 
+	 ?>
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -43,6 +63,7 @@ if(isset($title_name)){
 							    </div>
                                 <div class="panel-body ">
                                     <div class="row " id="documents">
+									<?php if($create_p==1 || $edit_p ==1){ ?>	
                                         <div class="col-sm-12">
                                             <div class="col-sm-4">
                                                 <div class="form-group">
@@ -67,11 +88,14 @@ if(isset($title_name)){
                                                 <div class="form-group">
                                                     <label></label>
                                                     <div class="form">
+													<?php 	if($export_p==1){ ?>
                                                     <input type="button" id="btnExport" class="btn btn-primary pull-right" value="Export" />
-                                                    </div>
+													<?php } ?>
+												</div>
                                                 </div>
                                             </div>
-                                        </div><br>
+										</div><br>
+									<?php } ?>
                                     <table id="file_info" class="table table-striped" width="100%" cellspacing="0">
                                             <thead id="thead">
                                                 <tr>
@@ -103,7 +127,15 @@ if(isset($title_name)){
         <a href="" id="scroll-to-top" class="hidden-print"><i class="fa fa-chevron-up"></i></a>
         <!-- Placed at the end of the document so the pages load faster -->
         <?php include "includes/footerlink.php"; ?>   
-        <script type="text/javascript">var baseurl = "<?php print base_url(); ?>";</script>
+		<script type="text/javascript">var baseurl = "<?php print base_url(); ?>";</script>
+		<script>
+	var editrt="<?php  echo $edit_p; ?>";
+var delrt="<?php  echo $delete_p; ?>";
+var read_p="<?php  echo $read_p; ?>";
+var create_p="<?php  echo $create_p; ?>";
+var export_p="<?php  echo $export_p; ?>";
+	
+	</script>
         <script src="<?php echo base_url(); ?>assets/js/jquery.table2excel.js" type="text/javascript"></script>
         <script src="<?php echo base_url(); ?>assets/js/myjs/Contractor_report.js"></script>
         <script>

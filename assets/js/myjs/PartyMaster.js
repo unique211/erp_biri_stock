@@ -591,26 +591,30 @@ $(document).ready(function() {
                 table += '</tbody></table>';
 
                 $('#show_master').html(table);
-                $('#myTable').DataTable({
-                    dom: 'Bfrtip',
-                    buttons: [{
-                            extend: 'pdfHtml5',
-                            title: 'DB Stock-Contractor/Party Master',
-                            orientation: 'landscape',
-                            pageSize: 'A4',
-                            exportOptions: {
-                                columns: [1, 2, 3, 4, 5, 6, 7, 8, 11, 12]
+                if (export_p == 1) {
+                    $('#myTable').DataTable({
+                        dom: 'Bfrtip',
+                        buttons: [{
+                                extend: 'pdfHtml5',
+                                title: 'DB Stock-Contractor/Party Master',
+                                orientation: 'landscape',
+                                pageSize: 'A4',
+                                exportOptions: {
+                                    columns: [1, 2, 3, 4, 5, 6, 7, 8, 11, 12]
+                                },
                             },
-                        },
-                        {
-                            title: 'DB Stock-Contractor/Party Master',
-                            extend: 'excelHtml5',
-                            exportOptions: {
-                                columns: [1, 2, 3, 4, 5, 6, 7, 8, 11, 12]
+                            {
+                                title: 'DB Stock-Contractor/Party Master',
+                                extend: 'excelHtml5',
+                                exportOptions: {
+                                    columns: [1, 2, 3, 4, 5, 6, 7, 8, 11, 12]
+                                }
                             }
-                        }
-                    ]
-                });
+                        ]
+                    });
+                } else {
+                    $('#myTable').DataTable({});
+                }
             },
             error: function() {}
         });

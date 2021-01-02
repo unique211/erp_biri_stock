@@ -224,6 +224,8 @@ input[type=checkbox]:checked {
 															class="allchkcheck"   name="select_all_update" value="0"> <span class="geekmark"></span></label> <label style="margin-left:15%;">Update</label></th>
                                                             <th  style="width:20%"><label class="main"><input type="checkbox" id="alldelete"
 															class="allchkcheck"   name="select_all_delete" value="0"> <span class="geekmark"></span></label><label style="margin-left:15%;"> Delete</label></th>
+															<th  style="width:20%"><label class="main"><input type="checkbox" id="allexport"
+															class="allchkcheck"   name="select_all_delete" value="0"> <span class="geekmark"></span></label><label style="margin-left:15%;">Export</label></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody id="tbd_user_rights">

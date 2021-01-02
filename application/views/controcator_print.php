@@ -7,6 +7,26 @@ if(isset($title_name)){
 	$title1 = $title_name1;
 }
 ?>
+<?php
+$edit_p=0;
+$delete_p=0;
+$read_p=0;
+$create_p=0;
+$export_p=0;
+?>
+ <?php foreach($sidebar as $val){ 
+	  
+	  if(($val->menu_id==5 && $val->submenu_id==31) && ( $val->create_p==1 || $val->delete_p==1 || $val->edit_p==1 || $val->read_p	==1 ||  $val->export_p	==1)){
+
+		$create_p=$val->create_p;
+		$edit_p=$val->edit_p;
+		$delete_p=$val->delete_p;
+		$read_p=$val->read_p;
+		$export_p=$val->export_p;
+
+	  }
+  } 
+	 ?>
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -66,6 +86,7 @@ th, td {
 									<form id="pdfgenerate" name="pdfgenerate"  method="POST" action="<?php echo base_url('FinishPS/printbill');?>" target="_blank">
 		
 		</form> 
+		<?php if($create_p==1 || $edit_p ==1){ ?>
                                         <div class="col-sm-12">
                                         <div class="col-sm-3">
                                                 <div class="form-group">
@@ -109,7 +130,8 @@ th, td {
                                                 </div>
                                             </div>
                                           
-                                        </div><br>
+										</div><br>
+		<?php } ?>
                                         <div class="col-sm-12">
                                         <div class="table-responsive" id="show_master" style="overflow-x: auto;">
 											
