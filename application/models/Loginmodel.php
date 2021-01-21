@@ -37,6 +37,7 @@ class Loginmodel extends CI_Model{
 					$this->session->username = $username;
 
 					$sidermenu=array();
+					$submenudata=array();
 					$this->db->select('menu_master.*');    
 					$this->db->from('menu_master');
 					$query =$this->db->get();
