@@ -233,7 +233,7 @@ $(document).ready(function() {
 
 
     function defaultdate() {
-        var table_name = "financial_period";
+        var table_name = "weekly_adjustment";
 
         $.ajax({
             type: "POST",
@@ -247,13 +247,14 @@ $(document).ready(function() {
                 var data = eval(data);
                 for (var i = 0; i < data.length; i++) {
 
-                    var fdateval = data[i].pedate;
+                    var fdateval = data[i].to_date;
                     var fdateslt = fdateval.split('-');
                     var tdate = fdateslt[2] + '/' + fdateslt[1] + '/' + fdateslt[0];
 
 
 
                 }
+               
                 $('#tdate').val(tdate);
             }
         });
@@ -268,6 +269,7 @@ $(document).ready(function() {
         $(".btnhideshow").hide();
         defaultdate();
     });
+    var selectdata="";
     $(".closehideshow").click(function() {
         $('#master_form')[0].reset();
         $('#save_update').val("");
@@ -278,7 +280,9 @@ $(document).ready(function() {
         $('#file_info1').html('');
         defaultdate();
         $('#btnsave').text('Save');
-
+        if(selectdata !=""){
+            $('#tdate').val(selectdata);
+        }
 
     });
 
@@ -302,7 +306,7 @@ $(document).ready(function() {
         var filter1 = $('#filter2').val();
         var id = $('#save_update').val();
         //alert(tobacco1+leaves1);
-
+        selectdata=date1;
         var fdateslt = date1.split('/');
         var date = fdateslt[2] + '-' + fdateslt[1] + '-' + fdateslt[0];
 

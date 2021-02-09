@@ -120,21 +120,21 @@ $create_p=0;
 													</td> 
                                                                  <td style="text-align:right;">
                                                                        <div class="form-group">
-                                                                           <input type="text" class="form-control input-sm placeholdesize" id="tobacco" name="tobacco" placeholder="Tobacco"  >
+                                                                           <input type="number" class="form-control input-sm placeholdesize" id="tobacco" name="tobacco" placeholder="Tobacco"  >
                                                                       </div>
 													</td> 
         		                                                  <td style="text-align:right;">
-														<input type="text" class="form-control input-sm placeholdesize" id="leaves" name="leaves" placeholder="Leaves"  >
+														<input type="number" class="form-control input-sm placeholdesize" id="leaves" name="leaves" placeholder="Leaves"  >
 													</td> 
                                 		           
                                         		                <td style="text-align:right;">
-														<input type="text" class="form-control input-sm placeholdesize" id="bl_yarn" name="bl_yarn"  placeholder="Black Yarn" >
+														<input type="number" class="form-control input-sm placeholdesize" id="bl_yarn" name="bl_yarn"  placeholder="Black Yarn" >
 													</td> 
                                                                  <td style="text-align:right;">
-														<input type="text" class="form-control input-sm placeholdesize" id="wh_yarn" name="wh_yarn"  placeholder="White Yarn" >
+														<input type="number" class="form-control input-sm placeholdesize" id="wh_yarn" name="wh_yarn"  placeholder="White Yarn" >
 													</td> 
                                                                  <td style="text-align:right;">
-														<input type="text" class="form-control input-sm placeholdesize" id="filter" name="filter"  placeholder="Filter" >
+														<input type="number" class="form-control input-sm placeholdesize" id="filter" name="filter"  placeholder="Filter" >
 													</td> 
 												</tr>
                                                             <tr>
@@ -146,21 +146,21 @@ $create_p=0;
 													</td> 
                                                                  <td style="text-align:right;">
                                                                        <div class="form-group">
-                                                                           <input type="text" class="form-control input-sm placeholdesize" value="0" id="tobacco2" name="tobacco2" placeholder="Tobacco" >
+                                                                           <input type="number" class="form-control input-sm placeholdesize" value="0" id="tobacco2" name="tobacco2" placeholder="Tobacco" >
                                                                       </div>
 													</td> 
         		                                                  <td style="text-align:right;">
-														<input type="text" class="form-control input-sm placeholdesize" id="leaves2" name="leaves2" value="0" placeholder="Leaves" >
+														<input type="number" class="form-control input-sm placeholdesize" id="leaves2" name="leaves2" value="0" placeholder="Leaves" >
 													</td> 
                                 		           
                                         		                <td style="text-align:right;">
-														<input type="text" class="form-control input-sm placeholdesize" id="bl_yarn2" name="bl_yarn2" value="0"  placeholder="Black Yarn" >
+														<input type="number" class="form-control input-sm placeholdesize" id="bl_yarn2" name="bl_yarn2" value="0"  placeholder="Black Yarn" >
 													</td> 
                                                                  <td style="text-align:right;">
-														<input type="text" class="form-control input-sm placeholdesize" id="wh_yarn2" value="0" name="wh_yarn2"  placeholder="White Yarn" >
+														<input type="number" class="form-control input-sm placeholdesize" id="wh_yarn2" value="0" name="wh_yarn2"  placeholder="White Yarn" >
 													</td> 
                                                                  <td style="text-align:right;">
-														<input type="text" class="form-control input-sm placeholdesize" id="filter2" value="0" name="filter2"  placeholder="Filter"  >
+														<input type="number" class="form-control input-sm placeholdesize" id="filter2" value="0" name="filter2"  placeholder="Filter"  >
 													</td> 
 												</tr>
 										   	</thead>

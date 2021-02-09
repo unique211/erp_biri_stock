@@ -139,7 +139,7 @@ $(document).ready(function() {
                     '<tr>' +
                     '<th><font style="font-weight:bold">Id</font></th>' +
                     '<th><font style="font-weight:bold">Entry Date</font></th>' +
-                    '<th><font style="font-weight:bold">From Date</font></th>' +
+                    '<th><font style="font-weight:bold">To Date</font></th>' +
                     '<th><font style="font-weight:bold">Item Quantity</font></th>' +
                     '<th><font style="font-weight:bold">Operations </font></th>' +
 

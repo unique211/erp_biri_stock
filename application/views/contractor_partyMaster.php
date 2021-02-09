@@ -188,7 +188,7 @@ $create_p=0;
 											<div class="col-sm-2">
 												<div class="form-group">
 													<label>IF PF Applicable ?</label>
-													<select class="form-control input-sm placeholdesize" id="pf" name="pf" required form="master_form">
+													<select class="form-control input-sm placeholdesize" id="pf" name="pf" required form="master_form" >
 															<option value="0" selected disabled>Select</option>
 															<option value="yes">Yes</option>
 															<option value="no">No</option>
@@ -256,19 +256,19 @@ $create_p=0;
 														</select>
 													</td> 
                                             		<td style="text-align:right;">
-														<input type="text" class="form-control input-sm placeholdesize" id="tobacco" value="0" name="tobacco" placeholder="Tobacco" form="opeBalance" ><span id="errmsgT"></span> 
+														<input type="number" class="form-control input-sm placeholdesize" id="tobacco" value="0" name="tobacco" placeholder="Tobacco" form="opeBalance" ><span id="errmsgT"></span> 
 													</td> 
                 		                            <td style="text-align:right;">
-														<input type="text" class="form-control input-sm placeholdesize" id="leaves" name="leaves" value="0"  placeholder="Leaves" form="opeBalance" ><span id="errmsgL"></span>
+														<input type="number" class="form-control input-sm placeholdesize" id="leaves" name="leaves" value="0"  placeholder="Leaves" form="opeBalance" ><span id="errmsgL"></span>
 													</td> 
                                         		    <td style="text-align:right;">
-														<input type="text" class="form-control input-sm placeholdesize" id="blackYarn" name="Black Yarn"  value="0" form="opeBalance" placeholder="Black Yarn" ><span id="errmsgBY"></span>
+														<input type="number" class="form-control input-sm placeholdesize" id="blackYarn" name="Black Yarn"  value="0" form="opeBalance" placeholder="Black Yarn" ><span id="errmsgBY"></span>
 													</td> 
                                             		<td style="text-align:right;">
 														<input type="number" class="form-control input-sm placeholdesize" id="whiteyarn" name="whiteyarn" value="0"  form="opeBalance" placeholder="White Yarn" ><span id="errmsgWY"></span>
 													</td> 
         		                                    <td style="text-align:right;">
-														<input type="text" class="form-control input-sm placeholdesize" id="filter" name="filter" value="0"  placeholder="Filter" form="opeBalance" ><span id="errmsgF"></span>
+														<input type="number" class="form-control input-sm placeholdesize" id="filter" name="filter" value="0"  placeholder="Filter" form="opeBalance" ><span id="errmsgF"></span>
 													</td> 
                                 		            <td style="text-align:right;"> 
 														<button type="button" form="opeBalance" id="add" class="btn btn-primary btn-xs pull-left"><i class="fa fa-plus"></i></button>

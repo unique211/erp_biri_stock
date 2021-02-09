@@ -442,5 +442,16 @@ $(document).ready(function() {
             }
         })
     }
+    setyeardropdown();
+    function setyeardropdown(){
+        var cyear=new Date().getFullYear()
+        var html="";
+        html+= '<option selected disabled>Select</option>';
+
+        for(i=2020;i<=cyear;i++){
+            html+='<option value="'+i+'">'+i+'</option>';
+        }
+        $('#yearnm').html(html);
+    }
 
 });

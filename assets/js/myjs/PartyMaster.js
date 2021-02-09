@@ -312,23 +312,24 @@ $(document).ready(function() {
             ledger = $('#ledger1').val();
         }
 
-        var name = $('#name').val();
+        var name = $('#name').val().toUpperCase();;
+       
         var state = $('#state').val();
         var state_code = $('#scode').val();
-        var address = $('#address').val();
-        var postoffice = $('#postoffice').val();
-        var district = $('#district').val();
+        var address = $('#address').val().toUpperCase();
+        var postoffice = $('#postoffice').val().toUpperCase();
+        var district = $('#district').val().toUpperCase();
         var pin = $('#pin').val();
-        var pan = $('#pan').val();
-        var aadhar = $('#aadhar').val();
+        var pan = $('#pan').val().toUpperCase();
+        var aadhar = $('#aadhar').val().toUpperCase();;
         var gstno = $('#gstno').val();
         var pfcode = $('#pfcode').val();
         var date = $('#doj').val();
         var security = $('#security').val();
         var pf = $('#pf').val();
         var tds = $('#tds').val();
-        var bankac = $('#bankac').val();
-        var bankname = $('#bankname').val();
+        var bankac = $('#bankac').val().toUpperCase();
+        var bankname = $('#bankname').val().toUpperCase();
         var amount = $('#amount').val();
         var ifsc = $('#ifsc').val();
 
@@ -595,6 +596,7 @@ $(document).ready(function() {
                 if (export_p == 1) {
                     $('#myTable').DataTable({
                         dom: 'Bfrtip',
+                        "order": [[ 1, "asc" ]],
                         buttons: [{
                                 extend: 'pdfHtml5',
                                 title: 'DB Stock-Contractor/Party Master',
@@ -869,5 +871,17 @@ $(document).ready(function() {
                     });
                 });
         }
+    });
+
+    $(document).on('change', '#tds', function() {
+        var val=$(this).val();
+        if(val=="yes"){
+            $("#pan").prop('required',true);
+
+        }else{
+            $("#pan").prop('required',false);
+
+        }
+
     });
 });

@@ -110,7 +110,7 @@ $export_p=0;
 											<div class="form-group">
 												<select id="yearnm" name="yearnm" class="form-control monthdata">
 													<option selected disabled>Select</option>
-													<option value="2020">2020</option>
+													
 
 												</select>
 											</div>

@@ -26,6 +26,7 @@ $(document).ready(function() {
             success: function(data) {
                 var data = eval(data);
                 console.log(data);
+                if(data.length >0){
                 var fdateslt = data[0].psdate.split('-');
                 var fdate = fdateslt[2] + '/' + fdateslt[1] + '/' + fdateslt[0];
                 var fdateslt = data[0].pedate.split('-');
@@ -34,6 +35,7 @@ $(document).ready(function() {
 
                 $('#fdate').val(fdate);
                 $('#date').val(cdate);
+                }
             },
             error: function() {
                 errorTost("Error");
